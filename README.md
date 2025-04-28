@@ -1,5 +1,6 @@
-![RiskWise_Combination](https://github.com/user-attachments/assets/dce9ba5e-d150-45fc-807f-9020dfbe4783)
-
+<p align="center">
+    ![RiskWise_Combination](https://github.com/user-attachments/assets/dce9ba5e-d150-45fc-807f-9020dfbe4783)
+</p>
 <hr/>
 
 <h1 align="center">RiskWise</h1>
