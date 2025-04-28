@@ -90,12 +90,33 @@
 </p>
 
 <br/>
-<br/>
 
 <h3 align="center">Backend</h3>
 <p align="center">
     <img src="https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white" />
     <img src="https://img.shields.io/badge/-Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black" />
-    <img src="https://img.shields.io/badge/-Firestore-FFA000?style=flat-square&logo=google-cloud&logoColor=white" />
+</p>
 
+<br/>
+
+<h3 align="center">Database</h3>
+<p align="center">
+    <img src="https://img.shields.io/badge/-Firestore-FFA000?style=flat-square&logo=google-cloud&logoColor=white" />
+</p>
+
+<br/>
+
+<h3 align="center">PWA Tools</h3>
+<p align="center">
+    <img src="https://img.shields.io/badge/-Service%20Worker-333333?style=flat-square&logo=gear&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Web%20Manifest-5A0FC8?style=flat-square&logo=web&logoColor=white" />
+    <img src="https://img.shields.io/badge/-IndexedDB-0066CC?style=flat-square&logo=databricks&logoColor=white" />
+</p>
+
+<br/>
+
+<h3 align="center">APIs Used</h3>
+<p align="center">
+    <img src="https://img.shields.io/badge/-Geolocation%20API-0A66C2?style=flat-square&logo=googlemaps&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Camera%20API-FF6F00?style=flat-square&logo=unsplash&logoColor=white" />
 </p>
