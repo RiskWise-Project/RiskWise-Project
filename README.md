@@ -1,5 +1,5 @@
 <p align="center">
-    ![RiskWise_Combination](https://github.com/user-attachments/assets/dce9ba5e-d150-45fc-807f-9020dfbe4783)
+    <img src="https://github.com/user-attachments/assets/dce9ba5e-d150-45fc-807f-9020dfbe4783" alt="RiskWise_Combination" />
 </p>
 <hr/>
 
