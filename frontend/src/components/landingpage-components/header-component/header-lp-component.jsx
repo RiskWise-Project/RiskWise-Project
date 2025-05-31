@@ -28,7 +28,7 @@ function HeaderComponent() {
         <div className="right-side-header-container">
           <div className="navigation-container">
             <button
-              className="md:hidden flex flex-col justify-center items-center w-8 h-8 mr-2"
+              className="md:hidden flex flex-col justify-center items-center w-8 h-8 mr-5"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -38,7 +38,7 @@ function HeaderComponent() {
             </button>
 
             {isMenuOpen && (
-              <ul className="md:hidden flex absolute flex-col items-center gap-4 mt-1 right-2 w-fit p-5 shadow-lg">
+              <ul className="md:hidden flex absolute flex-col items-center bg-[var(--color-white)] gap-4 mt-0 rounded-md right-5 w-fit p-5 shadow-lg">
                 {navigationLinks.map((link, index) => (
                   <li
                     key={index}
