@@ -1,0 +1,7 @@
+.get-started-btn:hover {
+  background-color: #2082bb;
+}
+
+.get-started-btn {
+  transition: all 0.15s ease-in;
+}
