@@ -1,14 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
 
 :root {
-  --header-font: 'Cal Sans';
-  --text-font: 'Inter';
+  --header-font: "Cal Sans";
+  --text-font: "Inter";
+
+  --color-dark: #152b3f;
+  --color-highlight: #18618a;
+  --color-accent: #ed7508;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: var(--text-font);
+  color: var(--color-dark);
   font-size: 14px;
 }

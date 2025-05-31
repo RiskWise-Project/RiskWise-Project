@@ -1,6 +1,6 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import LandingPage from '../pages/landing-page'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "../pages/user-side-pages/landing-page";
 
 function MainRoutes() {
   return (
@@ -9,7 +9,7 @@ function MainRoutes() {
         <Route path="/" element={<LandingPage />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default MainRoutes
+export default MainRoutes;

@@ -1,0 +1,7 @@
+.active {
+  color: var(--color-highlight);
+}
+
+.navigation-link {
+  transition: all 0.15s ease-in;
+}
