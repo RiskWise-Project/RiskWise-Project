@@ -9,7 +9,7 @@ function HeroSectionComponent() {
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       <div className="header-text-container items-center md:items-start flex flex-col md:pt-[12%] pt-[70%] md:pl-[15%] pl-[1%] h-fit">
-        <h1 className="font-[var(--header-text)] font-black md:text-6xl text-5xl tracking-wider">
+        <h1 className="font-black md:text-6xl text-5xl tracking-wider">
           RiskWise
         </h1>
 
