@@ -13,7 +13,7 @@ function HeroSectionComponent() {
           RiskWise
         </h1>
 
-        <p className="text-[14px] md:text-2xl mt-3 md:w-[50%] w-[70%] text-center md:text-start">
+        <p className="text-[16px] md:text-2xl mt-3 md:w-[50%] w-[70%] text-center md:text-start">
           A Progressive Web App for Real-Time Risk Assessment and Incident
           Reporting.
         </p>

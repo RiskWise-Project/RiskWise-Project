@@ -8,7 +8,7 @@ function AboutSectionComponent() {
         <h1 className="font-black md:text-4xl text-3xl tracking-wider">
           ABOUT
         </h1>
-        <p className="text-center md:w-[50%] w-full text-xl">
+        <p className="text-center md:w-[50%] w-full md:text-xl text-[16px]">
           RiskWise is a tool for uncovering and handling risks. It runs on any
           device with a browser. You can tap into it even without an internet
           connection. Users can flag hazards, trace risks, and absorb safety
@@ -17,7 +17,7 @@ function AboutSectionComponent() {
         </p>
         <a
           href=""
-          className="text-xl mt-5 hover:text-[var(--color-highlight)] transition-colors duration-75 ease-in"
+          className="md:text-xl text-[16px] mt-5 hover:text-[var(--color-highlight)] transition-colors duration-75 ease-in"
         >
           Learn More
         </a>
