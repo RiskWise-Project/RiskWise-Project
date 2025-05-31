@@ -8,7 +8,7 @@ function AboutSectionComponent() {
         <h1 className="font-black md:text-4xl text-3xl tracking-wider">
           ABOUT
         </h1>
-        <p className="text-center w-[50%] text-xl">
+        <p className="text-center md:w-[50%] w-full text-xl">
           RiskWise is a tool for uncovering and handling risks. It runs on any
           device with a browser. You can tap into it even without an internet
           connection. Users can flag hazards, trace risks, and absorb safety
