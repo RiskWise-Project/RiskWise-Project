@@ -9,7 +9,49 @@ function HeaderComponent() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const currentLocation = location.hash;
+  // Handle menu toggle and optional smooth scroll for in-page links
+  const handleLinkClick = (href) => {
+    setIsMenuOpen(false);
+    if (href.startsWith("#")) {
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const renderLink = (link) => {
+    const isActive = location.hash === link.href;
+
+    if (link.href.startsWith("#")) {
+      return (
+        <a
+          href={link.href}
+          onClick={(e) => {
+            e.preventDefault();
+            handleLinkClick(link.href);
+          }}
+          className={`navigation-link font-semibold text-[18px] hover:text-[var(--color-highlight)] ${
+            isActive ? "active" : ""
+          }`}
+        >
+          {link.title}
+        </a>
+      );
+    }
+
+    return (
+      <Link
+        to={link.href}
+        onClick={() => setIsMenuOpen(false)}
+        className={`navigation-link font-semibold text-[18px] hover:text-[var(--color-highlight)] ${
+          isActive ? "active" : ""
+        }`}
+      >
+        {link.title}
+      </Link>
+    );
+  };
 
   return (
     <div className="header-main-container">
@@ -17,7 +59,7 @@ function HeaderComponent() {
         <div className="left-side-header-container">
           <div className="img-container">
             <img
-              className="header-logo aspect-auto w-[12rem]"
+              className="header-logo aspect-auto w-[12rem] cursor-pointer"
               src={riskwise_combination}
               alt="Risk Wise Logo"
               onClick={() => navigate("/")}
@@ -32,38 +74,22 @@ function HeaderComponent() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              <span className="block w-6 h-0.5 bg-gray-800 mb-1 transition-transform duration-300"></span>
-              <span className="block w-6 h-0.5 bg-gray-800 mb-1 transition-transform duration-300"></span>
-              <span className="block w-6 h-0.5 bg-gray-800 transition-transform duration-300"></span>
+              <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+              <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
+              <span className="block w-6 h-0.5 bg-gray-800"></span>
             </button>
 
             {isMenuOpen && (
-              <ul className="md:hidden flex absolute flex-col items-center bg-[var(--color-white)] gap-4 mt-0 rounded-md right-5 w-fit p-5 shadow-lg">
+              <ul className="md:hidden flex absolute flex-col items-center bg-[var(--color-white)] gap-4 mt-0 rounded-md right-5 w-fit p-5 shadow-lg z-50">
                 {navigationLinks.map((link, index) => (
-                  <li
-                    key={index}
-                    className={`navigation-link font-semibold text-[18px] hover:text-[var(--color-highlight)] ${
-                      currentLocation === link.href ? "active" : ""
-                    }`}
-                  >
-                    <Link to={link.href} onClick={() => setIsMenuOpen(false)}>
-                      {link.title}
-                    </Link>
-                  </li>
+                  <li key={index}>{renderLink(link)}</li>
                 ))}
               </ul>
             )}
 
             <ul className="navigation-links hidden md:flex justify-end gap-9.5">
               {navigationLinks.map((link, index) => (
-                <li
-                  className={`navigation-link font-semibold text-[18px] hover:text-[var(--color-highlight)] ${
-                    currentLocation === link.href ? "active" : ""
-                  }`}
-                  key={index}
-                >
-                  <Link to={link.href}>{link.title}</Link>
-                </li>
+                <li key={index}>{renderLink(link)}</li>
               ))}
             </ul>
           </div>

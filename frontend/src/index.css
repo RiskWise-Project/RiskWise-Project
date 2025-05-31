@@ -18,3 +18,7 @@ body {
   color: var(--color-dark);
   font-size: 14px;
 }
+
+h1 {
+  font-family: var(--header-font);
+}
