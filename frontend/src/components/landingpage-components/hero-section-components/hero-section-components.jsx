@@ -18,9 +18,10 @@ function HeroSectionComponent() {
         </h1>
 
         <p className="text-[16px] md:text-xl mt-3 md:w-[50%] w-[100%] text-justify">
-          A progressive web app built for real-time risk detection and response.
-          Report hazards, monitor threats, and get mitigation support — anytime,
-          anywhere, even offline.
+          Stay informed and in control with a simple, accessible tool for
+          managing risks as they happen. Easily report hazards, follow updates,
+          and get helpful guidance—all from your phone or computer, even when
+          you're offline.
         </p>
 
         <button className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn">
