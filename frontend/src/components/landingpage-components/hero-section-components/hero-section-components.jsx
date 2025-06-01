@@ -18,11 +18,9 @@ function HeroSectionComponent() {
         </h1>
 
         <p className="text-[16px] md:text-xl mt-3 md:w-[50%] w-[100%] text-justify">
-          RISKWISE is a PWA designed to help organizations or communities
-          identify, assess, and manage risks in real-time. The system allows
-          users to report potential hazards, track ongoing risks, and receive
-          guidance on mitigation strategies — all from their mobile or desktop
-          browser, even offline.
+          A progressive web app built for real-time risk detection and response.
+          Report hazards, monitor threats, and get mitigation support — anytime,
+          anywhere, even offline.
         </p>
 
         <button className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn">
