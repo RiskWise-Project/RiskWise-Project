@@ -20,7 +20,7 @@ function HeroSectionComponent() {
         <p className="text-[16px] md:text-xl mt-3 md:w-[50%] w-[100%] text-justify">
           Stay informed and in control with a simple, accessible tool for
           managing risks as they happen. Easily report hazards, follow updates,
-          and get helpful guidance—all from your phone or computer, even when
+          and get helpful guidance all from your phone or computer, even when
           you're offline.
         </p>
 
