@@ -8,7 +8,7 @@ function HeroSectionComponent() {
       className="min-h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${heroBg})` }}
     >
-      <div className="header-text-container md:items-start flex flex-col md:pt-[12%] pt-[70%] md:pl-[15%] px-[5%] h-fit">
+      <div className="header-text-container md:items-start flex flex-col md:pt-[12%] pt-[50%] md:pl-[15%] px-[5%] h-fit">
         <h1 className="font-black md:text-5xl text-4xl tracking-wider leading-snug md:w-[60%] w-full">
           RiskWise:{" "}
           <span className="text-[var(--color-highlight)]">
