@@ -9,7 +9,6 @@ function HeaderComponent() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Handle menu toggle and optional smooth scroll for in-page links
   const handleLinkClick = (href) => {
     setIsMenuOpen(false);
     if (href.startsWith("#")) {
