@@ -30,18 +30,18 @@ function DownloadComponent() {
   };
 
   return (
-    <div>
+    <div className="w-full  ">
       {installPromptEvent && (
-        <div className="download-component-container flex flex-col items-center py-20 gap-5 px-5">
-          <h1 className="font-black md:text-4xl text-3xl tracking-wider mb-10">
+        <div className="download-component-container flex flex-col items-center py-20 gap-5">
+          <h1 className="font-black text-3xl md:text-4xl tracking-wider mb-10 md:mb-5 text-center">
             DOWNLOAD
           </h1>
-          <p className="text-center md:w-[50%] w-full md:text-xl text-[16px]">
+          <p className="text-center w-full max-w-md text-[16px] md:text-xl">
             Available on all major platforms. Get the app and start improving
             safety today.
           </p>
           <button
-            className="bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 md:w-fit w-full rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn"
+            className="bg-[var(--color-highlight)] text-[var(--color-white)] text-[17px] md:text-lg px-4 py-2 w-full max-w-xs rounded-md hover:cursor-pointer get-started-btn"
             onClick={handleInstallClick}
           >
             Install App

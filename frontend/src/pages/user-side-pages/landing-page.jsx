@@ -4,6 +4,7 @@ import HeroSectionComponent from "../../components/landingpage-components/hero-s
 import AboutSectionComponent from "../../components/landingpage-components/about-section-component/about-lp-component";
 import FeatureComponent from "../../components/landingpage-components/features-section-component/features-component";
 import DownloadComponent from "../../components/landingpage-components/download-section-component/download-component";
+import ContactSection from "../../components/landingpage-components/contact-section-component/contact-component";
 
 function LandingPage() {
   return (
@@ -22,6 +23,9 @@ function LandingPage() {
       </div>
       <div id="download" className="download-component-container">
         <DownloadComponent />
+      </div>
+      <div id="contact" className="contact-component-container">
+        <ContactSection />
       </div>
     </div>
   );
