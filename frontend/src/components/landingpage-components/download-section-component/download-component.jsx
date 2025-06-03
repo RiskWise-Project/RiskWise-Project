@@ -30,9 +30,9 @@ function DownloadComponent() {
   };
 
   return (
-    <div className="download-component-container flex flex-col items-center py-20 gap-5 px-5">
+    <div>
       {installPromptEvent && (
-        <>
+        <div className="download-component-container flex flex-col items-center py-20 gap-5 px-5">
           <h1 className="font-black md:text-4xl text-3xl tracking-wider mb-10">
             DOWNLOAD
           </h1>
@@ -46,7 +46,7 @@ function DownloadComponent() {
           >
             Install App
           </button>
-        </>
+        </div>
       )}
     </div>
   );
