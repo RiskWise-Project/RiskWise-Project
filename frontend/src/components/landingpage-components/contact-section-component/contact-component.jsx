@@ -71,7 +71,7 @@ function ContactSection() {
               className={`${
                 installPromptEvent
                   ? "border-[var(--color-white)]"
-                  : "border-[var(--color-dark)]"
+                  : "border-[var(--color-dark)] bg-gray-100"
               } border-2 rounded-lg px-2 py-1 text-lg outline-none`}
             />
           </div>
@@ -84,7 +84,7 @@ function ContactSection() {
               className={`${
                 installPromptEvent
                   ? "border-[var(--color-white)]"
-                  : "border-[var(--color-dark)]"
+                  : "border-[var(--color-dark)] bg-gray-100"
               } border-2 rounded-lg px-2 py-1 text-lg max-h-35 min-h-15 outline-none`}
             />
           </div>
