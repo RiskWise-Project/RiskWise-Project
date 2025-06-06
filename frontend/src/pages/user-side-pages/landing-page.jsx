@@ -5,6 +5,7 @@ import AboutSectionComponent from "../../components/landingpage-components/about
 import FeatureComponent from "../../components/landingpage-components/features-section-component/features-component";
 import DownloadComponent from "../../components/landingpage-components/download-section-component/download-component";
 import ContactSection from "../../components/landingpage-components/contact-section-component/contact-component";
+import FooterComponent from "../../components/landingpage-components/footer-section-component/footer-component";
 
 function LandingPage() {
   return (
@@ -26,6 +27,9 @@ function LandingPage() {
       </div>
       <div id="contact" className="contact-component-container">
         <ContactSection />
+      </div>
+      <div className="footer-component-container">
+        <FooterComponent />
       </div>
     </div>
   );

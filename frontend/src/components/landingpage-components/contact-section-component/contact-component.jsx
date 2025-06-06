@@ -42,21 +42,23 @@ function ContactSection() {
           Contact Details
         </h1>
 
-        <h2
+        <a
           className={`font-medium md:text-2xl text-xl tracking-wider md:mb-3 mb-5 flex items-center gap-5 ${
             installPromptEvent ? "text-[var(--color-white)]" : ""
           }`}
+          href="mailto:riskwise.project@gmail.com"
         >
           <Mail /> riskwise.project@gmail.com
-        </h2>
+        </a>
 
-        <h2
+        <a
           className={`font-medium md:text-2xl text-xl tracking-wider md:mb-5 mb-10 flex items-center gap-5 ${
             installPromptEvent ? "text-[var(--color-white)]" : ""
           }`}
+          href="tel:+639123456789"
         >
           <Phone /> (+63) 912-345-6789
-        </h2>
+        </a>
       </div>
 
       <div className="right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-25 md:py-14 py-0 text-white">
