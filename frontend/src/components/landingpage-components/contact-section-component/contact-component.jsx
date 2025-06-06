@@ -61,7 +61,11 @@ function ContactSection() {
         </a>
       </div>
 
-      <div className="right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-25 md:py-14 py-0 text-white">
+      <div
+        className={`right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-25 md:py-14 py-0 text-white ${
+          installPromptEvent ? "text-[var(--color-white)]" : ""
+        }`}
+      >
         <form action="" className="flex flex-col gap-5">
           <div className="flex flex-col">
             <label htmlFor="" className="font-[var(--text-font)] text-lg ">
