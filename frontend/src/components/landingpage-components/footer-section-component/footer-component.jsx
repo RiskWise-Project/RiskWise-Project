@@ -73,7 +73,7 @@ function FooterComponent() {
       <div className="fs-contact-container flex flex-col gap-2">
         <div className="fs-nav-links-container">
           <ul
-            className={`flex flex-row gap-5 justify-center${
+            className={`flex flex-row gap-5 justify-center ${
               installPromptEvent ? "" : "text-[var(--color-white)]"
             }`}
           >
