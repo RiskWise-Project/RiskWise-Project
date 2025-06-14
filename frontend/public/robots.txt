@@ -1,0 +1,10 @@
+# robots.txt for RiskWise
+
+User-agent: *
+Disallow: /admin/
+Disallow: /server/
+Disallow: /config/
+Disallow: /private/
+
+# Allow everything else
+Allow: /
