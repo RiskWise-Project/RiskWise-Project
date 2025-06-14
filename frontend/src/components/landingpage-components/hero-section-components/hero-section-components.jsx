@@ -1,6 +1,6 @@
 import React from "react";
 import "./hero-section-components.css";
-import heroBg from "../../../assets/resources/hero_section_bg.png";
+import heroBg from "../../../assets/resources/hero_section_bg.webp";
 
 function HeroSectionComponent() {
   return (
