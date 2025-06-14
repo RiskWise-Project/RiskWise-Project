@@ -1,8 +1,36 @@
 import { useState, useEffect } from "react";
 import { Mail, Phone } from "lucide-react";
+import { SendConcern } from "../../../services/concern-services";
+import { toast } from "react-hot-toast";
 
 function ContactSection() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [installPromptEvent, setInstallPromptEvent] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!email || !message) {
+      toast.error("Please fill in both email and concern.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      const response = await SendConcern({ email, message });
+      toast.success("Concern submitted successfully!");
+      setEmail("");
+      setMessage("");
+    } catch (error) {
+      toast.error("Failed to submit concern. Please try again.");
+    }
+  };
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event) => {
@@ -63,17 +91,26 @@ function ContactSection() {
 
       <div
         className={`right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-25 md:py-14 py-0 text-white ${
-          installPromptEvent ? "text-[var(--color-white)]" : ""
+          installPromptEvent ? "" : "text-[var(--color-white)]"
         }`}
       >
-        <form action="" className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col">
-            <label htmlFor="" className="font-[var(--text-font)] text-lg ">
+            <label
+              htmlFor=""
+              className={`font-[var(--text-font)] text-lg ${
+                installPromptEvent
+                  ? "text-[var(--color-white)]"
+                  : "text-[var(--color-dark)]"
+              }`}
+            >
               Email:
             </label>
             <input
-              type="text"
+              type="email"
               placeholder="johndoe@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={`${
                 installPromptEvent
                   ? "border-[var(--color-white)]"
@@ -82,11 +119,20 @@ function ContactSection() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="" className="font-[var(--text-font)] text-lg ">
+            <label
+              htmlFor=""
+              className={`font-[var(--text-font)] text-lg ${
+                installPromptEvent
+                  ? "text-[var(--color-white)]"
+                  : "text-[var(--color-dark)]"
+              }`}
+            >
               Concern:
             </label>
             <textarea
               placeholder="Enter your concern here..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className={`${
                 installPromptEvent
                   ? "border-[var(--color-white)]"
@@ -95,7 +141,10 @@ function ContactSection() {
             />
           </div>
 
-          <button className="bg-[var(--color-highlight)] text-[var(--color-white)] text-[17px] md:text-lg px-4 py-2 w-full md:max-w-xs rounded-md hover:cursor-pointer get-started-btn">
+          <button
+            type="submit"
+            className="bg-[var(--color-highlight)] text-[var(--color-white)] text-[17px] md:text-lg px-4 py-2 w-full md:max-w-xs rounded-md hover:cursor-pointer get-started-btn"
+          >
             Submit
           </button>
         </form>
