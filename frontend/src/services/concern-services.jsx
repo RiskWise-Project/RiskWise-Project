@@ -2,8 +2,8 @@ import axios from "axios";
 
 const baseURL =
   import.meta.env.MODE === "development"
-    ? import.meta.env.development.VITE_API_URL
-    : import.meta.env.production.VITE_API_URL;
+    ? import.meta.env.VITE_API_URL_DEVELOPMENT
+    : import.meta.env.VITE_API_URL;
 
 export const SendConcern = async ({ email, message }) => {
   try {
