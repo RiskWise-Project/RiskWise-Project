@@ -1,0 +1,14 @@
+.riskwise-asa-item-container {
+  animation: float-in 3s ease-in-out;
+}
+
+@keyframes float-in {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

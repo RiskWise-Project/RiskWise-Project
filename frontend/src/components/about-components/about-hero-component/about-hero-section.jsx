@@ -10,8 +10,8 @@ function AboutHero() {
         className="md:h-90 hero-banner-image"
       />
 
-      <div className="flex flex-col items-center gap-3.5 md:gap-13 px-2 py-10 md:py-35 text-container-heading">
-        <h1 className="text-[1.65rem] font-black tracking-wider leading-7.5 md:text-5xl text-[var(--color-highlight)]">
+      <div className="flex flex-col items-center gap-3.5 md:gap-13 px-2 py-25 md:py-45 text-container-heading">
+        <h1 className="text-[1.65rem] font-black text-center tracking-wider leading-7.5 md:text-5xl text-[var(--color-highlight)]">
           PROACTIVE RISK MANAGEMENT STARTS HERE
         </h1>
         <h2 className="text-[1.125rem] text-justify md:text-2xl w-full md:w-[50%] md:text-center">
