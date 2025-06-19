@@ -50,58 +50,51 @@ function ContactSection() {
 
   return (
     <div
-      className={`contact-component-main-container grid grid-cols-1 md:grid-cols-2 md:gap-x-2 ${
+      className={`contact-component-main-container grid grid-cols-1 lg:grid-cols-2 gap-y-10 lg:gap-x-10 px-5 py-10 ${
         installPromptEvent ? "bg-[var(--color-dark)]" : "bg-white"
       }`}
     >
       <h1
-        className={`font-black md:text-4xl text-3xl col-span-2 text-center py-15 pb-5 tracking-wider md:mb-5 mb-0 ${
-          installPromptEvent ? "text-[var(--color-white)]" : ""
+        className={`font-black text-3xl md:text-4xl col-span-full text-center tracking-wider mb-6 ${
+          installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
         }`}
       >
         Contact
       </h1>
-      <div className="left-side md:px-10 px-5 md:row-start-2 md:ml-55 md:py-25 py-0 row-start-3">
-        <h1
-          className={`font-black md:text-4xl text-3xl tracking-wider md:mb-15 text-center md:text-left mb-5 ${
-            installPromptEvent ? "text-[var(--color-white)]" : ""
+
+      <div className="order-2 lg:order-1 flex flex-col justify-center md:px-10 px-5">
+        <h2
+          className={`text-2xl md:text-3xl font-bold mb-4 ${
+            installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
           }`}
         >
           Contact Details
-        </h1>
-
+        </h2>
         <a
-          className={`font-medium md:text-2xl tracking-wider md:mb-3 mb-5 flex items-center md:gap-5 gap-2 ${
-            installPromptEvent ? "text-[var(--color-white)]" : ""
-          }`}
           href="mailto:riskwise.project@gmail.com"
+          className={`flex items-center gap-3 mb-4 text-lg ${
+            installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
+          }`}
         >
           <Mail /> riskwise.project@gmail.com
         </a>
-
         <a
-          className={`font-medium md:text-2xl tracking-wider md:mb-5 mb-10 flex items-center md:gap-5 gap-2 ${
-            installPromptEvent ? "text-[var(--color-white)]" : ""
-          }`}
           href="tel:+639123456789"
+          className={`flex items-center gap-3 text-lg ${
+            installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
+          }`}
         >
           <Phone /> (+63) 912-345-6789
         </a>
       </div>
 
-      <div
-        className={`right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-15 md:py-14 py-0 text-white ${
-          installPromptEvent ? "" : "text-[var(--color-white)]"
-        }`}
-      >
+      {/* 📝 Form – Right on Desktop, Top on Mobile */}
+      <div className="order-1 lg:order-2">
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-col">
             <label
-              htmlFor=""
-              className={`font-[var(--text-font)] text-lg ${
-                installPromptEvent
-                  ? "text-[var(--color-white)]"
-                  : "text-[var(--color-dark)]"
+              className={`text-lg font-medium ${
+                installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
               }`}
             >
               Email:
@@ -111,20 +104,18 @@ function ContactSection() {
               placeholder="johndoe@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={`${
+              className={`border-2 rounded-lg px-3 py-2 text-lg outline-none ${
                 installPromptEvent
-                  ? "border-[var(--color-white)]"
+                  ? "border-white bg-transparent text-white"
                   : "border-[var(--color-dark)] text-[var(--color-dark)]"
-              } border-2 rounded-lg px-2 py-1 text-lg outline-none`}
+              }`}
             />
           </div>
+
           <div className="flex flex-col">
             <label
-              htmlFor=""
-              className={`font-[var(--text-font)] text-lg ${
-                installPromptEvent
-                  ? "text-[var(--color-white)]"
-                  : "text-[var(--color-dark)]"
+              className={`text-lg font-medium ${
+                installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
               }`}
             >
               Concern:
@@ -133,17 +124,17 @@ function ContactSection() {
               placeholder="Enter your concern here..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className={`${
+              className={`border-2 rounded-lg px-3 py-2 text-lg outline-none min-h-[120px] ${
                 installPromptEvent
-                  ? "border-[var(--color-white)]"
+                  ? "border-white bg-transparent text-white"
                   : "border-[var(--color-dark)] text-[var(--color-dark)]"
-              } border-2 rounded-lg px-2 py-1 text-lg max-h-35 min-h-15 outline-none`}
+              }`}
             />
           </div>
 
           <button
             type="submit"
-            className="bg-[var(--color-highlight)] text-[var(--color-white)] text-[17px] md:text-lg px-4 py-2 w-full md:max-w-xs rounded-md hover:cursor-pointer get-started-btn"
+            className="bg-[var(--color-highlight)] text-white px-5 py-3 rounded-lg text-lg hover:opacity-90 transition"
           >
             Submit
           </button>
