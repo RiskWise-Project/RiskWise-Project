@@ -7,10 +7,10 @@ function AboutHero() {
       <img
         src={heroImageAbout}
         alt="About Hero Image"
-        className="md:h-90 hero-banner-image"
+        className="md:h-90 h-100 hero-banner-image"
       />
 
-      <div className="flex flex-col items-center gap-3.5 md:gap-13 px-2 py-25 md:py-45 text-container-heading">
+      <div className="flex flex-col items-center gap-3.5 md:gap-13 px-2 py-50 md:py-45 text-container-heading">
         <h1 className="text-[1.65rem] font-black text-center tracking-wider leading-7.5 md:text-5xl text-[var(--color-highlight)]">
           PROACTIVE RISK MANAGEMENT STARTS HERE
         </h1>
