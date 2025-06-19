@@ -50,7 +50,7 @@ function ContactSection() {
 
   return (
     <div
-      className={`contact-component-main-container grid grid-cols-1 md:grid-cols-2 gap-x-2 ${
+      className={`contact-component-main-container grid grid-cols-1 md:grid-cols-2 md:gap-x-2 ${
         installPromptEvent ? "bg-[var(--color-dark)]" : "bg-white"
       }`}
     >
@@ -61,9 +61,9 @@ function ContactSection() {
       >
         Contact
       </h1>
-      <div className="left-side md:px-10 px-5 md:row-start-2 md:py-30 py-0 row-start-3">
+      <div className="left-side md:px-10 px-5 md:row-start-2 md:ml-55 md:py-25 py-0 row-start-3">
         <h1
-          className={`font-black md:text-4xl text-3xl tracking-wider md:mb-15 mb-10 ${
+          className={`font-black md:text-4xl text-3xl tracking-wider md:mb-15 text-center md:text-left mb-5 ${
             installPromptEvent ? "text-[var(--color-white)]" : ""
           }`}
         >
@@ -71,7 +71,7 @@ function ContactSection() {
         </h1>
 
         <a
-          className={`font-medium md:text-2xl text-xl tracking-wider md:mb-3 mb-5 flex items-center gap-5 ${
+          className={`font-medium md:text-2xl tracking-wider md:mb-3 mb-5 flex items-center md:gap-5 gap-2 ${
             installPromptEvent ? "text-[var(--color-white)]" : ""
           }`}
           href="mailto:riskwise.project@gmail.com"
@@ -80,7 +80,7 @@ function ContactSection() {
         </a>
 
         <a
-          className={`font-medium md:text-2xl text-xl tracking-wider md:mb-5 mb-10 flex items-center gap-5 ${
+          className={`font-medium md:text-2xl tracking-wider md:mb-5 mb-10 flex items-center md:gap-5 gap-2 ${
             installPromptEvent ? "text-[var(--color-white)]" : ""
           }`}
           href="tel:+639123456789"
@@ -90,7 +90,7 @@ function ContactSection() {
       </div>
 
       <div
-        className={`right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-25 md:py-14 py-0 text-white ${
+        className={`right-side px-5 md:row-start-2 row-start-2 md:w-[70%] md:mb-0 mb-15 md:py-14 py-0 text-white ${
           installPromptEvent ? "" : "text-[var(--color-white)]"
         }`}
       >

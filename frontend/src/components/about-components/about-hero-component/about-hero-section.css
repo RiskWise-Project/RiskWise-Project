@@ -1,0 +1,27 @@
+.hero-banner-image {
+  animation: enter 2s ease-in-out;
+}
+
+.text-container-heading {
+  animation: text-in 2s ease-in-out;
+}
+
+@keyframes enter {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes text-in {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

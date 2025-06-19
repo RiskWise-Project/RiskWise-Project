@@ -24,7 +24,10 @@ function HeroSectionComponent() {
           you're offline.
         </p>
 
-        <button className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn">
+        <button
+          title="Login and Signup"
+          className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn"
+        >
           Get Started
         </button>
       </div>
