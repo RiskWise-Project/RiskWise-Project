@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 
 const AboutFooterComponent = React.lazy(() =>
   import(
@@ -40,22 +40,34 @@ function AboutPage() {
   return (
     <div className="main-about-container flex flex-col">
       <div className="section">
-        <AboutHero />
+        <Suspense fallback={null}>
+          <AboutHero />
+        </Suspense>
       </div>
       <div className="section">
-        <AboutMission />
+        <Suspense fallback={null}>
+          <AboutMission />
+        </Suspense>
       </div>
       <div className="section">
-        <WhyChooseUsSection />
+        <Suspense fallback={null}>
+          <WhyChooseUsSection />
+        </Suspense>
       </div>
       <div className="section">
-        <AboutTimeline />
+        <Suspense fallback={null}>
+          <AboutTimeline />
+        </Suspense>
       </div>
       <div className="section">
-        <FutureVisionSection />
+        <Suspense fallback={null}>
+          <FutureVisionSection />
+        </Suspense>
       </div>
       <div className="section">
-        <AboutFooterComponent />
+        <Suspense fallback={null}>
+          <AboutFooterComponent />
+        </Suspense>
       </div>
       <a href="/" className="back-button" aria-label="Go back to homepage">
         <CircleArrowLeft className="absolute cursor-pointer w-7 h-7 md:w-8 md:h-8 md:left-5 md:top-5 left-2 top-2 text-[var(--color-white)] hover:opacity-75 transition-all ease-in" />
