@@ -13,6 +13,7 @@ export default defineConfig({
       ext: ".br",
       deleteOriginFile: false,
     }),
+
     VitePWA({
       registerType: "autoUpdate",
 
@@ -37,4 +38,15 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ["react", "react-dom"],
+          lucide: ["lucide-react"],
+          vendor: ["axios", "react-hot-toast"], // example
+        },
+      },
+    },
+  },
 });
