@@ -31,6 +31,7 @@ function SignInPage() {
           <img
             src={logo1x}
             srcSet={`${logo1x} 1x, ${logo2x} 2x`}
+            decoding="async"
             alt="RiskWise Logo"
             width="192"
             height="71"
