@@ -58,10 +58,14 @@ function HeaderComponent() {
         <div className="left-side-header-container">
           <div className="img-container">
             <img
-              className="header-logo aspect-auto w-[12rem] cursor-pointer"
               src={riskwise_combination}
-              alt="Risk Wise Logo"
+              alt="RiskWise Logo"
+              width="192"
+              height="71"
+              loading="eager"
+              fetchPriority="high"
               onClick={() => navigate("/")}
+              className="header-logo w-[12rem] h-auto cursor-pointer md:w-[10rem] sm:w-[8rem]"
             />
           </div>
         </div>
