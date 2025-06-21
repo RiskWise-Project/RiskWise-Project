@@ -22,7 +22,8 @@ function AboutSectionComponent() {
           title="Learn more about RiskWise"
           className="md:text-xl text-[16px] mt-5 hover:text-[var(--color-highlight)] flex flex-row items-center md:gap-2 gap-1 transition-colors duration-75 ease-in"
         >
-          Learn More <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
+          Learn more about RiskWise
+          <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
         </Link>
       </div>
     </div>

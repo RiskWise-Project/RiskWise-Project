@@ -1,8 +1,9 @@
 import "./header-lp-component.css";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { riskwise_combination } from "../../../assets/logos/logo";
 import { navigationLinks } from "../../../data/navigation-links";
+import logo1x from "../../../assets/logos/riskwise-logo-1x.webp";
+import logo2x from "../../../assets/logos/riskwise-logo-2x.webp";
 
 function HeaderComponent() {
   const navigate = useNavigate();
@@ -58,7 +59,8 @@ function HeaderComponent() {
         <div className="left-side-header-container">
           <div className="img-container">
             <img
-              src={riskwise_combination}
+              src={logo1x}
+              srcSet={`${logo1x} 1x, ${logo2x} 2x`}
               alt="RiskWise Logo"
               width="192"
               height="71"
