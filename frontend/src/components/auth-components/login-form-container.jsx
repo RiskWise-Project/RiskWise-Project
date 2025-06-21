@@ -20,6 +20,7 @@ function LoginFormContainer() {
           <label htmlFor="email">Email Address: </label>
           <input
             type="email"
+            id="email"
             className="py-1 px-3 border border-gray-300 rounded-sm focus:outline-none"
           />
         </div>
@@ -27,12 +28,14 @@ function LoginFormContainer() {
           <label htmlFor="password">Password: </label>
           <input
             type="password"
+            id="password"
             className="py-1 px-3 border border-gray-300 rounded-sm focus:outline-none"
           />
         </div>
         <div className="form-group flex flex-row items-center mb-6 gap-2">
           <input
             type="checkbox"
+            id="show-password"
             name="show-password"
             className="scale-125 transform"
           />
@@ -57,7 +60,7 @@ function LoginFormContainer() {
           Don't have an account?{" "}
           <a
             href="/sign-up"
-            className="text-[var(--color-highlight)] hover:underline"
+            className="text-[var(--color-highlight)] underline hover:opacity-80"
           >
             Sign up
           </a>
