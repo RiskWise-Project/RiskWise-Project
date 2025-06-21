@@ -11,7 +11,6 @@ function MainRoutes() {
     <div>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-
         <Route path="/about" element={<AboutPage />} />
       </Routes>
     </div>
