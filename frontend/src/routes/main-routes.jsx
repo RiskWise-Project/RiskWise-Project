@@ -10,9 +10,7 @@ function MainRoutes() {
   return (
     <div>
       <Routes>
-        <Suspense fallback={null}>
-          <Route path="/" element={<LandingPage />} />
-        </Suspense>
+        <Route path="/" element={<LandingPage />} />
 
         <Route path="/about" element={<AboutPage />} />
       </Routes>
