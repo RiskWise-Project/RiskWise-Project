@@ -92,6 +92,7 @@ function FooterComponent() {
             <a
               className="fs-email-link"
               href="mailto:riskwise.project@gmail.com"
+              aria-label="RiskWise Email"
             >
               riskwise.project@gmail.com
             </a>

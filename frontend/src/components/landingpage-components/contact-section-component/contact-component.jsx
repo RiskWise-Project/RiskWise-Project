@@ -75,11 +75,13 @@ function ContactSection() {
           className={`flex items-center gap-3 mb-4 text-lg ${
             installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
           }`}
+          aria-label="RiskWise Email"
         >
           <Mail /> riskwise.project@gmail.com
         </a>
         <a
           href="tel:+639123456789"
+          aria-label="RiskWise phone number"
           className={`flex items-center gap-3 text-lg ${
             installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
           }`}
