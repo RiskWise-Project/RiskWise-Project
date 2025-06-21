@@ -1,8 +1,11 @@
 import React from "react";
 import "./hero-section-components.css";
+import { useNavigate } from "react-router-dom";
 import heroBg from "../../../assets/resources/hero_section_bg.webp";
 
 function HeroSectionComponent() {
+  const navigate = useNavigate();
+
   return (
     <div
       className="min-h-screen bg-cover bg-center"
@@ -26,6 +29,7 @@ function HeroSectionComponent() {
 
         <button
           title="Login and Signup"
+          onClick={() => navigate("/sign-in")}
           className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn"
         >
           Get Started
