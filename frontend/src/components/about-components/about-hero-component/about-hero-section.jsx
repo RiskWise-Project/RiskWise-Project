@@ -10,7 +10,6 @@ function AboutHero() {
           alt="About Hero Banner"
           className="w-full h-full object-cover hero-banner-image"
           loading="eager"
-          fetchpriority="high"
         />
       </div>
 

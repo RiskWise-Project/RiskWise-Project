@@ -9,9 +9,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
     compression({
-      algorithm: "brotliCompress", // or 'gzip'
-      ext: ".br", // or '.gz'
-      deleteOriginFile: false, // keep original files
+      algorithm: "brotliCompress",
+      ext: ".br",
+      deleteOriginFile: false,
     }),
     VitePWA({
       registerType: "autoUpdate",
