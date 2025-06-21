@@ -1,11 +1,36 @@
-import FutureVisionSection from "../../components/about-components/about-future-component/about-future-section";
-import AboutHero from "../../components/about-components/about-hero-component/about-hero-section";
-import AboutMission from "../../components/about-components/about-mission-component/about-mission-section";
-import AboutTimeline from "../../components/about-components/about-timeline-component/about-timeline-section";
-import WhyChooseUsSection from "../../components/about-components/about-why-choose-component/about-why-choose-section";
-import { CircleArrowLeft } from "lucide-react";
-import { useEffect } from "react";
-import AboutFooterComponent from "../../components/about-components/footer-section-component/footer-component";
+import React, { useEffect } from "react";
+
+const AboutFooterComponent = React.lazy(() =>
+  import(
+    "../../components/about-components/footer-section-component/footer-component"
+  )
+);
+const FutureVisionSection = React.lazy(() =>
+  import(
+    "../../components/about-components/about-future-component/about-future-section"
+  )
+);
+const AboutHero = React.lazy(() =>
+  import(
+    "../../components/about-components/about-hero-component/about-hero-section"
+  )
+);
+const AboutMission = React.lazy(() =>
+  import(
+    "../../components/about-components/about-mission-component/about-mission-section"
+  )
+);
+const AboutTimeline = React.lazy(() =>
+  import(
+    "../../components/about-components/about-timeline-component/about-timeline-section"
+  )
+);
+const WhyChooseUsSection = React.lazy(() =>
+  import(
+    "../../components/about-components/about-why-choose-component/about-why-choose-section"
+  )
+);
+const { CircleArrowLeft } = await import("lucide-react");
 
 function AboutPage() {
   useEffect(() => {
