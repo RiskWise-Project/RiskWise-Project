@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-hot-toast";
@@ -73,7 +73,7 @@ function SignUpForm() {
     setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithRedirect(auth, provider);
       const user = result.user;
 
       console.log("Google user signed in:", user.email);
