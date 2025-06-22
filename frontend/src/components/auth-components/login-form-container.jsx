@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { auth } from "../../utils/firebase";
@@ -66,14 +67,22 @@ function LoginFormContainer() {
     setShowPassword((prev) => !prev);
   };
 
+=======
+import React from "react";
+import googleIcon from "../../assets/logos/search.png";
+
+function LoginFormContainer() {
+>>>>>>> parent of ac4dd71 (RiskWise v1.2.2 --Created the auth pages UI and it is already responsive, checking for bugs and errors)
   return (
     <div className="flex flex-col items-center md:pt-[10%] pt-[20%] md:px-[15%] h-screen w-full">
       <div className="form-container w-full">
         <div className="form-header flex flex-col items-center mb-8">
-          <h1 className="font-black text-4xl tracking-wider whitespace-nowrap">
+          <h1 className="text-center font-black text-4xl tracking-wider whitespace-nowrap">
             WELCOME BACK
           </h1>
-          <p className="subtext-login">Please enter your credentials</p>
+          <p className="subtext-login text-center">
+            Please enter your credentials
+          </p>
         </div>
       </div>
 
@@ -83,23 +92,31 @@ function LoginFormContainer() {
           <input
             type="email"
             id="email"
+<<<<<<< HEAD
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
             placeholder="example@email.com"
             className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+=======
+            className="py-1 px-3 border border-gray-300 rounded-sm focus:outline-none"
+>>>>>>> parent of ac4dd71 (RiskWise v1.2.2 --Created the auth pages UI and it is already responsive, checking for bugs and errors)
           />
         </div>
         <div className="form-group flex flex-col mb-6 gap-2">
           <label htmlFor="password">Password: </label>
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             id="password"
+<<<<<<< HEAD
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+=======
+            className="py-1 px-3 border border-gray-300 rounded-sm focus:outline-none"
+>>>>>>> parent of ac4dd71 (RiskWise v1.2.2 --Created the auth pages UI and it is already responsive, checking for bugs and errors)
           />
         </div>
         <div className="form-group flex flex-row items-center mb-6 gap-2">
@@ -107,7 +124,6 @@ function LoginFormContainer() {
             type="checkbox"
             id="show-password"
             name="show-password"
-            onClick={toggleShowPassword}
             className="scale-125 transform"
           />
           <label htmlFor="show-password">Show Password</label>
