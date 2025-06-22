@@ -10,7 +10,6 @@ import { auth } from "../../utils/firebase";
 import { toast } from "react-hot-toast";
 
 import googleIcon from "../../assets/logos/search.png";
-import { SignUpSend } from "../../services/auth-services";
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -38,7 +37,6 @@ function SignUpForm() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    const idToken = await auth.currentUser.getIdToken();
 
     const { email, password, confirmPassword, termsAccepted } = formData;
 
@@ -61,9 +59,7 @@ function SignUpForm() {
         password
       );
       await sendEmailVerification(userCred.user);
-      await SignUpSend(formData, idToken);
       toast.success("Verification email sent! Please check your inbox.");
-
       navigate("/sign-in");
     } catch (err) {
       setError(err.message);
@@ -75,29 +71,16 @@ function SignUpForm() {
   const handleGoogleSignup = async () => {
     setError("");
     setLoading(true);
-
     try {
       const provider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      const idToken = await user.getIdToken();
-
-      await SignUpSend(
-        {
-          fullname: user.displayName || "Google User",
-          studentNumber: "",
-          email: user.email,
-        },
-        idToken
-      );
-
+      console.log("Google user signed in:", user.email);
       toast.success("Google sign-up successful!");
       //   navigate("/dashboard");
     } catch (err) {
-      console.error("Google Sign-up Error:", err);
       setError(err.message);
-      toast.error("Google sign-up failed.");
     } finally {
       setLoading(false);
     }
