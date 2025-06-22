@@ -5,9 +5,7 @@ import LandingPage from "../pages/user-side-pages/landing-page";
 const AboutPage = React.lazy(() =>
   import("../pages/user-side-pages/about-page.jsx")
 );
-const SignInPage = React.lazy(() =>
-  import("../pages/auth-pages/sign-in-page.jsx")
-);
+import SignInPage from "../pages/auth-pages/sign-in-page";
 const SignUpPage = React.lazy(() =>
   import("../pages/auth-pages/sign-up-page.jsx")
 );
