@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { auth } from "../../utils/firebase";
 
 import SideImage from "../../assets/resources/sign-in-side.webp";
 import logo1x from "../../assets/logos/riskwise-logo-1x.webp";
@@ -12,6 +13,10 @@ const LoginFormContainer = React.lazy(() =>
 
 function SignInPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <motion.div
