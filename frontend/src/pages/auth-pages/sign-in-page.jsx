@@ -50,16 +50,8 @@ function SignInPage() {
         </div>
 
         <div className="flex flex-col items-center justify-center w-full h-full">
-          <Suspense
-            fallback={
-              <div className="w-full h-full flex items-center justify-center">
-                Loading...
-              </div>
-            }
-          >
-            Render test
-            {/* <LoginFormContainer /> */}
-          </Suspense>
+          Render test
+          {/* <LoginFormContainer /> */}
         </div>
       </div>
     </motion.div>
