@@ -5,14 +5,9 @@ import LandingPage from "../pages/user-side-pages/landing-page";
 const AboutPage = React.lazy(() =>
   import("../pages/user-side-pages/about-page.jsx")
 );
-<<<<<<< HEAD
-import SignInPage from "../pages/auth-pages/sign-in-page";
+import SignInPage from "../pages/auth-pages/sign-in-page.jsx";
 const SignUpPage = React.lazy(() =>
   import("../pages/auth-pages/sign-up-page.jsx")
-=======
-const SignInPage = React.lazy(() =>
-  import("../pages/auth-pages/sign-in-page.jsx")
->>>>>>> parent of ac4dd71 (RiskWise v1.2.2 --Created the auth pages UI and it is already responsive, checking for bugs and errors)
 );
 
 function MainRoutes() {
@@ -22,6 +17,8 @@ function MainRoutes() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        {/* Add other routes as needed */}
       </Routes>
     </Suspense>
   );

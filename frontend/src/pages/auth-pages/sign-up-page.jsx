@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 
 import SideImageSignUp from "../../assets/resources/sign-up-image.webp";

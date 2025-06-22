@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React from "react";
+
 import { motion } from "framer-motion";
 
 import SideImage from "../../assets/resources/sign-in-side.webp";
@@ -7,7 +7,7 @@ import logo1x from "../../assets/logos/riskwise-logo-1x.webp";
 import logo2x from "../../assets/logos/riskwise-logo-2x.webp";
 import LoginFormContainer from "../../components/auth-components/login-form-container";
 
-function SignInPage = () => {
+function SignInPage() {
   const navigate = useNavigate();
 
   return (
@@ -51,8 +51,6 @@ function SignInPage = () => {
       </div>
     </motion.div>
   );
-
-};
-
+}
 
 export default SignInPage;
