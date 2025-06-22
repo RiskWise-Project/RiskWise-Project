@@ -5,22 +5,22 @@ import LandingPage from "../pages/user-side-pages/landing-page";
 const AboutPage = React.lazy(() =>
   import("../pages/user-side-pages/about-page.jsx")
 );
-import SignInPage from "../pages/auth-pages/sign-in-page.jsx";
+const SignInPage = React.lazy(() =>
+  import("../pages/auth-pages/sign-in-page.jsx")
+);
+
 const SignUpPage = React.lazy(() =>
   import("../pages/auth-pages/sign-up-page.jsx")
 );
 
 function MainRoutes() {
   return (
-    <Suspense fallback={<div className="p-8 text-center">Loading page...</div>}>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        {/* Add other routes as needed */}
-      </Routes>
-    </Suspense>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/sign-in" element={<SignInPage />} />
+      <Route path="/sign-up" element={<SignUpPage />} />
+    </Routes>
   );
 }
 
