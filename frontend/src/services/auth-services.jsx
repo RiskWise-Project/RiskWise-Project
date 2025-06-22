@@ -8,7 +8,7 @@ const baseURL =
 export const SignUpSend = async (formData, tokenID) => {
   try {
     await axios.post(
-      `${baseURL}/auth/create-users`,
+      `${baseURL}/create-users`,
       {
         fullname: formData.fullname,
         studentNumber: formData.studentNumber,
