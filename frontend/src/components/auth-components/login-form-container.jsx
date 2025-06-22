@@ -4,7 +4,7 @@ import { auth } from "../../utils/firebase";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
 
@@ -48,7 +48,7 @@ function LoginFormContainer() {
   const handleGoogleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithRedirect(auth, provider);
       const user = result.user;
 
       toast.success("Signed in with Google!");
@@ -111,7 +111,7 @@ function LoginFormContainer() {
             name="show-password"
             className="scale-125 transform"
             checked={showPassword}
-            onChange={() => setShowPassword((prev) => !prev)}
+            onChange={toggleShowPassword}
           />
           <label htmlFor="show-password">Show Password</label>
         </div>
