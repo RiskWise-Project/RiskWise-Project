@@ -51,12 +51,9 @@ function LoginFormContainer() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      console.log("Google user signed in:", user.email);
-
       toast.success("Signed in with Google!");
 
       const idToken = await user.getIdToken();
-      console.log("ID Token:", idToken);
 
       // Redirect to protected page
       // navigate("/dashboard");
