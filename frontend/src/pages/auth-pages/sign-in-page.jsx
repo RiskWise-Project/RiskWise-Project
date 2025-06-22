@@ -6,9 +6,10 @@ import SideImage from "../../assets/resources/sign-in-side.webp";
 import logo1x from "../../assets/logos/riskwise-logo-1x.webp";
 import logo2x from "../../assets/logos/riskwise-logo-2x.webp";
 
-const LoginFormContainer = React.lazy(() =>
-  import("../../components/auth-components/login-form-container")
-);
+// const LoginFormContainer = React.lazy(() =>
+//   import("../../components/auth-components/login-form-container")
+// );
+import LoginFormContainer from "../../components/auth-components/login-form-container";
 
 function SignInPage() {
   const navigate = useNavigate();
