@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/user-side-pages/landing-page";
 
@@ -14,15 +14,14 @@ const SignUpPage = React.lazy(() =>
 
 function MainRoutes() {
   return (
-    <div>
+    <Suspense fallback={<div className="p-8 text-center">Loading page...</div>}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutPage />} />
-
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
-    </div>
+    </Suspense>
   );
 }
 
