@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { motion } from "framer-motion";
 
 import SideImage from "../../assets/resources/sign-in-side.webp";
 import logo1x from "../../assets/logos/riskwise-logo-1x.webp";
@@ -13,7 +14,12 @@ function SignInPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen grid grid-cols-1 md:grid-cols-4 transition-all overflow-hidden motion-safe:duration-300 motion-safe:ease-in-out">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="h-screen grid grid-cols-1 md:grid-cols-4 transition-all overflow-hidden motion-safe:duration-300 motion-safe:ease-in-out"
+    >
       <div className="hidden md:flex items-center justify-center bg-[var(--color-highlight)] col-span-2 p-4 transition-all motion-safe:duration-300">
         <img
           src={SideImage}
@@ -46,7 +52,7 @@ function SignInPage() {
           <LoginFormContainer />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

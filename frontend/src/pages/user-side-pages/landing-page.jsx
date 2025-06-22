@@ -1,4 +1,4 @@
-import React from "react";
+import { motion } from "framer-motion";
 import HeaderComponent from "../../components/landingpage-components/header-component/header-lp-component";
 import HeroSectionComponent from "../../components/landingpage-components/hero-section-components/hero-section-components";
 import AboutSectionComponent from "../../components/landingpage-components/about-section-component/about-lp-component";
@@ -9,7 +9,11 @@ import FooterComponent from "../../components/landingpage-components/footer-sect
 
 function LandingPage() {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="header-component-container">
         <HeaderComponent />
       </div>
@@ -31,7 +35,7 @@ function LandingPage() {
       <div className="footer-component-container">
         <FooterComponent />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

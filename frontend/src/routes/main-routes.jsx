@@ -8,6 +8,9 @@ const AboutPage = React.lazy(() =>
 const SignInPage = React.lazy(() =>
   import("../pages/auth-pages/sign-in-page.jsx")
 );
+const SignUpPage = React.lazy(() =>
+  import("../pages/auth-pages/sign-up-page.jsx")
+);
 
 function MainRoutes() {
   return (
@@ -17,6 +20,7 @@ function MainRoutes() {
         <Route path="/about" element={<AboutPage />} />
 
         <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
     </div>
   );
