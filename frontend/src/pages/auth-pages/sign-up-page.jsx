@@ -36,7 +36,15 @@ function SignUpPage() {
           />
         </div>
         <div className="form-container flex flex-col items-center justify-center w-full h-full">
-          <SignUpForm />
+          <Suspense
+            fallback={
+              <div className="w-full h-full flex items-center justify-center">
+                Loading...
+              </div>
+            }
+          >
+            <SignUpForm />
+          </Suspense>
         </div>
       </div>
       <div className="right-side-container-signup flex items-center justify-center bg-[var(--color-highlight)] ">
