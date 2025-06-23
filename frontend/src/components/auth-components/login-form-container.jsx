@@ -5,7 +5,7 @@ import { auth } from "../../utils/firebase";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
 
@@ -48,7 +48,7 @@ function LoginFormContainer() {
   const handleGoogleSignIn = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithRedirect(auth, provider);
+      const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
       toast.success("Signed in with Google!");

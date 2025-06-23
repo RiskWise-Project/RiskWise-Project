@@ -4,7 +4,7 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   GoogleAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { toast } from "react-hot-toast";
@@ -85,11 +85,11 @@ function SignUpForm() {
     setLoading(true);
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithRedirect(auth, provider);
+      const result = await signInWithPopup(auth, provider);
+
       const user = result.user;
       const idToken = await user.getIdToken();
 
-      console.log("Google user signed in:", user.email);
       await SignUpSend(
         {
           email: user.email,
@@ -102,7 +102,9 @@ function SignUpForm() {
       toast.success("Google sign-up successful!");
       navigate("/dashboard/profile");
     } catch (err) {
+      console.error("Google signup error:", err.message);
       setError(err.message);
+      toast.error("Google signup failed.");
     } finally {
       setLoading(false);
     }
