@@ -10,6 +10,7 @@ import { auth } from "../../utils/firebase";
 import { toast } from "react-hot-toast";
 
 import googleIcon from "../../assets/logos/search.png";
+import { SignUpSend } from "../../services/auth-services";
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -58,7 +59,18 @@ function SignUpForm() {
         email,
         password
       );
+
+      const idToken = await userCred.user.getIdToken();
       await sendEmailVerification(userCred.user);
+      await SignUpSend(
+        {
+          email: userCred.user.email,
+          fullname: formData.fullname,
+          studentNumber: formData.studentNumber,
+        },
+        idToken
+      );
+
       toast.success("Verification email sent! Please check your inbox.");
       navigate("/sign-in");
     } catch (err) {
@@ -75,8 +87,18 @@ function SignUpForm() {
       const provider = new GoogleAuthProvider();
       const result = await signInWithRedirect(auth, provider);
       const user = result.user;
+      const idToken = await user.getIdToken();
 
       console.log("Google user signed in:", user.email);
+      await SignUpSend(
+        {
+          email: user.email,
+          fullname: user.displayName || "No Name",
+          studentNumber: "N/A",
+        },
+        idToken
+      );
+
       toast.success("Google sign-up successful!");
       navigate("/dashboard");
     } catch (err) {
