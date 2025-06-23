@@ -78,7 +78,7 @@ function SignUpForm() {
 
       console.log("Google user signed in:", user.email);
       toast.success("Google sign-up successful!");
-      //   navigate("/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {

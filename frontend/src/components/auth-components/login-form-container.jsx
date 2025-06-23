@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { auth } from "../../utils/firebase";
 import {
@@ -9,6 +10,7 @@ import {
 import googleIcon from "../../assets/logos/search.png";
 
 function LoginFormContainer() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,10 +36,8 @@ function LoginFormContainer() {
         return;
       }
 
-      // const idToken = await user.getIdToken();
-
-      // Navigate to a protected route
       toast.success("Login successful!");
+      navigate("/dashboard");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -55,8 +55,7 @@ function LoginFormContainer() {
 
       const idToken = await user.getIdToken();
 
-      // Redirect to protected page
-      // navigate("/dashboard");
+      navigate("/dashboard");
     } catch (err) {
       toast.error(err.message || "Google sign-in failed.");
     }
