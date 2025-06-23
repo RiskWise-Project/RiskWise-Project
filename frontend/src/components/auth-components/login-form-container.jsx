@@ -9,6 +9,8 @@ import {
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
 
+import { SignUpSend } from "../../services/auth-services";
+
 function LoginFormContainer() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -54,6 +56,17 @@ function LoginFormContainer() {
       toast.success("Signed in with Google!");
 
       const idToken = await user.getIdToken();
+
+      await SignUpSend(
+        {
+          email: user.email,
+          fullname: user.displayName || "No Name",
+          studentNumber: "N/A",
+        },
+        idToken
+      );
+
+      toast.success("Google sign-up successful!");
 
       navigate("/dashboard/profile");
     } catch (err) {
