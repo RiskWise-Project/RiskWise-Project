@@ -100,7 +100,7 @@ function SignUpForm() {
       );
 
       toast.success("Google sign-up successful!");
-      navigate("/dashboard");
+      navigate("/dashboard/profile");
     } catch (err) {
       setError(err.message);
     } finally {

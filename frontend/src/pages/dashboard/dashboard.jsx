@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 function dashboard() {
   return (
     <div className="dashboard-container flex flex-col md:flex-row h-screen w-full bg-[var(--color-white)]">
-      <div className="navigation-container md:static fixed bottom-0 w-fit h-16 md:h-screen md:w-fit z-50">
+      <div className="navigation-container md:static fixed bottom-0 w-full h-16 md:h-screen md:w-fit z-50">
         <UserNavigation />
       </div>
 

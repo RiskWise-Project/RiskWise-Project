@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { saveUser } = require("../controllers/auth-controllers");
+const {
+  saveUser,
+  fetchUser,
+  uploadProfilePicture,
+} = require("../controllers/auth-controllers");
 
 router.post("/create-users", saveUser);
+router.get("/fetch-user", fetchUser);
+router.post("/save-picture", uploadProfilePicture);
 
 module.exports = router;

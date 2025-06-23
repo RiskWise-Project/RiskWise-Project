@@ -54,4 +54,69 @@ const saveUser = async (req, res) => {
   }
 };
 
-module.exports = { saveUser };
+const fetchUser = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
+
+    const idToken = authHeader.split(" ")[1];
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
+
+    const userDoc = await db.collection("users").doc(uid).get();
+    if (!userDoc.exists) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ user: userDoc.data() });
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const uploadProfilePicture = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
+
+    const idToken = authHeader.split(" ")[1];
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
+
+    const { profileImageBase64 } = req.body;
+
+    if (!profileImageBase64) {
+      return res
+        .status(400)
+        .json({ message: "Missing profileImageBase64 in request body" });
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    await userRef.set(
+      {
+        profileImageBase64,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    console.log(`Profile image updated for UID: ${uid}`);
+    return res
+      .status(200)
+      .json({ message: "Profile picture updated successfully" });
+  } catch (error) {
+    console.error("Error uploading profile picture:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { saveUser, fetchUser, uploadProfilePicture };

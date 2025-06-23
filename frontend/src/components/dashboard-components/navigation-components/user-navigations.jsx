@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { userNavData } from "../../../data/dashboard-data/user-nav";
 
 import { riskwise_symbol } from "../../../assets/logos/logo";
@@ -7,6 +7,7 @@ import riskwise_combination from "../../../assets/logos/riskwise-logo-2x.webp";
 
 function UserNavigation() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [expanded, setExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -31,7 +32,7 @@ function UserNavigation() {
   `}
     >
       <div
-        className={`image-container-logo md:block hidden absolute top-5  ${
+        className={`image-container-logo md:block hidden absolute top-5 cursor-pointer ${
           expanded ? "aspect-video h-10" : "aspect-square w-13 h-0"
         }cursor-pointer`}
       >
@@ -42,19 +43,27 @@ function UserNavigation() {
         />
       </div>
 
-      <div className="h-full md:w-fit w-full flex md:flex-col items-center md:items-center md:justify-center ">
+      <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center md:justify-center ">
         {userNavData.map((item, index) => {
           const Icon = item.icon;
+          const isActive = item.location === location.pathname;
 
           return (
             <div
               key={index}
               onClick={() => navigate(item.location)}
-              className="flex md:flex-col items-center z-55 md:justify-center justify-evenly w-full h-25 md:w-fit p-4 cursor-pointer transition-colors duration-300 ease-in-out"
+              className={`flex md:flex-col items-center z-55 md:justify-center gap-3 rounded-xl justify-evenly w-full h-fit md:w-fit p-4 cursor-pointer ${
+                isActive
+                  ? "bg-[var(--color-highlight)] text-[var(--color-white)] transform md:translate-x-1.5 md:translate-y-0 translate-y-[-10px]"
+                  : "bg-[var(--color-white)] text-[var(--color-highlight)]"
+              } transition-all duration-300 ease-in-out`}
             >
-              <Icon className="md:w-7 md:h-7 w-7 h-7 text-[var(--color-highlight)] md:mb-0 mb-7" />
+              <Icon
+                strokeWidth={2}
+                className="md:w-7 md:h-7 w-7 h-7  md:mb-0 mb-7"
+              />
               <span
-                className={`text-sm text-[var(--color-highlight)] md:block hidden opacity-0 whitespace-nowrap ${
+                className={`text-sm md:block hidden opacity-0 whitespace-nowrap ${
                   expanded ? "md:opacity-100" : "md:hidden"
                 }`}
               >

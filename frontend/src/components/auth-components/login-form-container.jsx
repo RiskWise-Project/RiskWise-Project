@@ -37,7 +37,7 @@ function LoginFormContainer() {
       }
 
       toast.success("Login successful!");
-      navigate("/dashboard");
+      navigate("/dashboard/profile");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -55,7 +55,7 @@ function LoginFormContainer() {
 
       const idToken = await user.getIdToken();
 
-      navigate("/dashboard");
+      navigate("/dashboard/profile");
     } catch (err) {
       toast.error(err.message || "Google sign-in failed.");
     }
