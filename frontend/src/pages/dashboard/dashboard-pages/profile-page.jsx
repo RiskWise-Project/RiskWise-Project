@@ -5,7 +5,7 @@ import RightSideProfile from "../../../components/dashboard-components/profile-c
 
 function ProfilePage() {
   return (
-    <div className="dashboard-container flex flex-col w-full h-full  bg-[var(--color-white)]">
+    <div className="dashboard-container flex flex-col w-full h-full bg-[var(--color-white)]">
       <div className="header-container-dashboard flex flex-row items-center justify-between md:p-4 w-full">
         <h1 className="text-2xl text-[var(--color-highlight)] tracking-wider font-black md:text-3xl">
           User Profile
@@ -15,11 +15,11 @@ function ProfilePage() {
           strokeWidth={2.5}
         />
       </div>
-      <div className="content-container-profile grid grid-cols-1 h-[95%] md:grid-cols-2 gap-4 md:p-4">
+      <div className="content-container-profile grid grid-cols-1 h-[95%] w-full md:grid-cols-2 gap-4 md:p-4">
         <div className="left-side-profile">
           <LeftSideProfile />
         </div>
-        <div className="right-side-profile">
+        <div className="right-side-profile w-full">
           <RightSideProfile />
         </div>
       </div>

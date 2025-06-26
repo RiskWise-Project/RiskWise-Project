@@ -193,7 +193,7 @@ function LeftSideProfile() {
     <div className="left-side-profile-container flex flex-col gap-10 items-center justify-center p-4">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center">
-          <div className="relative group profile-container overflow-hidden rounded-full aspect-square md:h-70 h-50 mb-4">
+          <div className="relative group profile-container overflow-hidden rounded-full aspect-square md:h-60 h-50 mb-4">
             {preview || user?.profileImageBase64 ? (
               <img
                 src={preview || user?.profileImageBase64}

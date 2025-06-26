@@ -9,7 +9,7 @@ function dashboard() {
         <UserNavigation />
       </div>
 
-      <div className="content-container flex-1 p-4 md:h-full h-screen">
+      <div className="content-container flex-1 p-4 md:h-full h-fit bg-[var(--color-white)]">
         <Outlet />
       </div>
     </div>
