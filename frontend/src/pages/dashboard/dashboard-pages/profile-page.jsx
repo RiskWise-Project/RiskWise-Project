@@ -1,10 +1,11 @@
 import { Bell } from "lucide-react";
 
 import LeftSideProfile from "../../../components/dashboard-components/profile-components/left-side-profile";
+import RightSideProfile from "../../../components/dashboard-components/profile-components/right-side-profile";
 
 function ProfilePage() {
   return (
-    <div className="dashboard-container flex flex-col w-full bg-[var(--color-white)]">
+    <div className="dashboard-container flex flex-col w-full h-full bg-[var(--color-white)] overflow-scroll">
       <div className="header-container-dashboard flex flex-row items-center justify-between md:p-4 w-full">
         <h1 className="text-2xl text-[var(--color-highlight)] tracking-wider font-black md:text-3xl">
           User Profile
@@ -14,11 +15,13 @@ function ProfilePage() {
           strokeWidth={2.5}
         />
       </div>
-      <div className="content-container-profile grid grid-cols-1 md:grid-cols-2 gap-4 md:p-4">
+      <div className="content-container-profile grid grid-cols-1 h-[95%] md:grid-cols-2 gap-4 md:p-4">
         <div className="left-side-profile">
           <LeftSideProfile />
         </div>
-        <div className="right-side-profile"></div>
+        <div className="right-side-profile">
+          <RightSideProfile />
+        </div>
       </div>
     </div>
   );

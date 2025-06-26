@@ -184,7 +184,7 @@ function LeftSideProfile() {
         <h3 className="md:text-2xl text-xl font-black tracking-wider text-[var(--color-highlight)]">
           Recent Reports
         </h3>
-        <div className="reports-container"></div>
+        <div className="reports-container h-50"></div>
       </div>
     </div>
   );

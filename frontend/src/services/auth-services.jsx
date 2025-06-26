@@ -32,6 +32,35 @@ export const SignUpSend = async (formData, tokenID) => {
   }
 };
 
+export const updateUserProfile = async (formData, tokenID) => {
+  try {
+    await axios.post(
+      `${baseURL}/update-user`,
+      {
+        studentNumber: formData.studentNumber,
+        college: formData.college,
+        yearLevel: formData.yearLevel,
+        section: formData.section,
+        course: formData.course,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${tokenID}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return { success: true, message: "Registration successful" };
+  } catch (error) {
+    return {
+      success: false,
+      message:
+        error.response?.data?.message || error.message || "Registration failed",
+    };
+  }
+};
+
 export const FetchUser = async (tokenID) => {
   try {
     const response = await axios.get(`${baseURL}/fetch-user`, {

@@ -9,7 +9,7 @@ function dashboard() {
         <UserNavigation />
       </div>
 
-      <div className="content-container flex-1 p-4 overflow-auto md:h-full">
+      <div className="content-container flex-1 p-4 overflow-auto md:h-full h-screen">
         <Outlet />
       </div>
     </div>

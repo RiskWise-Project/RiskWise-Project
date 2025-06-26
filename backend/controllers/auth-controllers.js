@@ -79,6 +79,63 @@ const fetchUser = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
+
+    const idToken = authHeader.split(" ")[1];
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
+
+    const {
+      email = decodedToken.email,
+      studentNumber,
+      college,
+      yearLevel,
+      section,
+      course,
+    } = req.body;
+
+    if (!email || !studentNumber) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    await userRef.set(
+      {
+        email,
+        studentNumber,
+        college,
+        yearLevel,
+        section,
+        course,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    console.log("User saved successfully:", {
+      email,
+      studentNumber,
+      college,
+      yearLevel,
+      section,
+      course,
+    });
+
+    return res.status(201).json({ message: "User saved successfully" });
+  } catch (error) {
+    console.error("Error saving user:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const uploadProfilePicture = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -119,4 +176,4 @@ const uploadProfilePicture = async (req, res) => {
   }
 };
 
-module.exports = { saveUser, fetchUser, uploadProfilePicture };
+module.exports = { saveUser, fetchUser, updateUser, uploadProfilePicture };
