@@ -250,7 +250,7 @@ function LeftSideProfile() {
       <div className="recent-reports-container md:w-[80%]">
         <div className="form-container-header w-full flex items-center justify-between mb-4">
           <div className="flex flex-col items-start">
-            <h2 className="text-2xl font-bold tracking-wider">
+            <h2 className="text-2xl font-black tracking-wide">
               Profile Information
             </h2>
             <p className="text-xs opacity-50">
