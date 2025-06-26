@@ -17,9 +17,28 @@ body {
   font-family: var(--text-font);
   color: var(--color-dark);
   font-size: 16px;
+  overflow-x: hidden;
 }
 
-h1,
-h2 {
-  font-family: var(--header-font);
+* {
+  /* box-sizing: border-box; */
+  /* overflow-x: hidden; */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-highlight);
+  border-radius: 6px;
+  border: 2px solid #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
 }

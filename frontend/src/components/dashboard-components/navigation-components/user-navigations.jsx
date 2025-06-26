@@ -43,7 +43,7 @@ function UserNavigation() {
         />
       </div>
 
-      <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center md:justify-center ">
+      <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center md:justify-center">
         {userNavData.map((item, index) => {
           const Icon = item.icon;
           const isActive = item.location === location.pathname;
