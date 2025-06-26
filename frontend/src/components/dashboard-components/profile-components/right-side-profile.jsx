@@ -144,6 +144,11 @@ function RightSideProfile() {
               value={user?.studentNumber || ""}
               onChange={handleChange}
               name="studentNumber"
+              onInput={(e) => {
+                if (e.target.value.length > 10) {
+                  e.target.value = e.target.value.slice(0, 10);
+                }
+              }}
             />
           ) : (
             <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
