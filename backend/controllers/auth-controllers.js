@@ -94,7 +94,8 @@ const updateUser = async (req, res) => {
     const uid = decodedToken.uid;
 
     const {
-      email = decodedToken.email,
+      email,
+      fullname,
       studentNumber,
       college,
       yearLevel,
@@ -102,36 +103,39 @@ const updateUser = async (req, res) => {
       course,
     } = req.body;
 
-    if (!email || !studentNumber) {
-      return res.status(400).json({ message: "Missing required fields" });
+    // If nothing is provided, abort early
+    if (
+      !email &&
+      !fullname &&
+      !studentNumber &&
+      !college &&
+      !yearLevel &&
+      !section &&
+      !course
+    ) {
+      return res.status(400).json({ message: "No fields provided for update" });
     }
 
+    const updates = {
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    if (email) updates.email = email;
+    if (fullname) updates.fullname = fullname;
+    if (studentNumber) updates.studentNumber = studentNumber;
+    if (college) updates.college = college;
+    if (yearLevel) updates.yearLevel = yearLevel;
+    if (section) updates.section = section;
+    if (course) updates.course = course;
+
     const userRef = db.collection("users").doc(uid);
-    await userRef.set(
-      {
-        email,
-        studentNumber,
-        college,
-        yearLevel,
-        section,
-        course,
-        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-      },
-      { merge: true }
-    );
+    await userRef.set(updates, { merge: true });
 
-    console.log("User saved successfully:", {
-      email,
-      studentNumber,
-      college,
-      yearLevel,
-      section,
-      course,
-    });
+    console.log("User updated successfully:", updates);
 
-    return res.status(201).json({ message: "User saved successfully" });
+    return res.status(200).json({ message: "User updated successfully" });
   } catch (error) {
-    console.error("Error saving user:", error);
+    console.error("Error updating user:", error);
     return res.status(500).json({ message: "Internal server error" });
   }
 };

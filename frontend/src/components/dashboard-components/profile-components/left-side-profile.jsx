@@ -33,7 +33,6 @@ function LeftSideProfile() {
     const tokenID = await currentUser.getIdToken();
 
     if (!currentUser) {
-      console.error("No authenticated user found.");
       return;
     }
 
@@ -52,7 +51,7 @@ function LeftSideProfile() {
       toast.success("User Updated Successful!");
       setIsEditing(false);
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      toast.error("Error fetching user data:", error);
     } finally {
       setLoading(false);
     }
@@ -64,7 +63,7 @@ function LeftSideProfile() {
     const currentUser = auth.currentUser;
 
     if (!currentUser) {
-      console.error("No authenticated user found.");
+      toast.error("No authenticated user found.");
       return;
     }
 
@@ -97,19 +96,19 @@ function LeftSideProfile() {
           );
 
           if (response.success) {
-            console.log("User image saved as base64.");
+            toast.log("User image saved as base64.");
             fetchUserData();
           } else {
-            console.error("Failed to save base64 image:", response.message);
+            toast.error("Failed to save base64 image:", response.message);
           }
         } catch (err) {
-          console.error("Error saving base64 image:", err);
+          toast.error("Error saving base64 image:", err);
         }
       };
 
       reader.readAsDataURL(compressedFile);
     } catch (error) {
-      console.error("Image compression error:", error);
+      toast.error("Image compression error:", error);
       alert("Failed to compress the image.");
     }
   };
@@ -124,7 +123,7 @@ function LeftSideProfile() {
       const currentUser = auth.currentUser;
 
       if (!currentUser) {
-        console.error("No authenticated user found.");
+        toast.error("No authenticated user found.");
         return;
       }
 
@@ -143,12 +142,11 @@ function LeftSideProfile() {
         };
 
         setUser(mergedUser);
-        console.log("User data fetched successfully:", mergedUser);
       } else {
-        console.error("Failed to fetch user data:", response.message);
+        toast.error("Failed to fetch user data:", response.message);
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      toast.error("Error fetching user data:", error);
     }
   };
 

@@ -18,6 +18,9 @@ const Dashboard = React.lazy(() => import("../pages/dashboard/dashboard.jsx"));
 const ProfilePage = React.lazy(() =>
   import("../pages/dashboard/dashboard-pages/profile-page.jsx")
 );
+const SettingPage = React.lazy(() =>
+  import("../pages/dashboard/dashboard-pages/setting-page.jsx")
+);
 
 function MainRoutes() {
   return (
@@ -55,7 +58,7 @@ function MainRoutes() {
           path="settings"
           element={
             <Suspense fallback={<div>Loading...</div>}>
-              <h1>Settings Page</h1>
+              <SettingPage />
             </Suspense>
           }
         />

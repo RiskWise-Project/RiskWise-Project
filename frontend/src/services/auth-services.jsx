@@ -37,6 +37,8 @@ export const updateUserProfile = async (formData, tokenID) => {
     await axios.post(
       `${baseURL}/update-user`,
       {
+        fullname: formData.fullname,
+        email: formData.email,
         studentNumber: formData.studentNumber,
         college: formData.college,
         yearLevel: formData.yearLevel,
