@@ -14,6 +14,22 @@
     "sending_email": "Sending email...",
     "forgot_password": "Forgot Password",
     "changing_password": "Changing Password...",
-    "change_password_action": "Change Password"
+    "change_password_action": "Change Password",
+    "confirm_your_new_password": "Confirm your new password",
+    "enter_your_new_password": "Enter your new password",
+    "enter_your_current_password": "Enter your current password"
+  },
+
+  "ProfileSetting": {
+    "profile_setting": "Profile Setting",
+    "save": "Save",
+    "full_name": "Full Name:",
+    "email_address": "Email Address:",
+    "confirm_your_password": "Confirm Your Password",
+    "current_password": "Current Password:",
+    "enter_your_current_password": "Enter your current password",
+    "updating": "Updating...",
+    "update_email": "Update Email",
+    "cancel": "Cancel"
   }
 }

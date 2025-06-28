@@ -113,7 +113,7 @@ function SecuritySetting() {
                 <input
                   type="password"
                   name="currentPassword"
-                  placeholder="Enter your current password"
+                  placeholder={t("SecuritySetting.enter_your_current_password")}
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
@@ -130,7 +130,7 @@ function SecuritySetting() {
                 <input
                   type="password"
                   name="newPassword"
-                  placeholder="Enter your new password"
+                  placeholder={t("SecuritySetting.enter_your_new_password")}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
@@ -146,7 +146,7 @@ function SecuritySetting() {
                 <input
                   type="password"
                   name="confirmPassword"
-                  placeholder="Confirm your new password"
+                  placeholder={t("SecuritySetting.confirm_your_new_password")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"

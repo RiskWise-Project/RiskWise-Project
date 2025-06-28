@@ -14,6 +14,22 @@
     "sending_email": "Ipinapadala ang email...",
     "forgot_password": "Nakalimutan ang Password",
     "changing_password": "Binabago ang Password...",
-    "change_password_action": "Palitan ang Password"
+    "change_password_action": "Palitan ang Password",
+    "confirm_your_new_password": "Kumpirmahin ang iyong bagong password",
+    "enter_your_new_password": "Ilagay ang iyong bagong password",
+    "enter_your_current_password": "Ilagay ang iyong kasalukuyang password"
+  },
+
+  "ProfileSetting": {
+    "profile_setting": "Pagsasaayos ng Profile",
+    "save": "I-save",
+    "full_name": "Buong Pangalan:",
+    "email_address": "Email Address:",
+    "confirm_your_password": "Kumpirmahin ang Iyong Password",
+    "current_password": "Kasalukuyang Password:",
+    "enter_your_current_password": "Ilagay ang iyong kasalukuyang password",
+    "updating": "Ina-update...",
+    "update_email": "I-update ang Email",
+    "cancel": "Kanselahin"
   }
 }

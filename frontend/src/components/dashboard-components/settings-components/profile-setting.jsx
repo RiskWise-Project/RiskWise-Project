@@ -6,6 +6,7 @@ import {
   EmailAuthProvider,
 } from "firebase/auth";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 import { updateUserProfile, FetchUser } from "../../../services/auth-services";
 
@@ -13,6 +14,7 @@ function ProfileSettingSection() {
   const [currentUser, setUser] = useState(null);
   const auth = getAuth();
   const user = auth.currentUser;
+  const { t } = useTranslation();
 
   const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState(user?.email || "");
@@ -102,7 +104,9 @@ function ProfileSettingSection() {
   return (
     <div className="w-full h-fit flex flex-col gap-5 text-[var(--color-dark)]">
       <div className="section-header w-full flex justify-between items-center">
-        <h1 className="text-xl font-black tracking-wide">PROFILE SETTING</h1>
+        <h1 className="text-xl font-black tracking-wide">
+          {t("ProfileSetting.profile_setting")}
+        </h1>
         <button
           onClick={toggleConfirmation}
           className={`bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 ${
@@ -110,14 +114,14 @@ function ProfileSettingSection() {
           }`}
           disabled={loading}
         >
-          Save
+          {t("ProfileSetting.save")}
         </button>
       </div>
 
       <div className="setting-profile-content-container md:flex-row flex-col flex w-full md:gap-20 gap-5">
         <div className="container-content-form md:w-[50%] w-full flex flex-col gap-2">
           <label htmlFor="fullname" className="opacity-75 font-semibold">
-            Full Name:
+            {t("ProfileSetting.full_name")}
           </label>
           <input
             type="text"
@@ -131,7 +135,7 @@ function ProfileSettingSection() {
 
         <div className="container-content-form md:w-[50%] w-full flex flex-col gap-2">
           <label htmlFor="email" className="opacity-75 font-semibold">
-            Email Address:
+            {t("ProfileSetting.email_address")}
           </label>
           <input
             type="email"
@@ -148,15 +152,15 @@ function ProfileSettingSection() {
         <div className="password-confirmation-modal fixed inset-0 flex items-center justify-center z-50 bg-white/10 backdrop-blur-sm">
           <div className="confirmation-container bg-white p-6 rounded-xl shadow-2xl w-[90%] max-w-md">
             <h2 className="text-lg font-bold mb-3 text-center">
-              Confirm Your Password
+              {t("ProfileSetting.confirm_your_password")}
             </h2>
             <label htmlFor="password" className="opacity-75 font-semibold">
-              Current Password:
+              {t("ProfileSetting.current_password")}
             </label>
             <input
               type="password"
               name="password"
-              placeholder="Enter your current password"
+              placeholder={t("ProfileSetting.enter_your_current_password")}
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)] mt-1"
@@ -166,13 +170,15 @@ function ProfileSettingSection() {
               className="mt-4 w-full bg-[var(--color-highlight)] text-white py-2 px-4 rounded hover:opacity-90 transition-all disabled:opacity-60"
               disabled={loading}
             >
-              {loading ? "Updating..." : "Update Email"}
+              {loading
+                ? t("ProfileSetting.updating")
+                : t("ProfileSetting.update_email")}
             </button>
             <button
               onClick={toggleConfirmation}
               className="mt-2 w-full text-sm text-gray-500 hover:underline"
             >
-              Cancel
+              {t("ProfileSetting.cancel")}
             </button>
           </div>
         </div>
