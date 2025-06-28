@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { UserPen, SquarePen } from "lucide-react";
 import { getAuth } from "firebase/auth";
 import imageCompression from "browser-image-compression";
-import PlaceholderImg from "../../../assets/resources/Profile-placeholder.jpg";
+import { useTranslation } from "react-i18next";
 
 import {
   FetchUser,
@@ -19,6 +19,7 @@ function LeftSideProfile() {
   const [preview, setPreview] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
@@ -214,7 +215,7 @@ function LeftSideProfile() {
               className="hidden md:flex absolute top-0 flex-col justify-center items-center w-full h-full bg-[var(--color-highlight)] cursor-pointer text-[var(--color-white)] p-2 rounded-full transition-all ease-in-out duration-150 opacity-0 group-hover:opacity-75"
             >
               <UserPen className="w-10 h-10" />
-              <span className="text-sm">Edit Profile</span>
+              <span className="text-sm">{t("ProfilePage.edit_photo")}</span>
             </button>
           </div>
 
@@ -223,7 +224,7 @@ function LeftSideProfile() {
             className="flex md:hidden items-center gap-2 text-[var(--color-highlight)] text-sm mt-1 mb-3 "
           >
             <UserPen className="w-5 h-5" />
-            Edit Photo
+            {t("ProfilePage.edit_photo")}
           </button>
         </div>
 
@@ -249,10 +250,10 @@ function LeftSideProfile() {
         <div className="form-container-header w-full flex items-center justify-between mb-4">
           <div className="flex flex-col items-start">
             <h2 className="text-2xl font-black tracking-wide">
-              Profile Information
+              {t("ProfilePage.profile_information")}
             </h2>
             <p className="text-xs opacity-50">
-              Joined RiskWise:{" "}
+              {t("ProfilePage.joined_riskwise")}{" "}
               {user?.metadata?.creationTime
                 ? new Date(user.metadata.creationTime).toLocaleString("en-US", {
                     year: "numeric",
@@ -305,7 +306,7 @@ function LeftSideProfile() {
 
           <div className="form-group">
             <label className="opacity-50 font-semibold">
-              College/Department:
+              {t("ProfilePage.college_department")}
             </label>
             {isEditing ? (
               <select
@@ -315,7 +316,7 @@ function LeftSideProfile() {
                 name="college"
               >
                 <option value="" disabled>
-                  Select your college
+                  {t("ProfilePage.select_your_college")}
                 </option>
                 {Object.keys(dhvsuCourses).map((college) => (
                   <option key={college} value={college}>
@@ -332,7 +333,9 @@ function LeftSideProfile() {
 
           <div className="form-group-container flex justify-between gap-5">
             <div className="form-group w-[50%]">
-              <label className="opacity-50 font-semibold ">Year Level:</label>
+              <label className="opacity-50 font-semibold ">
+                {t("ProfilePage.year_level")}
+              </label>
               {isEditing ? (
                 <select
                   className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
@@ -341,7 +344,7 @@ function LeftSideProfile() {
                   name="yearLevel"
                 >
                   <option value="" disabled>
-                    Select your year level
+                    {t("ProfilePage.select_your_year_level")}
                   </option>
                   <option value="1st Year">1st Year</option>
                   <option value="2nd Year">2nd Year</option>
@@ -356,7 +359,9 @@ function LeftSideProfile() {
               )}
             </div>
             <div className="form-group w-[50%]">
-              <label className="opacity-50 font-semibold">Section:</label>
+              <label className="opacity-50 font-semibold">
+                {t("ProfilePage.section")}
+              </label>
               {isEditing ? (
                 <input
                   type="text"
@@ -375,7 +380,9 @@ function LeftSideProfile() {
           </div>
 
           <div className="form-group">
-            <label className="opacity-50 font-semibold">Program/Course:</label>
+            <label className="opacity-50 font-semibold">
+              {t("ProfilePage.program_course")}
+            </label>
             {isEditing ? (
               <select
                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
@@ -408,7 +415,9 @@ function LeftSideProfile() {
               }`}
               disabled={loading}
             >
-              {loading ? "Saving profile..." : "Save Profile"}
+              {loading
+                ? t("ProfilePage.saving_profile")
+                : t("ProfilePage.save_profile")}
             </button>
           )}
         </form>

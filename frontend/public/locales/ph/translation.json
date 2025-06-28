@@ -4,7 +4,6 @@
     "darkmode_setting": "Madilim/Maliwanag na Mode:",
     "language_setting": "Wika:"
   },
-
   "SecuritySetting": {
     "security_setting": "Mga Setting ng Seguridad",
     "change_password": "Palitan ang Password",
@@ -19,7 +18,6 @@
     "enter_your_new_password": "Ilagay ang iyong bagong password",
     "enter_your_current_password": "Ilagay ang iyong kasalukuyang password"
   },
-
   "ProfileSetting": {
     "profile_setting": "Pagsasaayos ng Profile",
     "save": "I-save",
@@ -31,5 +29,20 @@
     "updating": "Ina-update...",
     "update_email": "I-update ang Email",
     "cancel": "Kanselahin"
+  },
+  "ProfilePage": {
+    "edit_photo": "I-edit ang Larawan",
+    "profile_information": "Impormasyon ng Profile",
+    "joined_riskwise": "Sumali sa RiskWise:",
+    "college_department": "Kolehiyo/Departamento:",
+    "select_your_college": "Piliin ang iyong kolehiyo",
+    "year_level": "Taon ng Pag-aaral:",
+    "select_your_year_level": "Piliin ang taon ng pag-aaral",
+    "section": "Seksyon:",
+    "program_course": "Programa/Kurso:",
+    "saving_profile": "Sine-save ang profile...",
+    "save_profile": "I-save ang Profile",
+    "no_reports_present": "Walang Ulat na Kasalukuyan",
+    "recent_reports": "Mga Kamakailang Ulat"
   }
 }

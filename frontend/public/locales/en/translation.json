@@ -4,7 +4,6 @@
     "darkmode_setting": "Dark/Light Mode:",
     "language_setting": "Language:"
   },
-
   "SecuritySetting": {
     "security_setting": "Security Setting",
     "change_password": "Change Password",
@@ -19,7 +18,6 @@
     "enter_your_new_password": "Enter your new password",
     "enter_your_current_password": "Enter your current password"
   },
-
   "ProfileSetting": {
     "profile_setting": "Profile Setting",
     "save": "Save",
@@ -31,5 +29,20 @@
     "updating": "Updating...",
     "update_email": "Update Email",
     "cancel": "Cancel"
+  },
+  "ProfilePage": {
+    "edit_photo": "Edit Photo",
+    "profile_information": "Profile Information",
+    "joined_riskwise": "Joined RiskWise:",
+    "college_department": "College/Department:",
+    "select_your_college": "Select your college",
+    "year_level": "Year Level:",
+    "select_your_year_level": "Select your year level",
+    "section": "Section:",
+    "program_course": "Program/Course:",
+    "saving_profile": "Saving profile...",
+    "save_profile": "Save Profile",
+    "no_reports_present": "No Reports Present",
+    "recent_reports": "Recent Reports"
   }
 }
