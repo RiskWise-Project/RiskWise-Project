@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   getAuth,
-  updateEmail,
-  sendEmailVerification,
   reauthenticateWithCredential,
   verifyBeforeUpdateEmail,
   EmailAuthProvider,

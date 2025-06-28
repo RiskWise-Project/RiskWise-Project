@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
 
@@ -74,6 +75,24 @@ function LoginFormContainer() {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast.error("Please enter your email address first.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Password reset email sent. Check your inbox.");
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message || "Failed to send reset email.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const toggleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
@@ -126,6 +145,18 @@ function LoginFormContainer() {
             onChange={toggleShowPassword}
           />
           <label htmlFor="show-password">Show Password</label>
+        </div>
+
+        <div className="flex justify-end">
+          <button
+            onClick={handleForgotPassword}
+            className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
+              loading ? "cursor-wait opacity-60" : "cursor-pointer"
+            }`}
+            disabled={loading}
+          >
+            {loading ? "Sending email..." : "Forgot Password"}
+          </button>
         </div>
 
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}

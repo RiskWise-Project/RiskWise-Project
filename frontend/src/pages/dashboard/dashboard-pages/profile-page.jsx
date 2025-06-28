@@ -1,9 +1,14 @@
 import { Bell } from "lucide-react";
+import { useEffect } from "react";
 
 import LeftSideProfile from "../../../components/dashboard-components/profile-components/left-side-profile";
 import RightSideProfile from "../../../components/dashboard-components/profile-components/right-side-profile";
 
 function ProfilePage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="dashboard-container flex flex-col w-full h-full bg-[var(--color-white)]">
       <div className="header-container-dashboard flex flex-row items-center justify-between md:p-4 w-full">

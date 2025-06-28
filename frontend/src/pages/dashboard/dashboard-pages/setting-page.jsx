@@ -1,8 +1,14 @@
 import { Bell } from "lucide-react";
 
 import ProfileSettingSection from "../../../components/dashboard-components/settings-components/profile-setting";
+import SecuritySetting from "../../../components/dashboard-components/settings-components/security-setting";
+import { useEffect } from "react";
 
 function SettingPages() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="flex flex-col w-full h-full bg-[var(--color-white)] gap-10">
       <div className=" flex flex-row items-center justify-between md:p-4 w-full">
@@ -14,8 +20,9 @@ function SettingPages() {
           strokeWidth={2.5}
         />
       </div>
-      <div className="w-full h-fit md:w-[80%] md:mx-auto flex flex-col gap-10">
+      <div className="w-full h-fit mb-16 md:w-[80%] md:mx-auto flex flex-col gap-10 md:gap-15">
         <ProfileSettingSection />
+        <SecuritySetting />
       </div>
     </div>
   );
