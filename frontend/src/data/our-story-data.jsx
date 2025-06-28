@@ -12,7 +12,7 @@ export const teamMembers = [
     icon: UserRound,
   },
   {
-    name: "DHVSU Safety Office",
+    name: "PamSU Safety Office",
     role: "Field Partner & Pilot Implementer",
     icon: Landmark,
   },

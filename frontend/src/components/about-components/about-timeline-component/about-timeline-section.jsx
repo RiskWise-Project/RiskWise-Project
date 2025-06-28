@@ -17,10 +17,9 @@ function AboutTimeline() {
         </h2>
         <p className="text-[var(--color-white)] opacity-80 text-justify max-w-3xl mx-auto mb-10">
           RISKWISE was born from a university-led initiative to modernize risk
-          reporting at Don Honorio Ventura State University. Recognizing the
-          limitations of paper-based systems, our team of students, faculty
-          advisors, and developers collaborated to build a digital-first
-          solution.
+          reporting at Pampanga State University. Recognizing the limitations of
+          paper-based systems, our team of students, faculty advisors, and
+          developers collaborated to build a digital-first solution.
         </p>
 
         {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">

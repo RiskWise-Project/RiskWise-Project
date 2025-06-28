@@ -18,8 +18,8 @@ function AboutHero() {
           PROACTIVE RISK MANAGEMENT STARTS HERE
         </h1>
         <h2 className="text-[1.125rem] md:text-2xl text-justify md:text-center max-w-2xl">
-          Empowering the Don Honorio Ventura State University community to
-          identify, report, and respond to campus risks anytime, anywhere.
+          Empowering the Pampanga State University community to identify,
+          report, and respond to campus risks anytime, anywhere.
         </h2>
       </div>
     </section>

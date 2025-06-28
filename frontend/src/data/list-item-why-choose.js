@@ -3,5 +3,5 @@ export const ListItems = [
   "Works offline for uninterrupted safety",
   "Real-time alerts with push notifications",
   "Secure data storage and privacy-focused design",
-  "Backed by research and field-tested at DHVSU",
+  "Backed by research and field-tested at PamSU",
 ];

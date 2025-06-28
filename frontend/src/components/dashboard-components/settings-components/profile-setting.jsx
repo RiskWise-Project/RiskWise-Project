@@ -102,7 +102,7 @@ function ProfileSettingSection() {
   return (
     <div className="w-full h-fit flex flex-col gap-5 text-[var(--color-dark)]">
       <div className="section-header w-full flex justify-between items-center">
-        <h1 className="text-xl font-black tracking-wide">Profile Setting</h1>
+        <h1 className="text-xl font-black tracking-wide">PROFILE SETTING</h1>
         <button
           onClick={toggleConfirmation}
           className={`bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 ${

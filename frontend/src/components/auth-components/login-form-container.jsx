@@ -18,12 +18,13 @@ function LoginFormContainer() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
+    setLoginLoading(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(
@@ -35,7 +36,7 @@ function LoginFormContainer() {
 
       if (!user.emailVerified) {
         setError("Please verify your email before logging in.");
-        setLoading(false);
+        setLoginLoading(false);
         return;
       }
 
@@ -44,7 +45,7 @@ function LoginFormContainer() {
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setLoginLoading(false);
     }
   };
 
@@ -81,7 +82,7 @@ function LoginFormContainer() {
       return;
     }
 
-    setLoading(true);
+    setResetLoading(true);
     try {
       await sendPasswordResetEmail(auth, email);
       toast.success("Password reset email sent. Check your inbox.");
@@ -89,7 +90,7 @@ function LoginFormContainer() {
       console.error(err);
       toast.error(err.message || "Failed to send reset email.");
     } finally {
-      setLoading(false);
+      setResetLoading(false);
     }
   };
 
@@ -147,28 +148,16 @@ function LoginFormContainer() {
           <label htmlFor="show-password">Show Password</label>
         </div>
 
-        <div className="flex justify-end">
-          <button
-            onClick={handleForgotPassword}
-            className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
-              loading ? "cursor-wait opacity-60" : "cursor-pointer"
-            }`}
-            disabled={loading}
-          >
-            {loading ? "Sending email..." : "Forgot Password"}
-          </button>
-        </div>
-
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <button
           type="submit"
           className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 ${
-            loading ? "cursor-wait" : "cursor-pointer"
+            loginLoading ? "cursor-wait" : "cursor-pointer"
           }`}
-          disabled={loading}
+          disabled={loginLoading}
         >
-          {loading ? "Signing in..." : "Sign in"}
+          {loginLoading ? "Signing in..." : "Sign in"}
         </button>
       </form>
 
@@ -179,6 +168,19 @@ function LoginFormContainer() {
         <img src={googleIcon} alt="Google" className="h-5 w-5" />
         Sign in with Google
       </button>
+
+      <div className="flex justify-end">
+        <button
+          onClick={handleForgotPassword}
+          type="button"
+          className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
+            resetLoading ? "cursor-wait opacity-60" : "cursor-pointer"
+          }`}
+          disabled={resetLoading}
+        >
+          {resetLoading ? "Sending email..." : "Forgot Password"}
+        </button>
+      </div>
 
       <div className="no-account-container mt-6">
         <p className="text-center mt-4">

@@ -1,8 +1,8 @@
 import { Bell } from "lucide-react";
-
 import ProfileSettingSection from "../../../components/dashboard-components/settings-components/profile-setting";
 import SecuritySetting from "../../../components/dashboard-components/settings-components/security-setting";
 import { useEffect } from "react";
+import PreferencesSetting from "../../../components/dashboard-components/settings-components/preferences-settings";
 
 function SettingPages() {
   useEffect(() => {
@@ -10,8 +10,8 @@ function SettingPages() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full h-full bg-[var(--color-white)] gap-10">
-      <div className=" flex flex-row items-center justify-between md:p-4 w-full">
+    <div className="flex flex-col w-full bg-[var(--color-white)] gap-10">
+      <div className="flex flex-row items-center justify-between md:p-4 w-full">
         <h1 className="text-2xl text-[var(--color-highlight)] tracking-wider font-black md:text-3xl">
           Settings
         </h1>
@@ -20,9 +20,23 @@ function SettingPages() {
           strokeWidth={2.5}
         />
       </div>
-      <div className="w-full h-fit mb-16 md:w-[80%] md:mx-auto flex flex-col gap-10 md:gap-15">
-        <ProfileSettingSection />
-        <SecuritySetting />
+
+      <div className="w-full md:w-[80%] h-screen overflow-auto md:mx-auto flex flex-col gap-10 md:gap-15 [&::-webkit-scrollbar]:hidden scrollbar-hide">
+        <div className="flex flex-col gap-4 border border-gray-200 rounded-lg p-6 shadow-sm">
+          <ProfileSettingSection />
+        </div>
+
+        <div className="w-full h-[1px] bg-gray-300"></div>
+
+        <div className="flex flex-col gap-4 border border-gray-200 rounded-lg p-6 shadow-sm">
+          <SecuritySetting />
+        </div>
+
+        <div className="w-full h-[1px] bg-gray-300"></div>
+
+        <div className="flex flex-col gap-4 border border-gray-200 rounded-lg p-6 shadow-sm">
+          <PreferencesSetting />
+        </div>
       </div>
     </div>
   );

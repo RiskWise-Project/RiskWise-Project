@@ -82,7 +82,7 @@ function SecuritySetting() {
   return (
     <div className="w-full h-fit flex flex-col gap-5 text-[var(--color-dark)]">
       <div className="section-header w-full flex justify-between items-center">
-        <h1 className="text-xl font-black tracking-wide">Security Setting</h1>
+        <h1 className="text-xl font-black tracking-wide">SECURITY SETTING</h1>
       </div>
 
       <div className="setting-security-content-container flex flex-col w-full gap-3">
@@ -171,7 +171,7 @@ function SecuritySetting() {
               </button>
             </form>
           </div>
-          <div className="flex justify-center items-center">
+          <div className="md:flex justify-center items-center hidden">
             <img src={SecuritySide} alt="" className="mx-auto my-auto" />
           </div>
         </div>
