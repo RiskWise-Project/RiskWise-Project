@@ -8,7 +8,6 @@ function AboutFooterComponent() {
           <div
             className={`fs-email-container text-[var(--color-white)] flex flex-row items-center justify-center gap-1 `}
           >
-            <p className="fs-email-label">Email: </p>
             <a
               className="fs-email-link"
               href="mailto:riskwise.project@gmail.com"

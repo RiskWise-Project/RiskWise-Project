@@ -21,7 +21,7 @@ function SettingPages() {
         />
       </div>
 
-      <div className="w-full md:w-[80%] h-screen overflow-auto md:mx-auto flex flex-col gap-10 md:gap-15 [&::-webkit-scrollbar]:hidden scrollbar-hide">
+      <div className="w-full md:w-[80%] h-screen overflow-auto md:mx-auto mb-15 flex flex-col gap-6 md:gap-5 [&::-webkit-scrollbar]:hidden scrollbar-hide">
         <div className="flex flex-col gap-4 border border-gray-200 rounded-lg p-6 shadow-sm">
           <ProfileSettingSection />
         </div>

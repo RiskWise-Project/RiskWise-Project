@@ -18,7 +18,7 @@ function SignUpPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="main-container-signup h-screen grid grid-cols-1 md:grid-cols-2 transition-all overflow-hidden motion-safe:duration-300 motion-safe:ease-in-out"
+      className="main-container-signup h-screen grid bg-[var(--color-white)] grid-cols-1 md:grid-cols-2 transition-all overflow-hidden motion-safe:duration-300 motion-safe:ease-in-out"
     >
       <div className="left-side-container-signup">
         <div className="text-center">

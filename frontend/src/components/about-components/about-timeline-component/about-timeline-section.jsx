@@ -54,7 +54,7 @@ function AboutTimeline() {
                   className="w-full text-left flex items-center justify-between py-3 px-2"
                 >
                   <div className="flex items-center gap-2">
-                    <CalendarCheck className="w-5 h-5 text-primary" />
+                    <CalendarCheck className="w-5 h-5 text-[var(--color-white)]" />
                     <span className="font-semibold text-gray-800">
                       {phase.date} – {phase.title}
                     </span>

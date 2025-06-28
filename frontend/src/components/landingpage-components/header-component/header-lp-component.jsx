@@ -79,9 +79,9 @@ function HeaderComponent() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
-              <span className="block w-6 h-0.5 bg-gray-800 mb-1"></span>
-              <span className="block w-6 h-0.5 bg-gray-800"></span>
+              <span className="block w-6 h-0.5 bg-[var(--color-highlight)] mb-1"></span>
+              <span className="block w-6 h-0.5 bg-[var(--color-highlight)] mb-1"></span>
+              <span className="block w-6 h-0.5 bg-[var(--color-highlight)] "></span>
             </button>
 
             {isMenuOpen && (

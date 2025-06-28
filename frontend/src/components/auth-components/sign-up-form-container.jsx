@@ -111,7 +111,7 @@ function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-col items-center md:px-[5%] h-screen w-full">
+    <div className="flex flex-col items-center md:px-[5%] h-screen w-full  bg-[var(--color-white)]">
       <div className="form-container w-full flex flex-col items-center">
         <div className="form-header flex flex-col w-[90%] lg:w-[70%] mb-8">
           <h1 className=" font-black text-2xl tracking-wider whitespace-nowrap">

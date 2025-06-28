@@ -12,7 +12,7 @@ function FutureVisionSection() {
         <h2 className="text-3xl md:text-5xl font-extrabold text-[var(--color-dark)] tracking-tight mb-4">
           Smarter Today, Smarter Tomorrow
         </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-[var(--color-dark)] opacity-30 max-w-2xl mx-auto">
           We're building more than a reporting tool, RISKWISE evolves with your
           campus safety needs.
         </p>
@@ -22,7 +22,7 @@ function FutureVisionSection() {
         <div className="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition duration-300">
           <div className="flex items-center gap-3 mb-4">
             <BrainCircuit className="w-6 h-6 text-blue-600" />
-            <h3 className="text-xl font-semibold text-[var(--color-dark)]">
+            <h3 className="text-xl font-semibold text-[var(--color-white)]">
               AI-Powered Categorization
             </h3>
           </div>
@@ -36,7 +36,7 @@ function FutureVisionSection() {
         <div className="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition duration-300">
           <div className="flex items-center gap-3 mb-4">
             <Rocket className="w-6 h-6 text-rose-600" />
-            <h3 className="text-xl font-semibold text-[var(--color-dark)]">
+            <h3 className="text-xl font-semibold text-[var(--color-white)]">
               What&apos;s Coming?
             </h3>
           </div>

@@ -8,7 +8,7 @@ function WhyChooseUsSection() {
         <h2 className="text-3xl md:text-4xl font-extrabold text-[var(--color-dark)] mb-4">
           Why Choose Us
         </h2>
-        <p className="text-lg text-gray-600 md:w-[60%] mb-10">
+        <p className="text-lg text-[var(--color-dark)] opacity-30 md:w-[60%] mb-10">
           Built using Progressive Web App technology for reliability, speed, and
           cross-device compatibility.
         </p>

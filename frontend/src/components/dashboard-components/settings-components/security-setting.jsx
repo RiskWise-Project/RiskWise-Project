@@ -6,6 +6,7 @@ import {
   EmailAuthProvider,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 
 import { toast } from "react-hot-toast";
 import SecuritySide from "../../../assets/resources/side-picture.webp";
@@ -15,6 +16,8 @@ function SecuritySetting() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +85,9 @@ function SecuritySetting() {
   return (
     <div className="w-full h-fit flex flex-col gap-5 text-[var(--color-dark)]">
       <div className="section-header w-full flex justify-between items-center">
-        <h1 className="text-xl font-black tracking-wide">SECURITY SETTING</h1>
+        <h1 className="text-xl font-black tracking-wide">
+          {t("SecuritySetting.security_setting")}
+        </h1>
       </div>
 
       <div className="setting-security-content-container flex flex-col w-full gap-3">
@@ -90,7 +95,7 @@ function SecuritySetting() {
           <div className="security-form-container flex-col md:col-span-2 flex w-full gap-5">
             <div className="section-header w-full flex justify-between items-center">
               <h1 className="text-lg text-[var(--color-highlight)] font-black tracking-wide">
-                Change Password
+                {t("SecuritySetting.change_password")}
               </h1>
             </div>
 
@@ -103,7 +108,7 @@ function SecuritySetting() {
                   htmlFor="currentPassword"
                   className="opacity-75 font-semibold"
                 >
-                  Current Password:
+                  {t("SecuritySetting.current_password")}
                 </label>
                 <input
                   type="password"
@@ -120,7 +125,7 @@ function SecuritySetting() {
                   htmlFor="newPassword"
                   className="opacity-75 font-semibold"
                 >
-                  New Password:
+                  {t("SecuritySetting.new_password")}
                 </label>
                 <input
                   type="password"
@@ -136,7 +141,7 @@ function SecuritySetting() {
                   htmlFor="confirmPassword"
                   className="opacity-75 font-semibold"
                 >
-                  Confirm Password:
+                  {t("SecuritySetting.confirm_password")}
                 </label>
                 <input
                   type="password"
@@ -156,7 +161,9 @@ function SecuritySetting() {
                   }`}
                   disabled={loading}
                 >
-                  {loading ? "Sending email..." : "Forgot Password"}
+                  {loading
+                    ? t("SecuritySetting.sending_email")
+                    : t("SecuritySetting.forgot_password")}
                 </button>
               </div>
 
@@ -167,7 +174,9 @@ function SecuritySetting() {
                 }`}
                 disabled={loading}
               >
-                {loading ? "Changing Password..." : "Change Password"}
+                {loading
+                  ? t("SecuritySetting.changing_password")
+                  : t("SecuritySetting.change_password_action")}
               </button>
             </form>
           </div>

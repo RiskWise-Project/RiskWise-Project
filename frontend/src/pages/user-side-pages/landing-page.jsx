@@ -9,7 +9,7 @@ import FooterComponent from "../../components/landingpage-components/footer-sect
 
 function LandingPage() {
   return (
-    <div>
+    <div className="bg-[var(--color-white)]">
       <div className="header-component-container">
         <HeaderComponent />
       </div>

@@ -99,7 +99,7 @@ function LoginFormContainer() {
   };
 
   return (
-    <div className="flex flex-col items-center md:pt-[10%] pt-[20%] md:px-[15%] h-screen w-full">
+    <div className="flex flex-col items-center text-[var(--color-dark)] bg-[var(--color-white)] md:pt-[10%] pt-[20%] md:px-[15%] h-screen w-full">
       <div className="form-container w-full">
         <div className="form-header flex flex-col items-center mb-8">
           <h1 className="text-center font-black text-4xl tracking-wider whitespace-nowrap">
@@ -148,6 +148,19 @@ function LoginFormContainer() {
           <label htmlFor="show-password">Show Password</label>
         </div>
 
+        <div className="flex justify-end mb-5">
+          <button
+            onClick={handleForgotPassword}
+            type="button"
+            className={`text-[var(--color-highlight)] underline hover:opacity-80  transition-all duration-200 ${
+              resetLoading ? "cursor-wait opacity-60" : "cursor-pointer"
+            }`}
+            disabled={resetLoading}
+          >
+            {resetLoading ? "Sending email..." : "Forgot Password"}
+          </button>
+        </div>
+
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
         <button
@@ -168,19 +181,6 @@ function LoginFormContainer() {
         <img src={googleIcon} alt="Google" className="h-5 w-5" />
         Sign in with Google
       </button>
-
-      <div className="flex justify-end">
-        <button
-          onClick={handleForgotPassword}
-          type="button"
-          className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
-            resetLoading ? "cursor-wait opacity-60" : "cursor-pointer"
-          }`}
-          disabled={resetLoading}
-        >
-          {resetLoading ? "Sending email..." : "Forgot Password"}
-        </button>
-      </div>
 
       <div className="no-account-container mt-6">
         <p className="text-center mt-4">

@@ -1,0 +1,19 @@
+{
+  "PreferenceSetting": {
+    "preference_setting": "Mga Setting ng Kagustuhan",
+    "darkmode_setting": "Madilim/Maliwanag na Mode:",
+    "language_setting": "Wika:"
+  },
+
+  "SecuritySetting": {
+    "security_setting": "Mga Setting ng Seguridad",
+    "change_password": "Palitan ang Password",
+    "current_password": "Kasalukuyang Password:",
+    "new_password": "Bagong Password:",
+    "confirm_password": "Kumpirmahin ang Password:",
+    "sending_email": "Ipinapadala ang email...",
+    "forgot_password": "Nakalimutan ang Password",
+    "changing_password": "Binabago ang Password...",
+    "change_password_action": "Palitan ang Password"
+  }
+}
