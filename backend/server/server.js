@@ -13,6 +13,10 @@ app.use(express.json({ limit: "10mb" }));
 app.use("/", ConcernRoutes);
 app.use("/", AuthRoutes);
 
+app.get("/ping", (req, res) => {
+  res.status(200).json({ message: "pong" });
+});
+
 app.use(compression());
 app.use(express.static(path.resolve(__dirname, "dist")));
 

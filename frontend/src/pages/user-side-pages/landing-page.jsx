@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+import { useEffect } from "react";
 import HeaderComponent from "../../components/landingpage-components/header-component/header-lp-component";
 import HeroSectionComponent from "../../components/landingpage-components/hero-section-components/hero-section-components";
 import AboutSectionComponent from "../../components/landingpage-components/about-section-component/about-lp-component";
@@ -8,6 +10,18 @@ import ContactSection from "../../components/landingpage-components/contact-sect
 import FooterComponent from "../../components/landingpage-components/footer-section-component/footer-component";
 
 function LandingPage() {
+  useEffect(() => {
+    const pingBackend = async () => {
+      try {
+        await axios.get("https://your-backend-url.com/ping");
+      } catch (error) {
+        // ignore errors
+      }
+    };
+
+    pingBackend();
+  }, []);
+
   return (
     <div className="bg-[var(--color-white)]">
       <div className="header-component-container">

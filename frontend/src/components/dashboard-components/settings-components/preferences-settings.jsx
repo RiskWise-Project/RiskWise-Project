@@ -35,6 +35,8 @@ function PreferencesSetting() {
           </label>
 
           <button
+            id="darkModeToggle"
+            aria-label={darkMode ? "Disable dark mode" : "Enable dark mode"}
             onClick={toggleDarkMode}
             className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${
               darkMode ? "bg-[var(--color-highlight)]" : "bg-gray-300"
@@ -53,6 +55,7 @@ function PreferencesSetting() {
           </label>
 
           <select
+            id="languageSelect"
             onChange={changeLanguage}
             value={i18n.language}
             className="w-30 p-2 border border-gray-300 bg-[var(--color-white)] rounded focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
