@@ -26,7 +26,9 @@ function AboutTimeline() {
           {teamMembers.map(({ name, role, icon: Icon }, index) => (
             <div
               key={index}
-              className="bg-gray-100 p-6 rounded-xl shadow-sm text-center"
+              className={`bg-gray-100 p-6 rounded-xl shadow-sm text-center ${
+                index === teamMembers.length - 1 ? "md:col-start-2" : ""
+              }`}
             >
               <div className="flex justify-center mb-3">
                 <Icon className="w-5 h-5 text-primary" />

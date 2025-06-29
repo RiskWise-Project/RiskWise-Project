@@ -36,11 +36,6 @@ export const teamMembers = [
     role: "Project Mentor & Adviser",
     icon: UserRound,
   },
-  {
-    name: "PamSU Safety Office",
-    role: "Field Partner & Pilot Implementer",
-    icon: Landmark,
-  },
 ];
 
 export const projectTimeline = [
