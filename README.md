@@ -24,21 +24,27 @@
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Ronald Kevin T. Pabello</strong><br/>Front End Developer
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Christian Angelo G. Jimenez</strong><br/>Back End Developer
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Paulo Kurl Cando</strong><br/>UI/UX Designer
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Andrei Mallari</strong><br/>Researcher
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Troy Michael Angelo</strong><br/>Data Analyst
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
       <strong>Rose Anne Hipolito</strong><br/>Documents
     </div>
+    <br />
     <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 420px;">
       <strong>Marvin Luquiaz</strong><br/>Project Mentor & Adviser
     </div>
