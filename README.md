@@ -17,6 +17,38 @@
 <hr/>
 <br/>
 
+<h2 align="center">Team</h2>
+
+<div align="center">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 800px;">
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Ronald Kevin T. Pabello</strong><br/>Front End Developer
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Christian Angelo G. Jimenez</strong><br/>Back End Developer
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Paulo Kurl Cando</strong><br/>UI/UX Designer
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Andrei Mallari</strong><br/>Researcher
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Troy Michael Angelo</strong><br/>Data Analyst
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 200px;">
+      <strong>Rose Anne Hipolito</strong><br/>Documents
+    </div>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; width: 420px;">
+      <strong>Marvin Luquiaz</strong><br/>Project Mentor & Adviser
+    </div>
+  </div>
+</div>
+
+<br/>
+<hr/>
+<br/>
+
 <h2 align="center">Features</h2>
 
 ### **_High Priority (Essential for MVP – Build First)_**
@@ -113,30 +145,6 @@
     <img src="https://img.shields.io/badge/-Geolocation%20API-0A66C2?style=flat-square&logo=googlemaps&logoColor=white" />
     <img src="https://img.shields.io/badge/-Camera%20API-FF6F00?style=flat-square&logo=unsplash&logoColor=white" />
 </p>
-
-<br/>
-<hr/>
-<br/>
-
-<h2 align="center">Team</h2>
-
-<table align="center">
-  <tr>
-    <td align="center"><strong>Ronald Kevin T. Pabello</strong><br/>Front End Developer</td>
-    <td align="center"><strong>Christian Angelo G. Jimenez</strong><br/>Back End Developer</td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Paulo Kurl Cando</strong><br/>UI/UX Designer</td>
-    <td align="center"><strong>Andrei Mallari</strong><br/>Researcher</td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Troy Michael Angelo</strong><br/>Data Analyst</td>
-    <td align="center"><strong>Rose Anne Hipolito</strong><br/>Documents</td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center"><strong>Marvin Luquiaz</strong><br/>Project Mentor & Adviser</td>
-  </tr>
-</table>
 
 <br/>
 <hr/>
