@@ -22,7 +22,7 @@ function AboutTimeline() {
           developers collaborated to build a digital-first solution.
         </p>
 
-        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
           {teamMembers.map(({ name, role, icon: Icon }, index) => (
             <div
               key={index}
@@ -35,7 +35,7 @@ function AboutTimeline() {
               <p className="text-sm text-gray-600">{role}</p>
             </div>
           ))}
-        </div> */}
+        </div>
 
         <h3 className="text-2xl text-[var(--color-white)] font-semibold mb-6 text-center">
           Project Timeline

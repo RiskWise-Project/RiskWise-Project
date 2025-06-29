@@ -50,7 +50,7 @@ function PreferencesSetting() {
           </button>
         </div>
         <div className="preference-container flex flex-row items-center justify-between">
-          <label htmlFor="darkMode" className="opacity-75 font-semibold">
+          <label htmlFor="languageSelect" className="opacity-75 font-semibold">
             {t("PreferenceSetting.language_setting")}
           </label>
 

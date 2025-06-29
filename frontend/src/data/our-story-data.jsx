@@ -2,12 +2,37 @@ import { UserRound, Landmark } from "lucide-react";
 
 export const teamMembers = [
   {
-    name: "John Mark Flameño",
-    role: "Lead Developer & BSED Student",
+    name: "Ronald Kevin Pabello",
+    role: "Front End Developer",
     icon: UserRound,
   },
   {
-    name: "Tita Marcia Adriano",
+    name: "Christian Angelo G. Jimenez",
+    role: "Back End Developer",
+    icon: UserRound,
+  },
+  {
+    name: "Paulo Kurl Cando",
+    role: "UI/UX Designer",
+    icon: UserRound,
+  },
+  {
+    name: "Andrei Mallari",
+    role: "Researcher",
+    icon: UserRound,
+  },
+  {
+    name: "Troy Michael Angelo",
+    role: "Data Analyst",
+    icon: UserRound,
+  },
+  {
+    name: "Rose Anne Hipolito",
+    role: "Documents",
+    icon: UserRound,
+  },
+  {
+    name: "Marvin Luquiaz",
     role: "Project Mentor & Adviser",
     icon: UserRound,
   },

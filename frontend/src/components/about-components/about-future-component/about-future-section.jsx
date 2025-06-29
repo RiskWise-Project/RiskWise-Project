@@ -22,7 +22,7 @@ function FutureVisionSection() {
         <div className="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition duration-300">
           <div className="flex items-center gap-3 mb-4">
             <BrainCircuit className="w-6 h-6 text-blue-600" />
-            <h3 className="text-xl font-semibold text-[var(--color-white)]">
+            <h3 className="text-xl font-semibold text-[#152b3f]">
               AI-Powered Categorization
             </h3>
           </div>
@@ -36,7 +36,7 @@ function FutureVisionSection() {
         <div className="bg-gray-50 rounded-xl p-8 shadow-sm hover:shadow-md transition duration-300">
           <div className="flex items-center gap-3 mb-4">
             <Rocket className="w-6 h-6 text-rose-600" />
-            <h3 className="text-xl font-semibold text-[var(--color-white)]">
+            <h3 className="text-xl font-semibold text-[#152b3f]">
               What&apos;s Coming?
             </h3>
           </div>
