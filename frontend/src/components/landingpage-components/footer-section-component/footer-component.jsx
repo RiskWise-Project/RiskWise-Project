@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { navigationLinks } from "../../../data/navigation-links";
+import { useNavigationLinks } from "../../../hooks/navigation-links";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import "./footer-component.css";
 
 function FooterComponent() {
   const [installPromptEvent, setInstallPromptEvent] = useState(null);
   const location = useLocation();
+  const navigationLinks = useNavigationLinks();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event) => {
@@ -88,7 +91,6 @@ function FooterComponent() {
               installPromptEvent ? "" : "text-[var(--color-white)]"
             }`}
           >
-            <p className="fs-email-label">Email: </p>
             <a
               className="fs-email-link"
               href="mailto:riskwise.project@gmail.com"
@@ -105,7 +107,7 @@ function FooterComponent() {
           installPromptEvent ? "" : "text-[var(--color-white)]"
         }`}
       >
-        <p>© {new Date().getFullYear()} RiskWise. All rights reserved.</p>
+        <p>{t("FooterLP.copyright", { year: new Date().getFullYear() })}</p>
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import React from "react";
 import "./hero-section-components.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import heroBg from "../../../assets/resources/hero_section_bg.webp";
 
 function HeroSectionComponent() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div
@@ -16,15 +18,12 @@ function HeroSectionComponent() {
           RiskWise:{" "}
           <span className="text-[var(--color-highlight)]">
             {" "}
-            Real-Time Risk Assessment and Incident Reporting
+            {t("HeroComponentLP.headline")}
           </span>
         </h1>
 
         <p className="text-[16px] md:text-xl mt-3 md:w-[50%] w-[100%] text-justify">
-          Stay informed and in control with a simple, accessible tool for
-          managing risks as they happen. Easily report hazards, follow updates,
-          and get helpful guidance, all from your phone or computer, even when
-          you're offline.
+          {t("HeroComponentLP.description")}
         </p>
 
         <button
@@ -32,7 +31,7 @@ function HeroSectionComponent() {
           onClick={() => navigate("/sign-in")}
           className="md:mt-[5rem] mt-[3rem] bg-[var(--color-highlight)] md:px-9 px-6 md:py-2 py-1.5 rounded-md text-[var(--color-white)] md:text-lg text-[17px] hover:cursor-pointer get-started-btn"
         >
-          Get Started
+          {t("HeroComponentLP.get_started")}
         </button>
       </div>
     </div>

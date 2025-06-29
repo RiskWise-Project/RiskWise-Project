@@ -1,12 +1,14 @@
-import React from "react";
-import { featureData } from "../../../data/feature-data";
+import { useTranslation } from "react-i18next";
+import useFeatureData from "../../../hooks/feature-data";
 
 function FeatureComponent() {
+  const featureData = useFeatureData();
+  const { t } = useTranslation();
   return (
     <div className="feature-section-main-container bg-[var(--color-dark)] flex flex-col items-center py-15">
       <div className="feature-header-container md:w-[90%] w-full m-auto py-5">
-        <h1 className="font-black md:text-4xl text-center text-3xl text-[var(--color-white)] tracking-wider">
-          FEATURE
+        <h1 className="font-black md:text-4xl text-center mb-15 text-3xl text-[var(--color-white)] tracking-wider">
+          {t("FeaturesComponentLP.feature_title")}
         </h1>
       </div>
 

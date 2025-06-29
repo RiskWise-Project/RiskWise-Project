@@ -44,5 +44,49 @@
     "save_profile": "I-save ang Profile",
     "no_reports_present": "Walang Ulat na Kasalukuyan",
     "recent_reports": "Mga Kamakailang Ulat"
+  },
+  "HeaderComponentLP": {
+    "about": "Patungkol",
+    "features": "Mga Tampok",
+    "download": "I-download",
+    "contact": "Makipag-ugnayan"
+  },
+  "FooterLP": {
+    "copyright": "© {{year}} RiskWise. Lahat ng karapatan ay nakalaan."
+  },
+  "HeroComponentLP": {
+    "headline": "Real-Time na Pagsusuri ng Panganib at Pag-uulat ng Insidente",
+    "description": "Manatiling alam at kontrolado gamit ang isang simple at accessible na tool para sa pamamahala ng mga panganib habang nangyayari ang mga ito. Madaling mag-ulat ng panganib, subaybayan ang mga update, at kumuha ng kapaki-pakinabang na gabay, mula sa iyong telepono o computer, kahit offline ka.",
+    "get_started": "Magsimula"
+  },
+  "AboutComponentLP": {
+    "about_title": "TUNGKOL SA RISKWISE",
+    "about_description": "Ang RiskWise ay isang kasangkapan para tuklasin at tugunan ang mga panganib. Tumatakbo ito sa anumang device na may browser. Maaari mo itong magamit kahit walang koneksyon sa internet. Pwedeng markahan ng mga user ang mga panganib, subaybayan ang mga panganib, at matuto ng mga tip sa kaligtasan. Tumutulong ito sa mga koponan na mabilis tumugon at manatiling alerto. Pinapalaganap ng RiskWise ang mas ligtas na mga lugar sa pamamagitan ng madaling pagbabahagi at pag-unawa sa datos ng panganib.",
+    "about_link": "Alamin pa tungkol sa RiskWise"
+  },
+  "FeaturesComponentLP": {
+    "feature_title": "MGA KATANGIAN",
+    "risk_reporting_title": "Pag-uulat ng Panganib",
+    "risk_reporting_description": "Mag-ulat ng mga panganib gamit ang mga larawan, deskripsyon, at kategorya.",
+    "admin_dashboard_title": "Admin Dashboard",
+    "admin_dashboard_description": "Pamahalaan at subaybayan ang mga ulat gamit ang CRUD capabilities.",
+    "real_time_alerts_title": "Real-Time na Mga Alerto",
+    "real_time_alerts_description": "Tumanggap ng mga push notification para sa mahahalagang update.",
+    "incident_timeline_title": "Pagtingin ng Timeline ng Insidente",
+    "incident_timeline_description": "Ipakita ang mga insidente sa paglipas ng panahon para sa mas magandang pagsasalaysay.",
+    "geolocation_title": "Geolocation",
+    "geolocation_description": "Kunin at ipakita ang datos ng lokasyon para sa bawat ulat."
+  },
+  "ContactUsLP": {
+    "contact_title": "Makipag-ugnayan",
+    "subtitle": "Detalye ng Pakikipag-ugnayan",
+    "concern_title": "Concern:",
+    "concern_placeholder": "Ilagay ang iyong concern dito...",
+    "submit_concern": "Isumite"
+  },
+  "DownloadSectionLP": {
+    "download_title": "DOWNLOAD",
+    "download_subtext": " Available sa lahat ng pangunahing platform. I-download ang app at simulan ang pagpapahusay ng kaligtasan ngayon.",
+    "download_button": "I-install ang App"
   }
 }

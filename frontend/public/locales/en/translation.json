@@ -44,5 +44,49 @@
     "save_profile": "Save Profile",
     "no_reports_present": "No Reports Present",
     "recent_reports": "Recent Reports"
+  },
+  "HeaderComponentLP": {
+    "about": "About",
+    "features": "Features",
+    "download": "Download",
+    "contact": "Contact"
+  },
+  "FooterLP": {
+    "copyright": "© {{year}} RiskWise. All rights reserved."
+  },
+  "HeroComponentLP": {
+    "headline": "Real-Time Risk Assessment and Incident Reporting",
+    "description": "Stay informed and in control with a simple, accessible tool for managing risks as they happen. Easily report hazards, follow updates, and get helpful guidance, all from your phone or computer, even when you're offline.",
+    "get_started": "Get Started"
+  },
+  "AboutComponentLP": {
+    "about_title": "ABOUT",
+    "about_description": "RiskWise is a tool for uncovering and handling risks. It runs on any device with a browser. You can tap into it even without an internet connection. Users can flag hazards, trace risks, and absorb safety tips. It helps teams respond quickly and stay alert. RiskWise fosters safer spaces by making risk data easy to spread and grasp.",
+    "about_link": "Learn more about RiskWise"
+  },
+  "FeaturesComponentLP": {
+    "feature_title": "FEATURE",
+    "risk_reporting_title": "Risk Reporting",
+    "risk_reporting_description": "Report risks with photos, descriptions, and categories.",
+    "admin_dashboard_title": "Admin Dashboard",
+    "admin_dashboard_description": "Manage and monitor reports with CRUD capabilities.",
+    "real_time_alerts_title": "Real-Time Alerts",
+    "real_time_alerts_description": "Receive push notifications for critical updates.",
+    "incident_timeline_title": "Incident Timeline View",
+    "incident_timeline_description": "Visualize incidents over time for better storytelling.",
+    "geolocation_title": "Geolocation",
+    "geolocation_description": "Capture and display location data for each report."
+  },
+  "ContactUsLP": {
+    "contact_title": "Contact",
+    "subtitle": "Contact Details",
+    "concern_title": "Concern:",
+    "concern_placeholder": "Enter your concern here...",
+    "submit_concern": "Submit"
+  },
+  "DownloadSectionLP": {
+    "download_title": "DOWNLOAD",
+    "download_subtext": " Available on all major platforms. Get the app and start improving safety today.",
+    "download_button": "Install App"
   }
 }

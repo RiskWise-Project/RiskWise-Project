@@ -1,7 +1,7 @@
 import "./header-lp-component.css";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { navigationLinks } from "../../../data/navigation-links";
+import { useNavigationLinks } from "../../../hooks/navigation-links";
 import logo1x from "../../../assets/logos/riskwise-logo-1x.webp";
 import logo2x from "../../../assets/logos/riskwise-logo-2x.webp";
 
@@ -9,6 +9,7 @@ function HeaderComponent() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigationLinks = useNavigationLinks();
 
   const handleLinkClick = (href) => {
     setIsMenuOpen(false);

@@ -17,7 +17,7 @@
 <hr/>
 <br/>
 
-<h2 align="center">Team</h2>
+<h2 align="center">Meet the Team</h2>
 
 <div align="center">
   <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 800px;">

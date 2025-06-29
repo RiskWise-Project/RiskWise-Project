@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Mail, Phone } from "lucide-react";
 import { SendConcern } from "../../../services/concern-services";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 function ContactSection() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [installPromptEvent, setInstallPromptEvent] = useState(null);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,7 +61,7 @@ function ContactSection() {
           installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
         }`}
       >
-        Contact
+        {t("ContactUsLP.contact_title")}
       </h1>
 
       <div className="order-2 lg:order-1 flex flex-col justify-center md:px-10 px-5">
@@ -68,7 +70,7 @@ function ContactSection() {
             installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
           }`}
         >
-          Contact Details
+          {t("ContactUsLP.subtitle")}
         </h2>
         <a
           href="mailto:riskwise.project@gmail.com"
@@ -120,10 +122,10 @@ function ContactSection() {
                 installPromptEvent ? "text-white" : "text-[var(--color-dark)]"
               }`}
             >
-              Concern:
+              {t("ContactUsLP.concern_title")}
             </label>
             <textarea
-              placeholder="Enter your concern here..."
+              placeholder={t("ContactUsLP.concern_placeholder")}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className={`border-2 rounded-lg px-3 py-2 text-lg outline-none min-h-[120px] ${
@@ -138,7 +140,7 @@ function ContactSection() {
             type="submit"
             className="bg-[var(--color-highlight)] text-white px-5 py-3 rounded-lg text-lg hover:opacity-90 transition"
           >
-            Submit
+            {t("ContactUsLP.submit_concern")}
           </button>
         </form>
       </div>
