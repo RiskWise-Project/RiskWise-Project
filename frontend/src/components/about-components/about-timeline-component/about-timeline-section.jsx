@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import { CalendarCheck, ChevronDown, ChevronUp } from "lucide-react";
-import { teamMembers, projectTimeline } from "../../../data/our-story-data";
+import { teamMembers } from "../../../data/our-story-data";
+import { useTranslation } from "react-i18next";
+
+const projectTimelineKeys = [
+  "PLANNING_SETUP",
+  "AUTH_PWA_BASE",
+  "RISK_REPORTING",
+  "ADMIN_DASHBOARD",
+  "AI_SCORING",
+  "ANALYTICS_QA",
+];
 
 function AboutTimeline() {
   const [openIndex, setOpenIndex] = useState(null);
+  const { t } = useTranslation();
 
   const toggleIndex = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -13,13 +24,10 @@ function AboutTimeline() {
     <section className="bg-[var(--color-dark)] py-12 px-4 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl text-[var(--color-white)] tracking-wider md:text-4xl font-bold text-center mb-4">
-          Our Story
+          {t("TimelineAP.timeline_title")}
         </h2>
         <p className="text-[var(--color-white)] opacity-80 text-justify max-w-3xl mx-auto mb-10">
-          RISKWISE was born from a university-led initiative to modernize risk
-          reporting at Pampanga State University. Recognizing the limitations of
-          paper-based systems, our team of students, faculty advisors, and
-          developers collaborated to build a digital-first solution.
+          {t("TimelineAP.timeline_text")}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
@@ -40,11 +48,16 @@ function AboutTimeline() {
         </div>
 
         <h3 className="text-2xl text-[var(--color-white)] font-semibold mb-6 text-center">
-          Project Timeline
+          {t("TimelineAP.project_timeline_title")}
         </h3>
         <div className="space-y-4 md:w-[60%] mx-auto">
-          {projectTimeline.map((phase, index) => {
+          {projectTimelineKeys.map((key, index) => {
             const isOpen = openIndex === index;
+            const title = t(`Timeline_Data_AP.${key}.title`);
+            const date = t(`Timeline_Data_AP.${key}.date`);
+            const items = t(`Timeline_Data_AP.${key}.items`, {
+              returnObjects: true,
+            });
 
             return (
               <div
@@ -56,9 +69,9 @@ function AboutTimeline() {
                   className="w-full text-left flex items-center justify-between py-3 px-2"
                 >
                   <div className="flex items-center gap-2">
-                    <CalendarCheck className="w-5 h-5 text-[var(--color-white)]" />
+                    <CalendarCheck className="w-5 h-5 text-[var(--color-accent)]" />
                     <span className="font-semibold text-gray-800">
-                      {phase.date} – {phase.title}
+                      {date} – {title}
                     </span>
                   </div>
                   {isOpen ? (
@@ -70,7 +83,7 @@ function AboutTimeline() {
 
                 {isOpen && (
                   <ul className="list-disc pl-7 pr-4 pb-4 space-y-1 text-sm text-gray-700 transition-all duration-300">
-                    {phase.items.map((item, i) => (
+                    {items.map((item, i) => (
                       <li key={i}>{item}</li>
                     ))}
                   </ul>

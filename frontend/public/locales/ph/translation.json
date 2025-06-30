@@ -88,5 +88,112 @@
     "download_title": "DOWNLOAD",
     "download_subtext": " Available sa lahat ng pangunahing platform. I-download ang app at simulan ang pagpapahusay ng kaligtasan ngayon.",
     "download_button": "I-install ang App"
+  },
+  "HeroSectionAP": {
+    "header": "ANG PROAKTIBONG PAMAMAHALA NG PELIGRO AY NAGSISIMULA DITO",
+    "subtext": "Pinaaalalahanan ang komunidad ng Pampanga State University na tukuyin, iulat, at tugunan ang mga panganib sa campus kahit saan, kahit kailan."
+  },
+  "MissionSectionAP": {
+    "mission_title": "ANG AMING MISYON",
+    "mission_text": "Sa RISKWISE, naniniwala kami na ang bawat campus ay nararapat maging ligtas, tumutugon, at may sapat na kaalaman.",
+    "purpose_title": "ANG AMING LAYUNIN",
+    "purpose_text": "Nilalayon naming alisin ang pagkaantala sa pagtukoy at pag-uulat ng panganib sa pamamagitan ng isang tuloy-tuloy at handang-gamitin sa mobile na kasangkapan na nagbibigay kapangyarihan sa mga estudyante, guro, at administrador na kumilos nang mabilis at may tiwala.",
+    "commitment_title": "ANG AMING PANANAGUTAN",
+    "commitment_text": "Sa matibay na pagtutok sa madaling paggamit, seguridad ng datos, at pagiging maaasahan ng sistema, kami ay nakatuon sa pagbubuo ng isang kultura ng kaligtasan sa pamamagitan ng mga solusyong pinapagana ng teknolohiya.",
+    "vision_title": "ANG AMING BISYON"
+  },
+  "RiskWiseASA": {
+    "accessibility_title": "Pagiging Accessible",
+    "accessibility_text": "Dinisenyo para sa lahat, kahit offline",
+    "safety_title": "Kaligtasan",
+    "safety_text": "Pangako sa maagap na pagtugon sa insidente",
+    "accountability_title": "Pananagutan",
+    "accountability_text": "Real-time na kakayahang makita at transparency para sa mas mabuting pagpapasya"
+  },
+  "TimelineAP": {
+    "timeline_title": "Ang Aming Kwento",
+    "timeline_text": "Ang RISKWISE ay nagsimula sa isang inisyatiba na pinangunahan ng unibersidad upang gawing moderno ang pag-uulat ng panganib sa Pampanga State University. Sa pagkilala sa mga limitasyon ng paper-based na sistema, ang aming koponan ng mga estudyante, guro, at mga developer ay nagkaisa upang bumuo ng isang digital-first na solusyon.",
+    "project_timeline_title": "Timeline ng Proyekto"
+  },
+  "Timeline_Data_AP": {
+    "PLANNING_SETUP": {
+      "title": "Pagpaplano at Setup",
+      "date": "Mayo 2025",
+      "items": [
+        "Tapusin ang saklaw ng proyekto at MVP",
+        "Tukuyin ang mga pangunahing tampok (kinakailangan vs. nais lamang)",
+        "Pumili ng stack (React + Firebase)",
+        "I-setup ang GitHub, Firebase backend, PWA boilerplate",
+        "Deliverables: Prototype, handa na ang tech stack"
+      ]
+    },
+    "AUTH_PWA_BASE": {
+      "title": "Authentication at PWA Base",
+      "date": "Hunyo 2025",
+      "items": [
+        "Mga role ng user: reporter, admin",
+        "Firebase Auth + setup ng installable PWA",
+        "Deliverables: Gumaganang auth + installable app"
+      ]
+    },
+    "RISK_REPORTING": {
+      "title": "Risk Reporting (Frontend + Backend)",
+      "date": "Hulyo 2025",
+      "items": [
+        "Form: litrato, geolocation, kategorya, deskripsyon",
+        "Offline persistence gamit ang IndexedDB",
+        "Deliverables: Offline-capable na pagsusumite ng ulat"
+      ]
+    },
+    "ADMIN_DASHBOARD": {
+      "title": "Admin Dashboard at Notifications",
+      "date": "Agosto 2025",
+      "items": [
+        "Admin report view na may filters",
+        "Push alerts gamit ang Firebase Cloud Messaging",
+        "Deliverables: Dashboard + real-time na alerts"
+      ]
+    },
+    "AI_SCORING": {
+      "title": "AI Categorization at Severity Scoring",
+      "date": "Setyembre 2025",
+      "items": [
+        "ML model para sa category prediction",
+        "Severity scoring batay sa posibilidad × epekto",
+        "Deliverables: Smart na categorization + scoring engine"
+      ]
+    },
+    "ANALYTICS_QA": {
+      "title": "Analytics at Final QA",
+      "date": "Oktubre 2025",
+      "items": [
+        "Charts at timeline para sa admin insights",
+        "Manwal na testing + deployment",
+        "Deliverables: Analytics + Production-ready na build"
+      ]
+    }
+  },
+  "FutureVisionAP": {
+    "section_title": "Mas Matalino Ngayon, Mas Matalino Bukas",
+    "section_text": "Pinapalawak namin ng higit pa sa isang reporting tool, ang RISKWISE ay umuunlad kasabay ng pangangailangan ng kaligtasan sa inyong campus.",
+    "ai_title": "AI-Na Pinapatakbong Pag-uuri",
+    "ai_text": "Gumagamit ang aming sistema ng matatalinong algorithm upang awtomatikong uriin ang mga insidente batay sa bigat at kategorya—tumutulong sa staff na makaresponde nang mas mabilis at mas matalino.",
+    "coming_title": "Ano pa ang mga Darating?",
+    "coming_items": [
+      "Predictive analytics para sa umuusbong na risk patterns",
+      "Custom heatmaps para sa mga high-risk na lugar",
+      "Insights para sa resource allocation at response time"
+    ]
+  },
+  "WhyChooseAP": {
+    "title": "Bakit Kami Pinipili?",
+    "text": "Gawa gamit ang Progressive Web App technology para sa pagiging maaasahan, bilis, at compatibility sa iba’t ibang device.",
+    "items": [
+      "Angkop para sa mga akademikong institusyon",
+      "Gumagana offline para sa tuloy-tuloy na kaligtasan",
+      "Real-time na alerts gamit ang push notifications",
+      "Secure na data storage at privacy-focused na disenyo",
+      "Suportado ng pananaliksik at nasubukan sa PamSU"
+    ]
   }
 }

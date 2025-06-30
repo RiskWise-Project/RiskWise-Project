@@ -1,23 +1,30 @@
 import { Globe, ShieldCheck, Accessibility, ListChecks } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-export const RiskWiseASA = [
-  {
-    title: "Accessibility",
-    description: "Designed for all, even offline",
-    icon: <Globe className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />,
-  },
-  {
-    title: "Safety",
-    description: "A commitment to proactive incident response",
-    icon: (
-      <ShieldCheck className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />
-    ),
-  },
-  {
-    title: "Accountability",
-    description: "Real-time visibility and transparency for better decisions",
-    icon: (
-      <ListChecks className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />
-    ),
-  },
-];
+export const RiskWiseASA = () => {
+  const { t } = useTranslation();
+
+  return [
+    {
+      title: t("RiskWiseASA.accessibility_title"),
+      description: t("RiskWiseASA.accessibility_text"),
+      icon: (
+        <Globe className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />
+      ),
+    },
+    {
+      title: t("RiskWiseASA.safety_title"),
+      description: t("RiskWiseASA.safety_text"),
+      icon: (
+        <ShieldCheck className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />
+      ),
+    },
+    {
+      title: t("RiskWiseASA.accountability_title"),
+      description: t("RiskWiseASA.accountability_text"),
+      icon: (
+        <ListChecks className="md:w-9 md:h-9 w-7 h-7 text-[var(--color-white)]" />
+      ),
+    },
+  ];
+};

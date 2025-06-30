@@ -1,6 +1,8 @@
 import "./footer-component.css";
+import { useTranslation } from "react-i18next";
 
 function AboutFooterComponent() {
+  const { t } = useTranslation();
   return (
     <div className={`fs-main-container py-5 bg-[var(--color-dark)]`}>
       <div className="fs-contact-container flex flex-col gap-2">
@@ -21,7 +23,7 @@ function AboutFooterComponent() {
       <div
         className={`fs-copyright-container text-center mt-2 text-[var(--color-white)]`}
       >
-        <p>© {new Date().getFullYear()} RiskWise. All rights reserved.</p>
+        <p>{t("FooterLP.copyright", { year: new Date().getFullYear() })}</p>
       </div>
     </div>
   );

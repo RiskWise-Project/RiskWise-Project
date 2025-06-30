@@ -88,5 +88,112 @@
     "download_title": "DOWNLOAD",
     "download_subtext": " Available on all major platforms. Get the app and start improving safety today.",
     "download_button": "Install App"
+  },
+  "HeroSectionAP": {
+    "header": "PROACTIVE RISK MANAGEMENT STARTS HERE",
+    "subtext": "Empowering the Pampanga State University community to identify, report, and respond to campus risks anytime, anywhere."
+  },
+  "MissionSectionAP": {
+    "mission_title": "OUR MISSION",
+    "mission_text": "At RISKWISE, we believe every campus deserves to be a safe, responsive, and well-informed environment.",
+    "purpose_title": "OUR PURPOSE",
+    "purpose_text": "We aim to eliminate delays in hazard detection and reporting by offering a seamless, mobile-ready tool that empowers students, faculty, and administrators to take action quickly and confidently.",
+    "commitment_title": "OUR COMMITMENT",
+    "commitment_text": "With a strong focus on usability, data security, and system reliability, we&apos;re committed to building a culture of safety through technology-driven solutions.",
+    "vision_title": "OUR VISION"
+  },
+  "RiskWiseASA": {
+    "accessibility_title": "Accessibility",
+    "accessibility_text": "Designed for all, even offline",
+    "safety_title": "Safety",
+    "safety_text": "A commitment to proactive incident response",
+    "accountability_title": "Accountability",
+    "accountability_text": "Real-time visibility and transparency for better decisions"
+  },
+  "TimelineAP": {
+    "timeline_title": "Our Story",
+    "timeline_text": "RISKWISE was born from a university-led initiative to modernize risk reporting at Pampanga State University. Recognizing the limitations of paper-based systems, our team of students, faculty advisors, and developers collaborated to build a digital-first solution.",
+    "project_timeline_title": "Project Timeline"
+  },
+  "Timeline_Data_AP": {
+    "PLANNING_SETUP": {
+      "title": "Planning & Setup",
+      "date": "May 2025",
+      "items": [
+        "Finalize project scope and MVP",
+        "Define key features (must-haves vs. nice-to-haves)",
+        "Choose stack (React + Firebase)",
+        "Setup GitHub, Firebase backend, PWA boilerplate",
+        "Deliverables: Prototype, Tech stack ready"
+      ]
+    },
+    "AUTH_PWA_BASE": {
+      "title": "Authentication & PWA Base",
+      "date": "June 2025",
+      "items": [
+        "User roles: reporter, admin",
+        "Firebase Auth + installable PWA setup",
+        "Deliverables: Working auth + installable app"
+      ]
+    },
+    "RISK_REPORTING": {
+      "title": "Risk Reporting (Frontend + Backend)",
+      "date": "July 2025",
+      "items": [
+        "Form: photo, geolocation, category, description",
+        "Offline persistence via IndexedDB",
+        "Deliverables: Offline-capable report submission"
+      ]
+    },
+    "ADMIN_DASHBOARD": {
+      "title": "Admin Dashboard & Notifications",
+      "date": "August 2025",
+      "items": [
+        "Admin report view with filters",
+        "Push alerts using Firebase Cloud Messaging",
+        "Deliverables: Dashboard + real-time alerts"
+      ]
+    },
+    "AI_SCORING": {
+      "title": "AI Categorization & Severity Scoring",
+      "date": "September 2025",
+      "items": [
+        "ML model for category prediction",
+        "Severity scoring based on likelihood × impact",
+        "Deliverables: Smart categorization + scoring engine"
+      ]
+    },
+    "ANALYTICS_QA": {
+      "title": "Analytics & Final QA",
+      "date": "October 2025",
+      "items": [
+        "Charts and timeline for admin insights",
+        "Manual testing + deployment",
+        "Deliverables: Analytics + Production-ready build"
+      ]
+    }
+  },
+  "FutureVisionAP": {
+    "section_title": "Smarter Today, Smarter Tomorrow",
+    "section_text": "We're building more than a reporting tool, RISKWISE evolves with your campus safety needs.",
+    "ai_title": "AI-Powered Categorization",
+    "ai_text": "Our current system uses intelligent algorithms to auto-classify incidents based on severity and category—helping staff respond faster and smarter.",
+    "coming_title": "What's Coming?",
+    "coming_items": [
+      "Predictive analytics for emerging risk patterns",
+      "Custom heatmaps for high-risk zones",
+      "Resource allocation and response time insights"
+    ]
+  },
+  "WhyChooseAP": {
+    "title": "Why Choose Us",
+    "text": "Built using Progressive Web App technology for reliability, speed, and cross-device compatibility.",
+    "items": [
+      "Tailored for academic institutions",
+      "Works offline for uninterrupted safety",
+      "Real-time alerts with push notifications",
+      "Secure data storage and privacy-focused design",
+      "Backed by research and field-tested at PamSU"
+    ]
   }
 }
