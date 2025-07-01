@@ -15,6 +15,7 @@ app.use("/", AuthRoutes);
 
 app.get("/ping", (req, res) => {
   res.status(200).json({ message: "pong" });
+  console.log("Server is Awake!");
 });
 
 app.use(compression());

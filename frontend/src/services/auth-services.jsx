@@ -107,3 +107,13 @@ export const SavePicture = async (data, tokenID) => {
     };
   }
 };
+
+export const pingServer = async () => {
+  try {
+    const response = await axios.get(`${baseURL}/ping`);
+    return response.data;
+  } catch (error) {
+    console.error("Ping failed:", error.message);
+    throw error;
+  }
+};

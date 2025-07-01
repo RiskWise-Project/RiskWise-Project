@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
 import { useEffect } from "react";
+
+import { pingServer } from "../../services/auth-services";
 import HeaderComponent from "../../components/landingpage-components/header-component/header-lp-component";
 import HeroSectionComponent from "../../components/landingpage-components/hero-section-components/hero-section-components";
 import AboutSectionComponent from "../../components/landingpage-components/about-section-component/about-lp-component";
@@ -11,15 +11,15 @@ import FooterComponent from "../../components/landingpage-components/footer-sect
 
 function LandingPage() {
   useEffect(() => {
-    const pingBackend = async () => {
+    const fetchPing = async () => {
       try {
-        await axios.get("https://your-backend-url.com/ping");
+        await pingServer();
       } catch (error) {
-        // ignore errors
+        error.message;
       }
     };
 
-    pingBackend();
+    fetchPing();
   }, []);
 
   return (
