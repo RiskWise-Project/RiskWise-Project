@@ -208,5 +208,15 @@
     "google_button": "Sign in with Google",
     "dont_have_account": "Don't have an account?",
     "sign_up": "Sign up"
+  },
+  "SignupComponent": {
+    "singup_header": "CREATE AN ACCOUNT",
+    "singup_subtext": "Please fill in the details to sign up",
+    "fullname": "Full Name:",
+    "terms_condition": "I agree to the terms and conditions",
+    "signup_button_loading": "Creating account...",
+    "google_button": "Sign up with Google",
+    "dont_have_account": "Already have an account?",
+    "sign_up": "Sign in"
   }
 }

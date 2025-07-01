@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -14,6 +15,7 @@ import { SignUpSend } from "../../services/auth-services";
 
 function SignUpForm() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     fullname: "",
     studentNumber: "",
@@ -115,10 +117,10 @@ function SignUpForm() {
       <div className="form-container w-full flex flex-col items-center">
         <div className="form-header flex flex-col w-[90%] lg:w-[70%] mb-8">
           <h1 className=" font-black text-2xl tracking-wider whitespace-nowrap">
-            CREATE AN ACCOUNT
+            {t("SignupComponent.signup_header")}
           </h1>
           <p className="subtext-signup text-sm">
-            Please fill in the details to sign up
+            {t("SignupComponent.signup_subtext")}
           </p>
         </div>
 
@@ -128,7 +130,7 @@ function SignUpForm() {
         >
           <div className="input-container flex flex-col gap-2">
             <label htmlFor="fullname" className="">
-              Full Name:
+              {t("SignupComponent.fullname")}
             </label>
             <input
               type="text"
@@ -223,7 +225,7 @@ function SignUpForm() {
                 required
                 className="cursor-pointer scale-125 transform"
               />
-              I agree to the terms and conditions
+              {t("SignupComponent.terms_condition")}
             </label>
           </div>
 
@@ -236,7 +238,9 @@ function SignUpForm() {
               loading ? "cursor-wait" : "cursor-pointer"
             }`}
           >
-            {loading ? "Creating account..." : "Sign up"}
+            {loading
+              ? t("SignupComponent.signup_button_loading")
+              : t("SignupComponent.signup_button")}
           </button>
 
           <button
@@ -245,17 +249,17 @@ function SignUpForm() {
             className="w-full border border-gray-300 focus:outline-none py-2 px-4 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 cursor-pointer flex items-center justify-center gap-2"
           >
             <img src={googleIcon} alt="Google" className="h-5 w-5" />
-            Sign up with Google
+            {t("SignupComponent.google_button")}
           </button>
 
           <div className="no-account-container">
             <p className="text-center">
-              Don't have an account?{" "}
+              {t("SignupComponent.dont_have_account")}{" "}
               <a
                 href="/sign-in"
                 className="text-[var(--color-highlight)] underline hover:opacity-80"
               >
-                Sign in
+                {t("SignupComponent.sign_up")}
               </a>
             </p>
           </div>

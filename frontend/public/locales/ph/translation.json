@@ -208,5 +208,16 @@
     "google_button": "Mag-log In gamit ang Google",
     "dont_have_account": "Wala ka pang account?",
     "sign_up": "Gumawa ng account"
+  },
+  "SignupComponent": {
+    "signup_header": "GUMAWA NG IYONG ACCOUNT",
+    "signup_subtext": "Pakipunan ang mga detalye para makapag-sign up.",
+    "fullname": "Buong Pangalan:",
+    "terms_condition": "Sang-ayon ako sa mga tuntunin at kundisyon.",
+    "signup_button_loading": "Ginagawa na ang iyong account, sandali lang...",
+    "signup_button": "Mag-sign up",
+    "google_button": "Mag-sign up gamit ang Google",
+    "dont_have_account": "May account ka na ba?",
+    "sign_up": "Mag-log in"
   }
 }
