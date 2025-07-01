@@ -9,11 +9,13 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
+import { useTranslation } from "react-i18next";
 
 import { SignUpSend } from "../../services/auth-services";
 
 function LoginFormContainer() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -103,10 +105,10 @@ function LoginFormContainer() {
       <div className="form-container w-full">
         <div className="form-header flex flex-col items-center mb-8">
           <h1 className="text-center font-black text-4xl tracking-wider whitespace-nowrap">
-            WELCOME BACK
+            {t("LoginComponent.header")}
           </h1>
           <p className="subtext-login text-center">
-            Please enter your credentials
+            {t("LoginComponent.subtext")}
           </p>
         </div>
       </div>
@@ -132,7 +134,7 @@ function LoginFormContainer() {
             value={password}
             required
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
+            placeholder={t("LoginComponent.password_placeholder")}
             className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
           />
         </div>
@@ -145,7 +147,9 @@ function LoginFormContainer() {
             checked={showPassword}
             onChange={toggleShowPassword}
           />
-          <label htmlFor="show-password">Show Password</label>
+          <label htmlFor="show-password">
+            {t("LoginComponent.show_password_label")}
+          </label>
         </div>
 
         <div className="flex justify-end mb-5">
@@ -157,7 +161,9 @@ function LoginFormContainer() {
             }`}
             disabled={resetLoading}
           >
-            {resetLoading ? "Sending email..." : "Forgot Password"}
+            {resetLoading
+              ? t("LoginComponent.sending_email")
+              : t("LoginComponent.forgot_password_label")}
           </button>
         </div>
 
@@ -170,7 +176,9 @@ function LoginFormContainer() {
           }`}
           disabled={loginLoading}
         >
-          {loginLoading ? "Signing in..." : "Sign in"}
+          {loginLoading
+            ? t("LoginComponent.sign_in_button_loading")
+            : t("LoginComponent.sign_in_button")}
         </button>
       </form>
 
@@ -179,17 +187,17 @@ function LoginFormContainer() {
         className="w-full mt-6 border border-gray-300 focus:outline-none py-2 px-4 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 cursor-pointer flex items-center justify-center gap-2"
       >
         <img src={googleIcon} alt="Google" className="h-5 w-5" />
-        Sign in with Google
+        {t("LoginComponent.google_button")}
       </button>
 
       <div className="no-account-container mt-6">
         <p className="text-center mt-4">
-          Don't have an account?{" "}
+          {t("LoginComponent.dont_have_account")}{" "}
           <a
             href="/sign-up"
             className="text-[var(--color-highlight)] underline hover:opacity-80"
           >
-            Sign up
+            {t("LoginComponent.sign_up")}
           </a>
         </p>
       </div>

@@ -195,5 +195,18 @@
       "Secure na data storage at privacy-focused na disenyo",
       "Suportado ng pananaliksik at nasubukan sa PamSU"
     ]
+  },
+  "LoginComponent": {
+    "header": "MALIGAYANG PAGBALIK",
+    "subtext": "Pakilagay ang iyong mga kredensyal.",
+    "password_placeholder": "Ilagay ang iyong password",
+    "show_password_label": "Ipakita ang password",
+    "forgot_password_label": "Nakalimutan ang password?",
+    "sending_email": "Ipinapadala ang email, pakihintay...",
+    "sign_in_button_loading": "Nagla-log in, pakihintay...",
+    "sign_in_button": "Mag-log In",
+    "google_button": "Mag-log In gamit ang Google",
+    "dont_have_account": "Wala ka pang account?",
+    "sign_up": "Gumawa ng account"
   }
 }
