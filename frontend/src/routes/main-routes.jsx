@@ -21,6 +21,9 @@ const ProfilePage = React.lazy(() =>
 const SettingPage = React.lazy(() =>
   import("../pages/dashboard/dashboard-pages/setting-page.jsx")
 );
+const SubmitReportPage = React.lazy(() =>
+  import("../pages/dashboard/dashboard-pages/submit-report-page.jsx")
+);
 
 function MainRoutes() {
   return (
@@ -42,7 +45,7 @@ function MainRoutes() {
           path="report-risk"
           element={
             <Suspense fallback={<div>Loading...</div>}>
-              <h1>Report Risk Page</h1>
+              <SubmitReportPage />
             </Suspense>
           }
         />

@@ -2,12 +2,12 @@ import { Aperture, LayoutList, Bolt, CircleUserRound } from "lucide-react";
 
 export const userNavData = [
   {
-    title: "Report Risk",
+    title: "Report",
     icon: Aperture,
     location: "/dashboard/report-risk",
   },
   {
-    title: "Risks List",
+    title: "Risks",
     icon: LayoutList,
     location: "/dashboard/risk-list",
   },

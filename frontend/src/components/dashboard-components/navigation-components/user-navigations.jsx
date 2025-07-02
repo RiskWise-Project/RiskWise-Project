@@ -43,7 +43,7 @@ function UserNavigation() {
         />
       </div>
 
-      <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center md:justify-center ">
+      <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center  md:justify-center ">
         {userNavData.map((item, index) => {
           const Icon = item.icon;
           const isActive = item.location === location.pathname;
@@ -52,19 +52,19 @@ function UserNavigation() {
             <div
               key={index}
               onClick={() => navigate(item.location)}
-              className={`flex md:flex-col items-center z-55 md:justify-center gap-3 rounded-xl justify-evenly w-full h-fit md:w-fit p-4 cursor-pointer ${
+              className={`flex flex-col items-center z-55 md:justify-center md:gap-3 rounded-xl justify-evenly w-full h-fit md:w-fit p-2.5 cursor-pointer ${
                 isActive
-                  ? "bg-[var(--color-highlight)] text-[var(--color-white)] transform md:translate-x-1.5 md:translate-y-0 translate-y-[-10px]"
+                  ? " text-[var(--color-accent)]"
                   : "bg-[var(--color-white)] text-[var(--color-highlight)]"
               } transition-all duration-300 ease-in-out`}
             >
               <Icon
                 strokeWidth={2}
-                className="md:w-7 md:h-7 w-7 h-7  md:mb-0 mb-7"
+                className="md:w-7 md:h-7 w-7 h-7  md:mb-0"
               />
               <span
-                className={`text-sm md:block hidden opacity-0 whitespace-nowrap ${
-                  expanded ? "md:opacity-100" : "md:hidden"
+                className={`text-sm whitespace-nowrap ${
+                  expanded ? "opacity-100" : "opacity-100 md:hidden"
                 }`}
               >
                 {item.title}
