@@ -9,12 +9,14 @@ const generateCaption = async (req, res) => {
       return res.status(400).json({ error: "No image uploaded" });
     }
 
+    const baseURL = process.env.CAPTION_API_URL || "http://127.0.0.1:6000";
+
     const imagePath = path.resolve(req.file.path);
     const imageStream = fs.createReadStream(imagePath);
 
     const form = new FormData();
     form.append("file", imageStream);
-    const response = await axios.post("http://127.0.0.1:6000/caption", form, {
+    const response = await axios.post(`${baseURL}/caption`, form, {
       headers: form.getHeaders(),
     });
 
