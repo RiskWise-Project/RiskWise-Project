@@ -3,3 +3,4 @@ transformers==4.44.2
 Pillow==10.4.0
 torchvision==0.18.1
 accelerate
+requests
