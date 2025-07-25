@@ -1,8 +1,9 @@
 services:
   - type: web
-    name: riskwise-caption-api
+    name: RiskWise-Python-API
     env: python
     rootDir: python
-    buildCommand: pip install -r requirements.txt
+    port: 6000
+    pythonVersion: "3.11"
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
     startCommand: python caption_api.py
-    plan: free
