@@ -9,7 +9,7 @@ const generateCaption = async (req, res) => {
       return res.status(400).json({ error: "No image uploaded" });
     }
 
-    const baseURL = process.env.CAPTION_API_URL || "http://127.0.0.1:6000";
+    const baseURL = process.env.CAPTION_API_URL || "http://127.0.0.1:4000";
 
     const imagePath = path.resolve(req.file.path);
     const imageStream = fs.createReadStream(imagePath);
