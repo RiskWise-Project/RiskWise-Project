@@ -16,6 +16,8 @@ dist
 dist-ssr
 *.local
 
+python/venv/
+
 
 .vscode/*
 !.vscode/extensions.json
