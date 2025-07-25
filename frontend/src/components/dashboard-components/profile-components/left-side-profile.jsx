@@ -221,18 +221,18 @@ function LeftSideProfile() {
 
           <button
             onClick={triggerFileInput}
-            className="flex md:hidden items-center gap-2 text-[var(--color-highlight)] text-sm mt-1 mb-3 "
+            className="flex md:hidden items-center justify-center gap-1 text-[var(--color-highlight)] text-xs mt-1 mb-3 "
           >
-            <UserPen className="w-5 h-5" />
+            <UserPen className="w-4 h-4" />
             {t("ProfilePage.edit_photo")}
           </button>
         </div>
 
         <div className="user-info text-center">
-          <h2 className="md:text-3xl text-2xl font-bold tracking-wider text-[var(--color-highlight)]">
+          <h2 className="md:text-3xl text-2xl md:font-bold font-black tracking-wider text-[var(--color-highlight)]">
             {user?.fullname || "Loading..."}
           </h2>
-          <p className="md:text-xl font-bold tracking-wider opacity-50 ">
+          <p className="md:text-xl text-base font-bold tracking-wider opacity-50 ">
             {user?.email || "Loading..."}
           </p>
         </div>
@@ -246,10 +246,10 @@ function LeftSideProfile() {
         />
       </div>
 
-      <div className="recent-reports-container md:w-[80%]">
+      <div className="recent-reports-container md:w-[80%] w-full">
         <div className="form-container-header w-full flex items-center justify-between mb-4">
           <div className="flex flex-col items-start">
-            <h2 className="text-2xl font-black tracking-wide">
+            <h2 className="md:text-2xl text-xl font-black tracking-wide">
               {t("ProfilePage.profile_information")}
             </h2>
             <p className="text-xs opacity-50">
@@ -279,7 +279,9 @@ function LeftSideProfile() {
 
         <form className="w-full flex flex-col gap-4" onSubmit={updateUser}>
           <div className="form-group">
-            <label className="opacity-50 font-semibold">Student Number: </label>
+            <label className="opacity-50 font-semibold md:text-base text-sm">
+              Student Number:{" "}
+            </label>
             {isEditing ? (
               <input
                 type="number"
@@ -298,14 +300,14 @@ function LeftSideProfile() {
                 }}
               />
             ) : (
-              <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
+              <p className="md:text-lg text-base font-semibold w-full p-2 border border-gray-300 rounded">
                 {user?.studentNumber || "Loading..."}
               </p>
             )}
           </div>
 
           <div className="form-group">
-            <label className="opacity-50 font-semibold">
+            <label className="opacity-50 font-semibold md:text-base text-sm">
               {t("ProfilePage.college_department")}
             </label>
             {isEditing ? (
@@ -325,7 +327,7 @@ function LeftSideProfile() {
                 ))}
               </select>
             ) : (
-              <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
+              <p className="md:text-lg text-base font-semibold w-full p-2 border border-gray-300 rounded">
                 {user?.college || "Loading..."}
               </p>
             )}
@@ -333,7 +335,7 @@ function LeftSideProfile() {
 
           <div className="form-group-container flex justify-between gap-5">
             <div className="form-group w-[50%]">
-              <label className="opacity-50 font-semibold ">
+              <label className="opacity-50 font-semibold md:text-base text-sm">
                 {t("ProfilePage.year_level")}
               </label>
               {isEditing ? (
@@ -353,13 +355,13 @@ function LeftSideProfile() {
                   <option value="5th Year">5th Year</option>
                 </select>
               ) : (
-                <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
+                <p className="md:text-lg text-base font-semibold w-full p-2 border border-gray-300 rounded">
                   {user?.yearLevel || "Loading..."}
                 </p>
               )}
             </div>
             <div className="form-group w-[50%]">
-              <label className="opacity-50 font-semibold">
+              <label className="opacity-50 font-semibold md:text-base text-sm">
                 {t("ProfilePage.section")}
               </label>
               {isEditing ? (
@@ -372,7 +374,7 @@ function LeftSideProfile() {
                   name="section"
                 />
               ) : (
-                <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
+                <p className="md:text-lg text-base font-semibold w-full p-2 border border-gray-300 rounded">
                   {user?.section || "Loading..."}
                 </p>
               )}
@@ -380,7 +382,7 @@ function LeftSideProfile() {
           </div>
 
           <div className="form-group">
-            <label className="opacity-50 font-semibold">
+            <label className="opacity-50 font-semibold md:text-base text-sm">
               {t("ProfilePage.program_course")}
             </label>
             {isEditing ? (
@@ -401,7 +403,7 @@ function LeftSideProfile() {
                 ))}
               </select>
             ) : (
-              <p className="text-lg font-semibold w-full p-2 border border-gray-300 rounded">
+              <p className="md:text-lg text-base font-semibold w-full p-2 border border-gray-300 rounded">
                 {user?.course || "Loading..."}
               </p>
             )}

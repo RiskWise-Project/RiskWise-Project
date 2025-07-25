@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { riskwise_symbol } from "../assets/logos/logo";
 
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -23,9 +24,9 @@ const ProtectedRoute = ({ children }) => {
         <div className="relative w-16 h-16">
           <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
           <img
-            src="/path/to/riskwise-logo-1x.webp"
+            src={riskwise_symbol}
             alt="RiskWise logo"
-            className="w-8 h-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           />
         </div>
         <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">

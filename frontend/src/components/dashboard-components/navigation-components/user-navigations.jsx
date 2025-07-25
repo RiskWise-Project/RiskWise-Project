@@ -52,7 +52,7 @@ function UserNavigation() {
             <div
               key={index}
               onClick={() => navigate(item.location)}
-              className={`flex flex-col items-center z-55 md:justify-center md:gap-3 rounded-xl justify-evenly w-full h-fit md:w-fit p-2.5 cursor-pointer ${
+              className={`flex flex-col items-center z-55 md:justify-center md:gap-3 gap-1 rounded-xl justify-evenly w-full h-fit md:w-fit p-2.5 cursor-pointer ${
                 isActive
                   ? " text-[var(--color-accent)]"
                   : "bg-[var(--color-white)] text-[var(--color-highlight)]"
@@ -63,7 +63,7 @@ function UserNavigation() {
                 className="md:w-7 md:h-7 w-7 h-7  md:mb-0"
               />
               <span
-                className={`text-sm whitespace-nowrap ${
+                className={`md:text-sm text-xs whitespace-nowrap ${
                   expanded ? "opacity-100" : "opacity-100 md:hidden"
                 }`}
               >

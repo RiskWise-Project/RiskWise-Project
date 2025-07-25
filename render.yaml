@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: riskwise-caption-api
+    env: python
+    rootDir: Python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python caption_api.py
+    plan: free
