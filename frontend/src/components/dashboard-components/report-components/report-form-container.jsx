@@ -3,7 +3,12 @@ import {
   fetchAddress,
   handleMapClick,
 } from "../../../services/report services/report-form-functions";
-import { analyzeImageService } from "../../../services/image-services";
+import {
+  analyzeImageService,
+  summarizeReportService,
+} from "../../../services/image-services";
+import { getCurrentUserAsync } from "../../../utils/auth";
+import { toast } from "react-hot-toast";
 import "./report-form-container.css";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
@@ -11,12 +16,16 @@ const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
 function ReportFormContainer({
   fileName,
   setFileName,
+  setFileNametoPass,
+  fileNametoPass,
   location,
   setLocation,
   address,
   setAddress,
   loading,
   setLoading,
+  additionalInfo,
+  setAdditionalInfo,
   analysis,
   setAnalysis,
 }) {
@@ -25,10 +34,77 @@ function ReportFormContainer({
     libraries: ["places"],
   });
 
+  const handleAnalyze = async () => {
+    if (!fileNametoPass) {
+      console.warn("No file Base64 string available");
+      return;
+    }
+    if (!additionalInfo || !address) {
+      console.warn("Missing additional info or address");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const user = await getCurrentUserAsync(); // await the actual user
+      if (!user) throw new Error("User not logged in");
+
+      console.log("Firebase user found:", user.uid);
+
+      const payload = {
+        fileNametoPass: fileNametoPass, // actual Base64 string
+        description: additionalInfo, // your description
+        location,
+        address,
+        additionalInfo,
+        userId: user?.uid,
+        uniqueId: Date.now().toString(),
+        summary: analysis || "",
+      };
+
+      // 🔹 Log everything before sending
+      console.group("🚀 Sending report payload");
+      console.log("fileNametoPass:", fileNametoPass.slice(0, 100) + "..."); // log first 100 chars
+      console.log("description:", additionalInfo);
+      console.log("location:", location);
+      console.log("address:", address);
+      console.log("userId:", user.uid);
+      console.log("uniqueId:", payload.uniqueId);
+      console.log("summary:", analysis);
+      console.groupEnd();
+
+      const result = await summarizeReportService(payload);
+
+      console.log("✅ Summarize result:", result);
+
+      setAnalysis(result.summary || "");
+      setFileName("");
+      setFileNametoPass("");
+      setAdditionalInfo("");
+      setAddress("");
+      setLocation({ lat: 15.034, lng: 120.684 }); // reset to default
+      toast.success("Report submitted successfully!");
+    } catch (err) {
+      console.error("❌ Summarize error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const onMapClick = (e) => {
     handleMapClick(e, setLocation, (lat, lng) =>
       fetchAddress(lat, lng, apiKey, setAddress)
     );
+  };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   };
 
   const handleFileChange = async (e) => {
@@ -41,17 +117,12 @@ function ReportFormContainer({
 
       setAnalysis(result);
 
+      const base64String = await convertToBase64(file);
+      setFileNametoPass(base64String);
+
       setLoading(false);
     }
   };
-
-  const fixedText = analysis
-    ? analysis
-        .trim()
-        .replace(/\s+\./g, ".")
-        .replace(/^([a-zA-Z])/, (match) => match.toUpperCase()) +
-      (/[.!?]$/.test(analysis.trim()) ? "" : ".")
-    : "";
 
   return (
     <div className="form-container-main w-full h-fit bg-[var(--color-white)] rounded-lg p-6 flex flex-col gap-7">
@@ -95,10 +166,6 @@ function ReportFormContainer({
           />
         </div>
 
-        <div className="analysis-container md:mb-5 mb-5">
-          <p className="md:text-sm text-xs text-gray-600">{fixedText}</p>
-        </div>
-
         <div className="grid md:grid-cols-2 gap-5 items-center">
           <div className="w-full flex flex-col gap-5">
             <div className="location-container">
@@ -116,6 +183,8 @@ function ReportFormContainer({
               <textarea
                 className="border-2 rounded-lg px-4 py-2 border-[var(--color-dark)] min-h-15 h-50 max-h-100 md:text-base text-sm focus:outline-0"
                 placeholder="Describe the issue or risk in detail..."
+                value={additionalInfo} // bind to state
+                onChange={(e) => setAdditionalInfo(e.target.value)} // update state on change
               />
             </div>
           </div>
@@ -146,6 +215,8 @@ function ReportFormContainer({
             className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 mt-5 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 ${
               loading ? "cursor-wait" : "cursor-pointer"
             }`}
+            onClick={handleAnalyze}
+            disabled={loading || !fileName}
           >
             Report A Risk
           </button>

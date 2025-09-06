@@ -11,8 +11,7 @@ const generateCaption = async (req, res) => {
       return res.status(400).json({ error: "No image uploaded" });
     }
 
-    // Use environment variable or default to localhost
-    const baseURL = process.env.CAPTION_API_URL || "http://127.0.0.1:5000";
+    const baseURL = "http://127.0.0.1:5000" || process.env.CAPTION_API_URL;
     console.log(`🔗 Using caption API: ${baseURL}`);
 
     imagePath = path.resolve(req.file.path);
@@ -54,7 +53,7 @@ const generateCaption = async (req, res) => {
         ...form.getHeaders(),
         Accept: "application/json",
       },
-      timeout: 60000, // 60 second timeout for ML processing
+      timeout: 60000,
       maxContentLength: Infinity,
       maxBodyLength: Infinity,
     });

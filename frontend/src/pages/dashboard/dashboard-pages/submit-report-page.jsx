@@ -6,9 +6,11 @@ import PreviewContainer from "../../../components/dashboard-components/report-co
 
 function SubmitReportPage() {
   const [fileName, setFileName] = useState();
+  const [fileNametoPass, setFileNametoPass] = useState();
   const [location, setLocation] = useState(dhvsuCoords);
   const [address, setAddress] = useState("PamSU Bacolor, Pampanga");
   const [loading, setLoading] = useState(false);
+  const [additionalInfo, setAdditionalInfo] = useState("");
   const [analysis, setAnalysis] = useState("");
 
   return (
@@ -35,15 +37,20 @@ function SubmitReportPage() {
             setLoading={setLoading}
             analysis={analysis}
             setAnalysis={setAnalysis}
+            setFileNametoPass={setFileNametoPass}
+            fileNametoPass={fileNametoPass}
+            additionalInfo={additionalInfo}
+            setAdditionalInfo={setAdditionalInfo}
           />
         </div>
         <div className="mb-15">
           <PreviewContainer
             fileName={fileName}
-            location={location}
             address={address}
             loading={loading}
             analysis={analysis}
+            fileNametoPass={fileNametoPass}
+            description={additionalInfo}
           />
         </div>
       </div>

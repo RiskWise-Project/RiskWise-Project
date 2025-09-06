@@ -22,3 +22,20 @@ export async function analyzeImageService(file) {
     return "Error calling AI service";
   }
 }
+
+export async function summarizeReportService(payload) {
+  try {
+    const response = await axios.post(`${baseURL}/summarize`, payload, {
+      headers: {
+        "Content-Type": "application/json", // ✅ important!
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Axios summarize report error:",
+      error.response?.data || error.message
+    );
+    return { error: "Error summarizing report" };
+  }
+}
