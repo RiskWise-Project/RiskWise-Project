@@ -11,7 +11,9 @@ const generateCaption = async (req, res) => {
       return res.status(400).json({ error: "No image uploaded" });
     }
 
-    const baseURL = "http://127.0.0.1:5000" || process.env.CAPTION_API_URL;
+    if (process.env.NODE_ENV === "development") {
+      return process.env.CAPTION_API_URL || "http://127.0.0.1:5000";
+    }
     console.log(`🔗 Using caption API: ${baseURL}`);
 
     imagePath = path.resolve(req.file.path);
