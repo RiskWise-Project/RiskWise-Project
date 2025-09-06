@@ -19,7 +19,7 @@ const summarizeReport = async (req, res) => {
 You are an incident analysis AI. Always return valid JSON in this schema:
 
 {
-  "category": "Operational | Environmental | Safety | Security | Other",
+  "category": "Operational | Environmental | Safety | Security | Structural | Other",
   "likelihood": <number between 1 and 5>,
   "impact": <number between 1 and 5>,
   "score": <likelihood × impact>,

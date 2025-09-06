@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
+import { riskwise_symbol } from "../assets/logos/logo.jsx";
 import LandingPage from "../pages/user-side-pages/landing-page";
 import ProtectedRoute from "./protected-routes.jsx";
 
@@ -48,7 +49,23 @@ function MainRoutes() {
         <Route
           path="report-risk"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex flex-col items-center justify-center h-screen bg-white">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+                    <img
+                      src={riskwise_symbol}
+                      alt="RiskWise logo"
+                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
+                    Loading RiskWise...
+                  </p>
+                </div>
+              }
+            >
               <SubmitReportPage />
             </Suspense>
           }
@@ -56,7 +73,23 @@ function MainRoutes() {
         <Route
           path="risk-list"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex flex-col items-center justify-center h-screen bg-white">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+                    <img
+                      src={riskwise_symbol}
+                      alt="RiskWise logo"
+                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
+                    Loading RiskWise...
+                  </p>
+                </div>
+              }
+            >
               <ReportListPage />
             </Suspense>
           }
@@ -64,7 +97,23 @@ function MainRoutes() {
         <Route
           path="settings"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex flex-col items-center justify-center h-screen bg-white">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+                    <img
+                      src={riskwise_symbol}
+                      alt="RiskWise logo"
+                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
+                    Loading RiskWise...
+                  </p>
+                </div>
+              }
+            >
               <SettingPage />
             </Suspense>
           }
@@ -72,7 +121,23 @@ function MainRoutes() {
         <Route
           path="profile"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="flex flex-col items-center justify-center h-screen bg-white">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+                    <img
+                      src={riskwise_symbol}
+                      alt="RiskWise logo"
+                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    />
+                  </div>
+                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
+                    Loading RiskWise...
+                  </p>
+                </div>
+              }
+            >
               <ProfilePage />
             </Suspense>
           }
