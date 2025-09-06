@@ -1,60 +1,61 @@
 import os
-import gc
+import requests
 from flask import Flask, request, jsonify
 from PIL import Image
-import torch
-from transformers import BlipProcessor, BlipForConditionalGeneration
 import io
 
 app = Flask(__name__)
 
-# Load BLIP model and processor once
-device = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"Using device: {device}")
-
-processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
-model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
-model.to(device)
-model.eval()
+HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base"
+HF_API_KEY = os.environ.get("HUGGINGFACE_API_KEY")
+HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"}
 
 @app.route("/", methods=["GET"])
 def health_check():
-    """Health check endpoint."""
-    return jsonify({"status": "healthy", "message": "Local BLIP caption API is running"})
+    return jsonify({"status": "healthy", "message": "Caption API is running via Hugging Face"})
 
 @app.route("/caption", methods=["POST"])
 def caption():
-    """Generate caption for uploaded image locally."""
+    if 'file' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+
+    file = request.files['file']
+    if not file.filename:
+        return jsonify({"error": "No file selected"}), 400
+
     try:
-        # 1️⃣ Validate file
-        if 'file' not in request.files:
-            return jsonify({"error": "No file uploaded"}), 400
-        file = request.files['file']
-        if not file.filename:
-            return jsonify({"error": "No file selected"}), 400
+        image = Image.open(file.stream).convert("RGB")
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")
+        image_bytes = buffered.getvalue()
 
-        # 2️⃣ Open image
+        response = requests.post(
+            HF_API_URL,
+            headers=HEADERS,
+            files={"file": ("image.png", image_bytes, "image/png")},
+            timeout=60
+        )
+
         try:
-            image = Image.open(file.stream).convert("RGB")
-        except Exception as e:
-            return jsonify({"error": f"Failed to process image: {str(e)}"}), 400
+            result = response.json()
+        except ValueError:
+            return jsonify({
+                "error": "Hugging Face API returned invalid JSON",
+                "raw_text": response.text
+            }), 502
 
-        # 3️⃣ Generate caption
-        try:
-            inputs = processor(images=image, return_tensors="pt").to(device)
-            out = model.generate(**inputs)
-            caption_text = processor.decode(out[0], skip_special_tokens=True)
-        except Exception as e:
-            return jsonify({"error": f"Caption generation failed: {str(e)}"}), 500
+        if response.status_code != 200:
+            return jsonify({"error": "Hugging Face API failed", "details": result}), response.status_code
 
-        # 4️⃣ Cleanup memory
-        gc.collect()
-        torch.cuda.empty_cache() if device == "cuda" else None
+        # Extract caption safely
+        if isinstance(result, list) and "generated_text" in result[0]:
+            caption_text = result[0]["generated_text"]
+        else:
+            caption_text = str(result)
 
         return jsonify({"analysis": caption_text})
 
     except Exception as e:
-        gc.collect()
         return jsonify({"error": f"Processing failed: {str(e)}"}), 500
 
 
