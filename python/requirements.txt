@@ -4,3 +4,4 @@ Pillow==10.4.0
 torchvision==0.18.1
 accelerate
 requests
+gunicorn
