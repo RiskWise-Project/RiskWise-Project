@@ -9,6 +9,7 @@ import {
 } from "../../../services/image-services";
 import { getCurrentUserAsync } from "../../../utils/auth";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import "./report-form-container.css";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
@@ -33,6 +34,7 @@ function ReportFormContainer({
     googleMapsApiKey: apiKey,
     libraries: ["places"],
   });
+  const { t } = useTranslation();
 
   const handleAnalyze = async () => {
     if (!fileNametoPass) {
@@ -128,11 +130,10 @@ function ReportFormContainer({
     <div className="form-container-main w-full h-fit bg-[var(--color-white)] rounded-lg p-6 flex flex-col gap-7">
       <div className="form-header-container">
         <h1 className="md:text-xl text-lg font-black tracking-wide text-[var(--color-dark)]">
-          Submit a Report
+          {t("ReportFormContainer.submit_report")}
         </h1>
         <p className="md:text-sm text-xs opacity-60 text-[var(--color-dark)] md:w-[50%] text-justify">
-          Fill up the form for the submission of Risk Report. AI will scan the
-          image to categorize the risks.
+          {t("ReportFormContainer.fill_form_instruction")}
         </p>
       </div>
 
@@ -142,17 +143,17 @@ function ReportFormContainer({
             htmlFor="RiskAttachment"
             className="block font-semibold mb-2 md:text-base text-sm"
           >
-            Upload or Take Photo
+            {t("ReportFormContainer.upload_photo")}
           </label>
           <div className="flex items-center gap-2 border-2 rounded-lg border-[var(--color-dark)]">
             <label
               htmlFor="RiskAttachment"
               className="inline-block bg-blue-600 text-white px-4 py-2 rounded cursor-pointer md:text-base text-sm"
             >
-              Choose File
+              {t("ReportFormContainer.choose_file")}
             </label>
             <span className="text-[var(--color-dark)] opacity-60 md:text-base text-sm">
-              {fileName || "No file chosen"}
+              {fileName || t("ReportFormContainer.no_file_chosen")}
             </span>
           </div>
           <input
@@ -169,7 +170,7 @@ function ReportFormContainer({
         <div className="grid md:grid-cols-2 gap-5 items-center">
           <div className="w-full flex flex-col gap-5">
             <div className="location-container">
-              <label>Location: </label>
+              <label>{t("ReportFormContainer.location_label")}</label>
               <input
                 type="text"
                 value={address}
@@ -179,10 +180,12 @@ function ReportFormContainer({
             </div>
 
             <div className="additional-content-container flex flex-col">
-              <label>Additional Information: </label>
+              <label>{t("ReportFormContainer.additional_info")}</label>
               <textarea
                 className="border-2 rounded-lg px-4 py-2 border-[var(--color-dark)] min-h-15 h-50 max-h-100 md:text-base text-sm focus:outline-0"
-                placeholder="Describe the issue or risk in detail..."
+                placeholder={t(
+                  "ReportFormContainer.additional_info_placeholder"
+                )}
                 value={additionalInfo} // bind to state
                 onChange={(e) => setAdditionalInfo(e.target.value)} // update state on change
               />
@@ -204,7 +207,7 @@ function ReportFormContainer({
               </GoogleMap>
             ) : (
               <p className="text-sm text-center py-4 text-[var(--color-dark)] opacity-60">
-                Loading Map...
+                {t("ReportFormContainer.loading_map")}
               </p>
             )}
           </div>
@@ -218,7 +221,7 @@ function ReportFormContainer({
             onClick={handleAnalyze}
             disabled={loading || !fileName}
           >
-            Report A Risk
+            {t("ReportFormContainer.submit_report")}
           </button>
         </div>
       </div>

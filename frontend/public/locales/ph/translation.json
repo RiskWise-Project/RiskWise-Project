@@ -219,5 +219,27 @@
     "google_button": "Mag-sign up gamit ang Google",
     "dont_have_account": "May account ka na ba?",
     "sign_up": "Mag-log in"
+  },
+  "ReportPreview": {
+    "report_preview": "Preview ng Report",
+    "review_details": "Pakicheck muna ang mga detalye ng report bago ipasa.",
+    "image_alt": "Preview ng na-upload",
+    "no_image": "Walang na-upload na image",
+    "file_name": "Pangalan ng File",
+    "details_address": "Address:",
+    "details_description": "Deskripsyon:",
+    "details_not_provided": "Walang ibinigay"
+  },
+  "ReportFormContainer": {
+    "submit_report": "Ipasa ang Report",
+    "fill_form_instruction": "Punan ang form para sa pagsusumite ng Risk Report. Susuriin ng AI ang larawan para i-categorize ang mga panganib.",
+    "upload_photo": "Mag-upload o Kunan ng Larawan",
+    "choose_file": "Pumili ng File",
+    "no_file_chosen": "Walang napiling file",
+    "location_label": "Lokasyon:",
+    "additional_info": "Karagdagang Impormasyon:",
+    "additional_info_placeholder": "Ilarawan ang isyu o panganib nang detalyado...",
+    "loading_map": "Ina-load ang Mapa...",
+    "report_button": "Iulat ang Panganib"
   }
 }
