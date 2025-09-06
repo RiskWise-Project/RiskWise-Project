@@ -17,8 +17,6 @@ function RightSideProfile() {
     const auth = getAuth();
     const user = auth.currentUser;
 
-    console.log("Current user:", user);
-
     if (user) {
       user.getIdToken().then((tokenID) => {
         fetchReports(user.uid, tokenID);

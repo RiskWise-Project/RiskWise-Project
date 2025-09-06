@@ -21,7 +21,7 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
   }, [fileNametoPass]);
 
   return (
-    <div className="container-main w-[70%] h-fit m-auto bg-[var(--color-white)] rounded-2xl p-6 flex flex-col gap-6 shadow-md">
+    <div className="container-main md:w-[70%] w-full h-fit m-auto bg-[var(--color-white)] rounded-2xl p-6 flex flex-col gap-6 shadow-md">
       {/* Header */}
       <div className="form-header-container mb-4">
         <h1 className="md:text-2xl text-xl font-black tracking-wide text-[var(--color-dark)]">
@@ -52,20 +52,20 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
 
       {/* Report Details */}
       <div className="flex flex-col w-full m-auto gap-3 text-[var(--color-dark)]">
-        <div className="flex flex-row justify-between">
+        <div className="flex md:flex-row flex-col justify-between">
           <span className="font-semibold">
             {t("ReportPreview.details_address")}
           </span>
-          <span className="opacity-80 w-[50%] text-right break-words">
+          <span className="opacity-80 md:w-[50%] w-full md:text-right break-words">
             {address || t("ReportPreview.details_not_provided")}
           </span>
         </div>
 
-        <div className="flex flex-row justify-between">
+        <div className="flex md:flex-row flex-col justify-between">
           <span className="font-semibold">
             {t("ReportPreview.details_description")}
           </span>
-          <span className="opacity-80 w-[50%] text-right break-words">
+          <span className="opacity-80 md:w-[50%] w-full md:text-right break-words">
             {description || t("ReportPreview.details_not_provided")}
           </span>
         </div>

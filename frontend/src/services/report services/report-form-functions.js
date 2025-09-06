@@ -4,7 +4,6 @@ export const dhvsuCoords = {
 };
 
 export async function fetchAddress(lat, lng, apiKey, setAddress) {
-  console.log("Fetching address for:", lat, lng);
   try {
     const response = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`
@@ -16,8 +15,7 @@ export async function fetchAddress(lat, lng, apiKey, setAddress) {
       setAddress("Address not found");
     }
   } catch (error) {
-    console.error("Geocoding error:", error);
-    setAddress("Error fetching address");
+    setAddress(error, "Error fetching address");
   }
 }
 
