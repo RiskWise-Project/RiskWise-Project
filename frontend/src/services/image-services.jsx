@@ -39,3 +39,20 @@ export async function summarizeReportService(payload) {
     return { error: "Error summarizing report" };
   }
 }
+
+export async function fetchUserReports(userId, tokenID) {
+  try {
+    const response = await axios.get(`${baseURL}/reports/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${tokenID}`,
+      },
+    });
+    return response.data.reports || [];
+  } catch (error) {
+    console.error(
+      "Axios fetch user reports error:",
+      error.response?.data || error.message
+    );
+    return [];
+  }
+}

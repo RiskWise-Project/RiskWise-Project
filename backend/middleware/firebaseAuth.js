@@ -9,7 +9,7 @@ const authenticateFirebaseToken = async (req, res, next) => {
       .json({ message: "Authorization token missing or malformed" });
   }
 
-  const idToken = authHeader.split("Bearer ")[1];
+  const idToken = authHeader.split(" ")[1];
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
