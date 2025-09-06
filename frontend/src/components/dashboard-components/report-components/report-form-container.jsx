@@ -53,8 +53,6 @@ function ReportFormContainer({
       const user = await getCurrentUserAsync(); // await the actual user
       if (!user) throw new Error("User not logged in");
 
-      console.log("Firebase user found:", user.uid);
-
       const payload = {
         fileNametoPass: fileNametoPass, // actual Base64 string
         description: additionalInfo, // your description
@@ -76,7 +74,7 @@ function ReportFormContainer({
       setLocation(dhvsuCoords); // reset to default
       toast.success("Report submitted successfully!");
     } catch (err) {
-      console.error("❌ Summarize error:", err);
+      toast.error("Failed to submit report. Please try again.");
     } finally {
       setLoading(false);
     }

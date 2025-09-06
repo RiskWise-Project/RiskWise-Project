@@ -1,30 +1,20 @@
 import os
 import gc
+import requests
 from flask import Flask, request, jsonify
 from PIL import Image
-import torch
-from transformers import BlipForConditionalGeneration, BlipProcessor
+import io
 
 app = Flask(__name__)
 
-# Force CPU usage and limit threads
-os.environ['CUDA_VISIBLE_DEVICES'] = ''
-torch.set_num_threads(1)
-
-# Load BLIP model on CPU with low memory usage
-model_name = "Salesforce/blip-image-captioning-base"
-
-device = torch.device("cpu")
-
-print("Loading BLIP model...")
-model = BlipForConditionalGeneration.from_pretrained(model_name).to(device)
-processor = BlipProcessor.from_pretrained(model_name)
-gc.collect()
-print("Model loaded successfully on CPU")
+# Hugging Face API setup
+HF_API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-captioning-base"
+HF_API_KEY = os.environ.get("HUGGINGFACE_API_KEY")  # ✅ your backend env var
+HEADERS = {"Authorization": f"Bearer {HF_API_KEY}"}
 
 @app.route("/", methods=["GET"])
 def health_check():
-    return jsonify({"status": "healthy", "message": "Caption API is running"})
+    return jsonify({"status": "healthy", "message": "Caption API is running via Hugging Face"})
 
 @app.route("/caption", methods=["POST"])
 def caption():
@@ -35,23 +25,28 @@ def caption():
         if file.filename == '':
             return jsonify({"error": "No file selected"}), 400
 
-        # Open and convert image
+        # Convert uploaded file to bytes
         image = Image.open(file.stream).convert("RGB")
+        buffered = io.BytesIO()
+        image.save(buffered, format="PNG")
+        image_bytes = buffered.getvalue()
 
-        # Prepare inputs
-        inputs = processor(images=image, return_tensors="pt").to(device)
+        # Send request to Hugging Face Inference API
+        response = requests.post(
+            HF_API_URL,
+            headers=HEADERS,
+            data=image_bytes,
+        )
 
-        # Generate caption (no gradient to save memory)
-        with torch.no_grad():
-            output_ids = model.generate(
-                **inputs,
-                max_length=16,
-                num_beams=1
-            )
-            caption_text = processor.decode(output_ids[0], skip_special_tokens=True)
+        if response.status_code != 200:
+            return jsonify({"error": "Hugging Face API failed", "details": response.json()}), 500
 
-        # Cleanup memory
-        del inputs, output_ids
+        result = response.json()
+
+        # Hugging Face returns a list with "generated_text"
+        caption_text = result[0]["generated_text"] if isinstance(result, list) else str(result)
+
+        # Cleanup
         gc.collect()
 
         return jsonify({"analysis": caption_text})
