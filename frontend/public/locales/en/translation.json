@@ -218,5 +218,27 @@
     "google_button": "Sign up with Google",
     "dont_have_account": "Already have an account?",
     "sign_up": "Sign in"
+  },
+  "ReportPreview": {
+    "report_preview": "Report Preview",
+    "review_details": "Please review your report details before submission.",
+    "image_alt": "Uploaded preview",
+    "no_image": "No image uploaded",
+    "file_name": "File Name",
+    "details_address": "Address:",
+    "details_description": "Description:",
+    "details_not_provided": "Not provided"
+  },
+  "ReportFormContainer": {
+    "submit_report": "Submit a Report",
+    "fill_form_instruction": "Fill up the form for the submission of Risk Report. AI will scan the image to categorize the risks.",
+    "upload_photo": "Upload or Take Photo",
+    "choose_file": "Choose File",
+    "no_file_chosen": "No file chosen",
+    "location_label": "Location:",
+    "additional_info": "Additional Information:",
+    "additional_info_placeholder": "Describe the issue or risk in detail...",
+    "loading_map": "Loading Map...",
+    "report_button": "Report A Risk"
   }
 }

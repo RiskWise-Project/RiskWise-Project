@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./preview-container.css";
 
 function PreviewContainer({ fileName, address, description, fileNametoPass }) {
   const [previewUrl, setPreviewUrl] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     let url;
@@ -23,10 +25,10 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
       {/* Header */}
       <div className="form-header-container mb-4">
         <h1 className="md:text-2xl text-xl font-black tracking-wide text-[var(--color-dark)]">
-          Report Preview
+          {t("ReportPreview.report_preview")}
         </h1>
         <p className="md:text-sm text-xs opacity-70 text-[var(--color-dark)]">
-          Please review your report details before submission.
+          {t("ReportPreview.review_details")}
         </p>
       </div>
 
@@ -35,7 +37,7 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
         <div className="w-full flex flex-col items-center gap-2">
           <img
             src={previewUrl}
-            alt="Uploaded preview"
+            alt={t("ReportPreview.image_alt")}
             className="max-h-64 object-contain rounded-lg border border-gray-200 shadow-sm"
           />
           <span className="text-[var(--color-dark)] opacity-80">
@@ -44,20 +46,28 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
         </div>
       ) : (
         <div className="w-full h-40 flex items-center justify-center border-2 border-dashed border-gray-300 rounded-lg text-gray-400 text-sm">
-          No image uploaded
+          {t("ReportPreview.no_image")}
         </div>
       )}
 
       {/* Report Details */}
       <div className="flex flex-col w-full m-auto gap-3 text-[var(--color-dark)]">
         <div className="flex flex-row justify-between">
-          <span className="font-semibold">Address</span>
-          <span className="opacity-80">{address || "Not provided"}</span>
+          <span className="font-semibold">
+            {t("ReportPreview.details_address")}
+          </span>
+          <span className="opacity-80">
+            {address || t("ReportPreview.details_not_provided")}
+          </span>
         </div>
 
         <div className="flex flex-row justify-between">
-          <span className="font-semibold">Description</span>
-          <span className="opacity-80">{description || "Not provided"}</span>
+          <span className="font-semibold">
+            {t("ReportPreview.details_description")}
+          </span>
+          <span className="opacity-80">
+            {description || t("ReportPreview.details_not_provided")}
+          </span>
         </div>
       </div>
     </div>
