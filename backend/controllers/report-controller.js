@@ -5,11 +5,12 @@ const { v4: uuidv4 } = require("uuid");
 // Summarize Report Controller (Base64 version)
 const summarizeReport = async (req, res) => {
   try {
-    const { fileNametoPass, description, userId, summary } = req.body;
+    const { fileNametoPass, description, userId, summary, address } = req.body;
 
-    if (!fileNametoPass || !description || !userId || !summary) {
+    if (!fileNametoPass || !description || !userId || !summary || !address) {
       return res.status(400).json({
-        error: "Image (Base64), description, and userId are required",
+        error:
+          "Image (Base64), description, userId, summary, and address are required",
       });
     }
 
@@ -83,6 +84,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       userId,
       fileBase64: fileNametoPass,
       caption: summary,
+      address,
       description,
       likelihood: structured.likelihood || 1,
       impact: structured.impact || 1,
@@ -98,7 +100,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
     // === STEP 5: Respond back ===
     res.json({ id: docRef.id, ...reportData });
   } catch (error) {
-    console.error("💥 Summarization error:", {
+    console.error("Summarization error:", {
       message: error.message,
       response: error.response?.data,
     });
@@ -106,4 +108,32 @@ Based on the following incident data, assign category, likelihood, impact, calcu
   }
 };
 
-module.exports = { summarizeReport };
+const getReportsByUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Check UID from token
+    if (req.user.uid !== userId) {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: Cannot access other user's reports" });
+    }
+
+    const reportsSnapshot = await db
+      .collection("reports")
+      .where("userId", "==", userId)
+      .orderBy("createdAt", "desc")
+      .get();
+
+    const reports = reportsSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    res.json({ reports });
+  } catch (error) {
+    console.error("Fetch reports error:", error);
+    res.status(500).json({ error: "Failed to fetch reports" });
+  }
+};
+module.exports = { summarizeReport, getReportsByUser };

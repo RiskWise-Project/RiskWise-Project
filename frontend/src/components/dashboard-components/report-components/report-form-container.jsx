@@ -10,6 +10,7 @@ import {
 import { getCurrentUserAsync } from "../../../utils/auth";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import { dhvsuCoords } from "../../../services/report services/report-form-functions";
 import "./report-form-container.css";
 
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API;
@@ -65,27 +66,14 @@ function ReportFormContainer({
         summary: analysis || "",
       };
 
-      // 🔹 Log everything before sending
-      console.group("🚀 Sending report payload");
-      console.log("fileNametoPass:", fileNametoPass.slice(0, 100) + "..."); // log first 100 chars
-      console.log("description:", additionalInfo);
-      console.log("location:", location);
-      console.log("address:", address);
-      console.log("userId:", user.uid);
-      console.log("uniqueId:", payload.uniqueId);
-      console.log("summary:", analysis);
-      console.groupEnd();
-
       const result = await summarizeReportService(payload);
-
-      console.log("✅ Summarize result:", result);
 
       setAnalysis(result.summary || "");
       setFileName("");
       setFileNametoPass("");
       setAdditionalInfo("");
-      setAddress("");
-      setLocation({ lat: 15.034, lng: 120.684 }); // reset to default
+      setAddress("PamSU Bacolor, Pampanga");
+      setLocation(dhvsuCoords); // reset to default
       toast.success("Report submitted successfully!");
     } catch (err) {
       console.error("❌ Summarize error:", err);
@@ -216,10 +204,10 @@ function ReportFormContainer({
         <div className="button-container">
           <button
             className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 mt-5 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 ${
-              loading ? "cursor-wait" : "cursor-pointer"
+              loading ? "cursor-wait bg-gray-400" : "cursor-pointer"
             }`}
             onClick={handleAnalyze}
-            disabled={loading || !fileName}
+            disabled={loading}
           >
             {t("ReportFormContainer.submit_report")}
           </button>

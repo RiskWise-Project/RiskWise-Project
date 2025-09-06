@@ -25,6 +25,10 @@ const SubmitReportPage = React.lazy(() =>
   import("../pages/dashboard/dashboard-pages/submit-report-page.jsx")
 );
 
+const ReportListPage = React.lazy(() =>
+  import("../pages/dashboard/dashboard-pages/report-list-page.jsx")
+);
+
 function MainRoutes() {
   return (
     <Routes>
@@ -53,7 +57,7 @@ function MainRoutes() {
           path="risk-list"
           element={
             <Suspense fallback={<div>Loading...</div>}>
-              <h1>Risks List Page</h1>
+              <ReportListPage />
             </Suspense>
           }
         />

@@ -2,7 +2,11 @@ const express = require("express");
 const path = require("path");
 const multer = require("multer");
 const { generateCaption } = require("../controllers/image-controller");
-const { summarizeReport } = require("../controllers/report-controller");
+const {
+  summarizeReport,
+  getReportsByUser,
+} = require("../controllers/report-controller");
+const authenticateFirebaseToken = require("../middleware/firebaseAuth");
 
 const router = express.Router();
 
@@ -10,5 +14,6 @@ const upload = multer({ dest: path.join(__dirname, "..", "uploads") });
 
 router.post("/caption", upload.single("file"), generateCaption);
 router.post("/summarize", summarizeReport);
+router.get("/reports/:userId", authenticateFirebaseToken, getReportsByUser);
 
 module.exports = router;

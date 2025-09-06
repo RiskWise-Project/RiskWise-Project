@@ -56,7 +56,7 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
           <span className="font-semibold">
             {t("ReportPreview.details_address")}
           </span>
-          <span className="opacity-80">
+          <span className="opacity-80 w-[50%] text-right break-words">
             {address || t("ReportPreview.details_not_provided")}
           </span>
         </div>
@@ -65,7 +65,7 @@ function PreviewContainer({ fileName, address, description, fileNametoPass }) {
           <span className="font-semibold">
             {t("ReportPreview.details_description")}
           </span>
-          <span className="opacity-80">
+          <span className="opacity-80 w-[50%] text-right break-words">
             {description || t("ReportPreview.details_not_provided")}
           </span>
         </div>
