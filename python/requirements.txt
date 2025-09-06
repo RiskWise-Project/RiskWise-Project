@@ -1,5 +1,6 @@
 flask==2.3.3
+torch==2.7.1
+transformers==4.53.3
+Pillow==10.4.0
 requests==2.31.0
 gunicorn==21.2.0
-Pillow==10.4.0
-numpy==1.26.2   # optional, used by Pillow internally
