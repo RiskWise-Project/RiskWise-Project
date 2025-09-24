@@ -1,28 +1,50 @@
-// src/components/ProtectedRoute.jsx
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { riskwise_symbol } from "../assets/logos/logo";
+import { FetchUser } from "../services/auth-services";
 
-const ProtectedRoute = ({ children }) => {
+export default function ProtectedRoute({ children, allowedRoles }) {
   const [user, setUser] = useState(null);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      setUser(firebaseUser);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        try {
+          const tokenID = await firebaseUser.getIdToken();
+
+          const { success, user: dbUser } = await FetchUser(tokenID);
+
+          if (success) {
+            setUser({
+              ...firebaseUser,
+              role: dbUser.role,
+              ...dbUser,
+            });
+          } else {
+            setUser(null);
+          }
+        } catch (err) {
+          console.error("ProtectedRoute error:", err);
+          setUser(null);
+        }
+      } else {
+        setUser(null);
+      }
       setChecking(false);
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
+  // ⏳ Show loader while checking auth
   if (checking) {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-white">
         <div className="relative w-16 h-16">
-          <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin" />
           <img
             src={riskwise_symbol}
             alt="RiskWise logo"
@@ -36,11 +58,16 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  if (!user) {
-    return <Navigate to="/sign-in" replace />;
+  // 🔐 No Firebase user → redirect to sign-in
+  if (!user) return <Navigate to="/sign-in" replace />;
+
+  // 🚦 Role-based access check
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    // redirect based on actual role
+    const fallback = user.role === "admin" ? "/admin" : "/dashboard/profile";
+    console.log("Allowed:", allowedRoles, "User Role:", user?.role);
+    return <Navigate to={fallback} replace />;
   }
 
   return children;
-};
-
-export default ProtectedRoute;
+}

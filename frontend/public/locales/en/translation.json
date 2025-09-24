@@ -210,8 +210,8 @@
     "sign_up": "Sign up"
   },
   "SignupComponent": {
-    "singup_header": "CREATE AN ACCOUNT",
-    "singup_subtext": "Please fill in the details to sign up",
+    "signup_header": "CREATE AN ACCOUNT",
+    "signup_subtext": "Please fill in the details to sign up",
     "fullname": "Full Name:",
     "terms_condition": "I agree to the terms and conditions",
     "signup_button_loading": "Creating account...",
