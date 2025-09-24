@@ -1,150 +1,81 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { riskwise_symbol } from "../assets/logos/logo.jsx";
 import LandingPage from "../pages/user-side-pages/landing-page";
 import ProtectedRoute from "./protected-routes.jsx";
 
-const AboutPage = React.lazy(() =>
-  import("../pages/user-side-pages/about-page.jsx")
-);
-const SignInPage = React.lazy(() =>
-  import("../pages/auth-pages/sign-in-page.jsx")
-);
-
-const SignUpPage = React.lazy(() =>
-  import("../pages/auth-pages/sign-up-page.jsx")
-);
-
-const Dashboard = React.lazy(() => import("../pages/dashboard/dashboard.jsx"));
-const ProfilePage = React.lazy(() =>
+// Lazy imports
+const AboutPage = lazy(() => import("../pages/user-side-pages/about-page.jsx"));
+const SignInPage = lazy(() => import("../pages/auth-pages/sign-in-page.jsx"));
+const SignUpPage = lazy(() => import("../pages/auth-pages/sign-up-page.jsx"));
+const Dashboard = lazy(() => import("../pages/dashboard/dashboard.jsx"));
+const ProfilePage = lazy(() =>
   import("../pages/dashboard/dashboard-pages/profile-page.jsx")
 );
-const SettingPage = React.lazy(() =>
+const SettingPage = lazy(() =>
   import("../pages/dashboard/dashboard-pages/setting-page.jsx")
 );
-const SubmitReportPage = React.lazy(() =>
+const SubmitReportPage = lazy(() =>
   import("../pages/dashboard/dashboard-pages/submit-report-page.jsx")
 );
-
-const ReportListPage = React.lazy(() =>
+const ReportListPage = lazy(() =>
   import("../pages/dashboard/dashboard-pages/report-list-page.jsx")
 );
+const AdminMainPage = lazy(() =>
+  import("../pages/admin-dashboard-pages/admin-main-page.jsx")
+);
 
-function MainRoutes() {
+/** === Loading Spinner === */
+function LoadingSpinner() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/sign-in" element={<SignInPage />} />
-      <Route path="/sign-up" element={<SignUpPage />} />
-
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      >
-        <Route
-          path="report-risk"
-          element={
-            <Suspense
-              fallback={
-                <div className="flex flex-col items-center justify-center h-screen bg-white">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
-                    <img
-                      src={riskwise_symbol}
-                      alt="RiskWise logo"
-                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
-                    Loading RiskWise...
-                  </p>
-                </div>
-              }
-            >
-              <SubmitReportPage />
-            </Suspense>
-          }
+    <div className="flex flex-col items-center justify-center h-screen bg-white">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
+        <img
+          src={riskwise_symbol}
+          alt="RiskWise logo"
+          className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
-        <Route
-          path="risk-list"
-          element={
-            <Suspense
-              fallback={
-                <div className="flex flex-col items-center justify-center h-screen bg-white">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
-                    <img
-                      src={riskwise_symbol}
-                      alt="RiskWise logo"
-                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
-                    Loading RiskWise...
-                  </p>
-                </div>
-              }
-            >
-              <ReportListPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="settings"
-          element={
-            <Suspense
-              fallback={
-                <div className="flex flex-col items-center justify-center h-screen bg-white">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
-                    <img
-                      src={riskwise_symbol}
-                      alt="RiskWise logo"
-                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
-                    Loading RiskWise...
-                  </p>
-                </div>
-              }
-            >
-              <SettingPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path="profile"
-          element={
-            <Suspense
-              fallback={
-                <div className="flex flex-col items-center justify-center h-screen bg-white">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 rounded-full border-4 border-[var(--color-highlight)] border-t-transparent animate-spin"></div>
-                    <img
-                      src={riskwise_symbol}
-                      alt="RiskWise logo"
-                      className="w-8 h-8 absolute opacity-70 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                    />
-                  </div>
-                  <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
-                    Loading RiskWise...
-                  </p>
-                </div>
-              }
-            >
-              <ProfilePage />
-            </Suspense>
-          }
-        />
-      </Route>
-    </Routes>
+      </div>
+      <p className="mt-4 text-[var(--color-highlight)] font-medium animate-pulse">
+        Loading RiskWise...
+      </p>
+    </div>
   );
 }
 
-export default MainRoutes;
+export default function MainRoutes() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminMainPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allowedRoles={["user"]}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="report-risk" element={<SubmitReportPage />} />
+          <Route path="risk-list" element={<ReportListPage />} />
+          <Route path="settings" element={<SettingPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+        </Route>
+      </Routes>
+    </Suspense>
+  );
+}
