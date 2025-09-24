@@ -58,6 +58,7 @@ function LoginFormContainer() {
       const user = result.user;
 
       toast.success("Signed in with Google!");
+      navigate("/dashboard/profile");
 
       const idToken = await user.getIdToken();
 

@@ -73,8 +73,8 @@ function ReportFormContainer({
       setAddress("PamSU Bacolor, Pampanga");
       setLocation(dhvsuCoords); // reset to default
       toast.success("Report submitted successfully!");
-    } catch (err) {
-      toast.error("Failed to submit report. Please try again.");
+    } catch (error) {
+      toast.error(error, "Failed to submit report. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -172,8 +172,8 @@ function ReportFormContainer({
                 placeholder={t(
                   "ReportFormContainer.additional_info_placeholder"
                 )}
-                value={additionalInfo} // bind to state
-                onChange={(e) => setAdditionalInfo(e.target.value)} // update state on change
+                value={additionalInfo}
+                onChange={(e) => setAdditionalInfo(e.target.value)}
               />
             </div>
           </div>
