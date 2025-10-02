@@ -22,21 +22,18 @@ export default function LoginFormContainer() {
   const [loading, setLoading] = useState({ login: false, reset: false });
   const [error, setError] = useState("");
 
-  /** === Helpers === */
   const startLoading = (key) =>
     setLoading((prev) => ({ ...prev, [key]: true }));
   const stopLoading = (key) =>
     setLoading((prev) => ({ ...prev, [key]: false }));
 
   const redirectToDashboard = async (firebaseUser) => {
-    // Get fresh token
     const token = await firebaseUser.getIdToken();
 
-    // Fetch the Firestore user doc to get the role
     const { success, user: dbUser } = await FetchUser(token);
 
     if (success && dbUser.role === "admin") {
-      navigate("/admin");
+      navigate("/admin/dashboard");
     } else {
       navigate("/dashboard/profile");
     }
@@ -59,7 +56,7 @@ export default function LoginFormContainer() {
       }
 
       toast.success("Login successful!");
-      await redirectToDashboard(firebaseUser); // ✅ pass firebaseUser here
+      await redirectToDashboard(firebaseUser);
     } catch (err) {
       setError(parseFirebaseError(err));
     } finally {
@@ -72,7 +69,7 @@ export default function LoginFormContainer() {
     const { user: firebaseUser } = await signInWithPopup(auth, provider);
     const token = await firebaseUser.getIdToken();
 
-    const { success } = await FetchUser(token); // check if Firestore doc exists
+    const { success } = await FetchUser(token);
     if (!success) {
       await SignUpSend(
         {
