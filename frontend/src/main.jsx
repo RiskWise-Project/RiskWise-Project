@@ -5,12 +5,15 @@ import { Toaster } from "react-hot-toast";
 import "./index.css";
 import "./utils/i18n.js";
 import App from "./App.jsx";
+import { NotificationProvider } from "./context/NotificationContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <StrictMode>
-      <App />
-      <Toaster position="top-right" reverseOrder={false} />
+      <NotificationProvider>
+        <App />
+        <Toaster position="top-right" reverseOrder={false} />
+      </NotificationProvider>
     </StrictMode>
   </BrowserRouter>
 );

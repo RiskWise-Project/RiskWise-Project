@@ -24,8 +24,12 @@ const ReportListPage = lazy(() =>
 const AdminMainPage = lazy(() =>
   import("../pages/admin-dashboard-pages/admin-main-page.jsx")
 );
+const AdminDashboard = lazy(() =>
+  import(
+    "../pages/admin-dashboard-pages/admin-dashboard-sub-pages/admin-dashboard.jsx"
+  )
+);
 
-/** === Loading Spinner === */
 function LoadingSpinner() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-white">
@@ -60,7 +64,9 @@ export default function MainRoutes() {
               <AdminMainPage />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="dashboard" element={<AdminDashboard />} />
+        </Route>
 
         <Route
           path="/dashboard"
