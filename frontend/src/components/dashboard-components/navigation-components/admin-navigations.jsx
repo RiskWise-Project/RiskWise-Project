@@ -46,12 +46,12 @@ function AdminNavigations() {
       <div className="h-full md:w-fit w-full flex md:flex-col gap-5 items-center md:items-center  md:justify-center ">
         {adminNav.map((item, index) => {
           const Icon = item.icon;
-          const isActive = item.location === location.pathname;
+          const isActive = item.RouteLocation === location.pathname;
 
           return (
             <div
               key={index}
-              onClick={() => navigate(item.location)}
+              onClick={() => navigate(item.RouteLocation)}
               className={`flex flex-col items-center z-55 md:justify-center md:gap-3 gap-1 rounded-xl justify-evenly w-full h-fit md:w-fit p-2.5 cursor-pointer ${
                 isActive
                   ? " text-[var(--color-accent)]"
@@ -67,7 +67,7 @@ function AdminNavigations() {
                   expanded ? "opacity-100" : "opacity-100 md:hidden"
                 }`}
               >
-                {item.title}
+                {item.RouteTitle}
               </span>
             </div>
           );

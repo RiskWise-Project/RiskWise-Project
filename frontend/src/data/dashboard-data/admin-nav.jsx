@@ -8,22 +8,22 @@ import {
 export const adminNav = [
   {
     RouteTitle: "Dashboard",
-    RouteLocation: "/dashboard/admin",
+    RouteLocation: "/admin/dashboard",
     icon: LayoutDashboard,
   },
   {
     RouteTitle: "Analytics",
-    RouteLocation: "/dashboard/analytics",
+    RouteLocation: "/admin/analytics",
     icon: ChartArea,
   },
   {
     RouteTitle: "User Management",
-    RouteLocation: "/dashboard/user-management",
+    RouteLocation: "/admin/user-management",
     icon: CircleUserRound,
   },
   {
     RouteTitle: "Archive",
-    RouteLocation: "/dashboard/archive",
+    RouteLocation: "/admin/archive",
     icon: FileArchive,
   },
 ];

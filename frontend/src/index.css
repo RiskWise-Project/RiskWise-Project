@@ -7,6 +7,7 @@
 
   --color-dark: #152b3f;
   --color-highlight: #18618a;
+  --color-card-bg: #4db2e0;
   --color-accent: #ed7508;
   --color-white: #faf9f6;
 }
@@ -15,6 +16,7 @@
   --color-dark: #e8e6e3;
   --color-highlight: #4db2e0;
   --color-accent: #ffb877;
+  --color-card-bg: #708090;
   --color-white: #2c3e50;
 }
 

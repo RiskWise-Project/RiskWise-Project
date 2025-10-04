@@ -79,38 +79,29 @@ function LeftSideProfile() {
       const compressedFile = await imageCompression(file, {
         maxSizeMB: 0.2,
         maxWidthOrHeight: 500,
-        useWebWorker: true,
+      });
+      const base64String = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(compressedFile);
       });
 
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const base64String = reader.result;
+      setPreview(base64String);
 
-        setPreview(base64String);
+      const response = await SavePicture(
+        { profileImageBase64: base64String },
+        tokenID
+      );
 
-        try {
-          const response = await SavePicture(
-            {
-              profileImageBase64: base64String,
-            },
-            tokenID
-          );
-
-          if (response.success) {
-            toast.log("User image saved as base64.");
-            fetchUserData();
-          } else {
-            toast.error("Failed to save base64 image:", response.message);
-          }
-        } catch (err) {
-          toast.error("Error saving base64 image:", err);
-        }
-      };
-
-      reader.readAsDataURL(compressedFile);
+      if (response.success) {
+        toast.success("User image saved successfully!");
+        fetchUserData();
+      } else {
+        toast.error(`Failed to save image: ${response.message}`);
+      }
     } catch (error) {
-      toast.error("Image compression error:", error);
-      alert("Failed to compress the image.");
+      toast.error(`Image upload failed: ${error.message || error}`);
     }
   };
 

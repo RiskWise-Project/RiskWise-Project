@@ -1,5 +1,4 @@
-const { db } = require("../helper/firebase");
-const admin = require("firebase-admin");
+const { db, admin } = require("../helper/firebase");
 
 const saveUser = async (req, res) => {
   try {
@@ -58,23 +57,36 @@ const fetchUser = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      console.warn("Missing or malformed Authorization header");
       return res
         .status(401)
         .json({ message: "Unauthorized: No token provided" });
     }
 
     const idToken = authHeader.split(" ")[1];
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    console.log("Received token:", idToken);
+    let decodedToken;
+    try {
+      decodedToken = await admin.auth().verifyIdToken(idToken);
+    } catch (tokenError) {
+      console.error("Token verification failed:", tokenError);
+      return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    }
+
     const uid = decodedToken.uid;
+    console.log("Decoded UID:", uid);
 
     const userDoc = await db.collection("users").doc(uid).get();
     if (!userDoc.exists) {
+      console.warn(`User document not found for UID: ${uid}`);
       return res.status(404).json({ message: "User not found" });
     }
 
+    console.log("User document fetched:", userDoc.data());
     return res.status(200).json({ user: userDoc.data() });
   } catch (error) {
-    console.error("Error fetching user:", error);
+    console.error("Unexpected error in fetchUser:", error);
+
     return res.status(500).json({ message: "Internal server error" });
   }
 };
