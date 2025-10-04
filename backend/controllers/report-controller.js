@@ -95,6 +95,8 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       read: false,
       status: "pending",
       summary: structured.summary,
+      status: "Pending",
+      read: false,
       createdAt: new Date().toISOString(),
     };
     // === STEP 4: Save in Firebase ===
@@ -139,4 +141,20 @@ const getReportsByUser = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch reports" });
   }
 };
-module.exports = { summarizeReport, getReportsByUser };
+
+const markReportRead = async (req, res) => {
+  try {
+    const { reportId } = req.params;
+
+    await db.collection("reports").doc(reportId).update({
+      read: true,
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Mark as read error:", error);
+    res.status(500).json({ error: "Failed to mark report as read" });
+  }
+};
+
+module.exports = { summarizeReport, getReportsByUser, markReportRead };

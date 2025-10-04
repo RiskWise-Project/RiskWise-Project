@@ -192,4 +192,21 @@ const uploadProfilePicture = async (req, res) => {
   }
 };
 
-module.exports = { saveUser, fetchUser, updateUser, uploadProfilePicture };
+const promoteToAdmin = async (req, res) => {
+  const { uid } = req.body;
+
+  try {
+    await admin.auth().setCustomUserClaims(uid, { admin: true });
+    res.json({ success: true, message: `User ${uid} is now admin` });
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+module.exports = {
+  saveUser,
+  fetchUser,
+  updateUser,
+  uploadProfilePicture,
+  promoteToAdmin,
+};

@@ -22,21 +22,23 @@ export default function LoginFormContainer() {
   const [loading, setLoading] = useState({ login: false, reset: false });
   const [error, setError] = useState("");
 
-  /** === Helpers === */
   const startLoading = (key) =>
     setLoading((prev) => ({ ...prev, [key]: true }));
   const stopLoading = (key) =>
     setLoading((prev) => ({ ...prev, [key]: false }));
 
   const redirectToDashboard = async (firebaseUser) => {
+<<<<<<< HEAD
     // Get fresh token
     const token = await firebaseUser.getIdToken(true);
+=======
+    const token = await firebaseUser.getIdToken();
+>>>>>>> 809cc65b7a756daa5b8871436ac68d9adaeb4cce
 
-    // Fetch the Firestore user doc to get the role
     const { success, user: dbUser } = await FetchUser(token);
 
     if (success && dbUser.role === "admin") {
-      navigate("/admin");
+      navigate("/admin/dashboard");
     } else {
       navigate("/dashboard/profile");
     }

@@ -64,7 +64,8 @@ export default function ProtectedRoute({ children, allowedRoles }) {
   // 🚦 Role-based access check
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     // redirect based on actual role
-    const fallback = user.role === "admin" ? "/admin" : "/dashboard/profile";
+    const fallback =
+      user.role === "admin" ? "/admin/dashboard" : "/dashboard/profile";
     console.log("Allowed:", allowedRoles, "User Role:", user?.role);
     return <Navigate to={fallback} replace />;
   }
