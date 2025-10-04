@@ -28,12 +28,7 @@ export default function LoginFormContainer() {
     setLoading((prev) => ({ ...prev, [key]: false }));
 
   const redirectToDashboard = async (firebaseUser) => {
-<<<<<<< HEAD
-    // Get fresh token
-    const token = await firebaseUser.getIdToken(true);
-=======
     const token = await firebaseUser.getIdToken();
->>>>>>> 809cc65b7a756daa5b8871436ac68d9adaeb4cce
 
     const { success, user: dbUser } = await FetchUser(token);
 

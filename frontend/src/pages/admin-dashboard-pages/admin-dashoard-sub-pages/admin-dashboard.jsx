@@ -3,6 +3,7 @@ import NotificationModal from "../../../components/notification-components/notif
 import { useNotifications } from "../../../context/notification-context";
 import { useTheme } from "../../../context/theme-context";
 import DashboardAnalytics from "../../../components/admin-components/dashboard-analytics";
+import AdminRecentReports from "../../../components/admin-components/admin-dashboard-recent";
 
 export default function AdminDashboard() {
   const { unreadCount, setModalOpen } = useNotifications();
@@ -46,6 +47,7 @@ export default function AdminDashboard() {
 
       <div className="main-container w-full h-full md:p-4 flex flex-col">
         <DashboardAnalytics />
+        <AdminRecentReports />
       </div>
 
       <NotificationModal />

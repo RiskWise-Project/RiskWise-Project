@@ -92,10 +92,8 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       category: structured.category,
       score: structured.score,
       severity: structured.severity,
-      read: false,
-      status: "pending",
       summary: structured.summary,
-      status: "Pending",
+      status: "pending",
       read: false,
       createdAt: new Date().toISOString(),
     };
@@ -117,7 +115,10 @@ const getReportsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
 
-    // Check UID from token
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized: No user decoded" });
+    }
+
     if (req.user.uid !== userId) {
       return res
         .status(403)
@@ -138,7 +139,7 @@ const getReportsByUser = async (req, res) => {
     res.json({ reports });
   } catch (error) {
     console.error("Fetch reports error:", error);
-    res.status(500).json({ error: "Failed to fetch reports" });
+    res.status(500).json({ error: error.message });
   }
 };
 
