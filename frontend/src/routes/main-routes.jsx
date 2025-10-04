@@ -26,11 +26,7 @@ const AdminMainPage = lazy(() =>
 );
 const AdminDashboard = lazy(() =>
   import(
-<<<<<<< HEAD
     "../pages/admin-dashboard-pages/admin-dashoard-sub-pages/admin-dashboard.jsx"
-=======
-    "../pages/admin-dashboard-pages/admin-dashboard-sub-pages/admin-dashboard.jsx"
->>>>>>> 809cc65b7a756daa5b8871436ac68d9adaeb4cce
   )
 );
 
