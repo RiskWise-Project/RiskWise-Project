@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { db } = require("../helper/firebase");
 const { v4: uuidv4 } = require("uuid");
+require("dotenv").config();
 
 // Summarize Report Controller (Base64 version)
 const summarizeReport = async (req, res) => {
@@ -77,7 +78,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
     }
 
     // === STEP 3: Build full report object ===
-    const uniqueId = uuidv4(); // unique ID for this report
+    const uniqueId = uuidv4();
 
     const reportData = {
       uniqueId,
@@ -91,6 +92,8 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       category: structured.category,
       score: structured.score,
       severity: structured.severity,
+      read: false,
+      status: "pending",
       summary: structured.summary,
       createdAt: new Date().toISOString(),
     };

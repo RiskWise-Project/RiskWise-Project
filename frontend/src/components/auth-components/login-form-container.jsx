@@ -30,7 +30,7 @@ export default function LoginFormContainer() {
 
   const redirectToDashboard = async (firebaseUser) => {
     // Get fresh token
-    const token = await firebaseUser.getIdToken();
+    const token = await firebaseUser.getIdToken(true);
 
     // Fetch the Firestore user doc to get the role
     const { success, user: dbUser } = await FetchUser(token);
@@ -59,7 +59,7 @@ export default function LoginFormContainer() {
       }
 
       toast.success("Login successful!");
-      await redirectToDashboard(firebaseUser); // ✅ pass firebaseUser here
+      await redirectToDashboard(firebaseUser);
     } catch (err) {
       setError(parseFirebaseError(err));
     } finally {
@@ -70,9 +70,9 @@ export default function LoginFormContainer() {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     const { user: firebaseUser } = await signInWithPopup(auth, provider);
-    const token = await firebaseUser.getIdToken();
+    const token = await firebaseUser.getIdToken(true);
 
-    const { success } = await FetchUser(token); // check if Firestore doc exists
+    const { success } = await FetchUser(token);
     if (!success) {
       await SignUpSend(
         {
