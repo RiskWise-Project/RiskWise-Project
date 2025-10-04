@@ -21,10 +21,8 @@ export const useReports = () => {
 
       let q;
       if (isAdmin) {
-        // Admin: fetch all reports
         q = query(collection(db, "reports"), orderBy("createdAt", "desc"));
       } else {
-        // Normal user: only fetch their own reports
         q = query(
           collection(db, "reports"),
           where("userId", "==", user.uid),

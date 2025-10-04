@@ -52,3 +52,19 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-accent);
 }
+
+/* in your global CSS or tailwind config */
+.export-clean * {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  overflow: visible !important;
+}
+
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none; /* Remove default focus ring */
+}
