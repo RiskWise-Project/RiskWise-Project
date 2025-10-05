@@ -8,16 +8,22 @@ import App from "./App.jsx";
 
 import { NotificationProvider } from "./context/notification-context.jsx";
 import { ThemeProvider } from "./context/theme-context.jsx";
+import { AuthProvider } from "./context/auth-context";
+import { UserNotificationProvider } from "./context/user-notification-context";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <StrictMode>
-      <NotificationProvider>
-        <ThemeProvider>
-          <App />
-          <Toaster position="top-right" reverseOrder={false} />
-        </ThemeProvider>
-      </NotificationProvider>
+      <AuthProvider>
+        <UserNotificationProvider>
+          <NotificationProvider>
+            <ThemeProvider>
+              <App />
+              <Toaster position="top-right" reverseOrder={false} />
+            </ThemeProvider>
+          </NotificationProvider>
+        </UserNotificationProvider>
+      </AuthProvider>
     </StrictMode>
   </BrowserRouter>
 );

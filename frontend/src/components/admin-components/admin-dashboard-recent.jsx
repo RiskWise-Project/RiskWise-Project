@@ -109,6 +109,7 @@ function AdminRecentReports() {
                         try {
                           await updateDoc(doc(db, "reports", report.id), {
                             status: newStatus,
+                            adminRead: false,
                           });
                           console.log(
                             `Report ${report.id} status updated to ${newStatus}`

@@ -23,7 +23,7 @@ export const adminNav = [
   },
   {
     RouteTitle: "Archive",
-    RouteLocation: "/admin/archive",
+    RouteLocation: "/admin/archived",
     icon: FileArchive,
   },
 ];

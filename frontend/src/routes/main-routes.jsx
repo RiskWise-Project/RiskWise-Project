@@ -39,6 +39,11 @@ const UserManagement = lazy(() =>
     "../pages/admin-dashboard-pages/admin-dashoard-sub-pages/admin-user-management.jsx"
   )
 );
+const AdminArchived = lazy(() =>
+  import(
+    "../pages/admin-dashboard-pages/admin-dashoard-sub-pages/admin-archived.jsx"
+  )
+);
 
 function LoadingSpinner() {
   return (
@@ -78,6 +83,7 @@ export default function MainRoutes() {
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="analytics" element={<AdminAnalytics />} />
           <Route path="user-management" element={<UserManagement />} />
+          <Route path="archived" element={<AdminArchived />} />
         </Route>
 
         <Route
