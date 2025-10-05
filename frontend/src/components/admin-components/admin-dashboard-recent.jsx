@@ -11,7 +11,9 @@ function AdminRecentReports() {
 
   useEffect(() => {
     const fetchReporterNames = async () => {
-      const uniqueUserIds = [...new Set(reports.map((r) => r.userId))];
+      const activeReports = reports.filter((r) => r.status !== "archived");
+
+      const uniqueUserIds = [...new Set(activeReports.map((r) => r.userId))];
       const namesMap = {};
 
       await Promise.all(
@@ -43,10 +45,6 @@ function AdminRecentReports() {
     await updateDoc(doc(db, "reports", id), { status: "archived" });
   };
 
-  const handleTakeAction = (report) => {
-    console.log("Take action on report", report);
-  };
-
   return (
     <div className="mt-10">
       <div className="header-container w-full">
@@ -59,71 +57,94 @@ function AdminRecentReports() {
         {reports.length === 0 ? (
           <p className="text-gray-500">No reports found.</p>
         ) : (
-          reports.map((report) => (
-            <div
-              key={report.id}
-              className="report-card bg-[var(--color-card-bg)] p-4 rounded-lg flex flex-col gap-2"
-            >
-              <div className="report-info flex flex-col gap-5">
-                <p className="text-sm">
-                  <span className="font-semibold">Severity:</span>{" "}
-                  <span
-                    className={`font-bold ${
-                      report.severity === "High"
-                        ? "text-red-500"
-                        : report.severity === "Medium"
-                        ? "text-yellow-400"
-                        : "text-green-400"
-                    }`}
-                  >
-                    {report.severity}
-                  </span>
-                </p>
-
-                <div className="flex flex-col gap-1.5">
-                  <h2 className="font-bold text-base md:text-lg">
-                    {report.summary}
-                  </h2>
-                  <p className="text-xs">
-                    <span className="font-semibold">Date Submitted:</span>{" "}
-                    {new Date(report.createdAt).toLocaleString()}
+          reports
+            .filter((report) => report.status !== "archived")
+            .map((report) => (
+              <div
+                key={report.id}
+                className="report-card bg-[var(--color-card-bg)] p-4 rounded-lg flex flex-col gap-2"
+              >
+                <div className="report-info flex flex-col gap-5">
+                  <p className="text-sm">
+                    <span className="font-semibold">Severity:</span>{" "}
+                    <span
+                      className={`font-bold ${
+                        report.severity === "High"
+                          ? "text-red-500"
+                          : report.severity === "Medium"
+                          ? "text-yellow-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {report.severity}
+                    </span>
                   </p>
 
-                  <div className="flex md:flex-row-reverse flex-col md:justify-between">
-                    <p className="text-sm">
-                      <span className="font-semibold">Reported by:</span>{" "}
-                      {reporterNames[report.userId] || "Unknown"}
+                  <div className="flex flex-col gap-1.5">
+                    <h2 className="font-bold text-base md:text-lg">
+                      {report.summary}
+                    </h2>
+                    <p className="text-xs">
+                      <span className="font-semibold">Date Submitted:</span>{" "}
+                      {new Date(report.createdAt).toLocaleString()}
                     </p>
-                    <p className="text-sm">
-                      <span className="font-semibold">Location:</span>{" "}
-                      {report.address}
-                    </p>
+
+                    <div className="flex md:flex-row-reverse flex-col md:justify-between">
+                      <p className="text-sm">
+                        <span className="font-semibold">Reported by:</span>{" "}
+                        {reporterNames[report.userId] || "Unknown"}
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold">Location:</span>{" "}
+                        {report.address}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="report-actions flex gap-5 mt-2 md:mt-0 text-sm">
+                    <select
+                      value={report.status || "Take Action"}
+                      onChange={async (e) => {
+                        const newStatus = e.target.value;
+                        try {
+                          await updateDoc(doc(db, "reports", report.id), {
+                            status: newStatus,
+                          });
+                          console.log(
+                            `Report ${report.id} status updated to ${newStatus}`
+                          );
+                        } catch (err) {
+                          console.error("Error updating status:", err);
+                        }
+                      }}
+                      className={`px-3 py-1 text-white rounded hover:opacity-90
+      ${report.status === "pending" ? "bg-yellow-500" : ""}
+      ${report.status === "solved" ? "bg-green-600" : ""}
+      ${!report.status || report.status === "Take Action" ? "bg-gray-500" : ""}
+    `}
+                    >
+                      <option value="Take Action" disabled>
+                        Take Action
+                      </option>
+                      <option value="pending">Pending</option>
+                      <option value="solved">Solved</option>
+                    </select>
+                    <button
+                      onClick={() => handleView(report)}
+                      className="px-3 py-1 bg-blue-600 text-[#ffffff] rounded hover:bg-blue-700"
+                    >
+                      View
+                    </button>
+                    <button
+                      onClick={() => handleArchive(report.id)}
+                      className="px-3 py-1 bg-red-600 text-[#ffffff] rounded hover:bg-red-700"
+                    >
+                      Archive
+                    </button>
                   </div>
                 </div>
-
-                <div className="report-actions flex gap-5 mt-2 md:mt-0 text-sm">
-                  <button
-                    onClick={() => handleTakeAction(report)}
-                    className="px-3 py-1 bg-green-600 text-[#ffffff] rounded hover:bg-green-700"
-                  >
-                    Take Action
-                  </button>
-                  <button
-                    onClick={() => handleView(report)}
-                    className="px-3 py-1 bg-blue-600 text-[#ffffff] rounded hover:bg-blue-700"
-                  >
-                    View
-                  </button>
-                  <button
-                    onClick={() => handleArchive(report.id)}
-                    className="px-3 py-1 bg-red-600 text-[#ffffff] rounded hover:bg-red-700"
-                  >
-                    Archive
-                  </button>
-                </div>
               </div>
-            </div>
-          ))
+            ))
         )}
       </div>
 
