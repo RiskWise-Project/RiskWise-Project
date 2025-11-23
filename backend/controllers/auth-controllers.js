@@ -84,7 +84,11 @@ const fetchUser = async (req, res) => {
     }
 
     console.log("User document fetched:", userDoc.data());
-    pingCaptionAPI().then(() => console.log("Caption API ping completed"));
+    pingCaptionAPI()
+      .then((healthy) =>
+        console.log("Caption API ping completed. Healthy:", healthy)
+      )
+      .catch((err) => console.error("Caption API ping error:", err));
     return res.status(200).json({ user: userDoc.data() });
   } catch (error) {
     console.error("Unexpected error in fetchUser:", error);
