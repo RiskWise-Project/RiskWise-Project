@@ -3,7 +3,19 @@ services:
     name: RiskWise-Python-API
     env: python
     rootDir: python
-    port: 6000
+    port: 5000
     pythonVersion: "3.11"
-    buildCommand: pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
-    startCommand: python caption_api.py
+    buildCommand: |
+      # Upgrade pip and basic packaging tools
+      pip install --upgrade pip setuptools wheel
+
+      # Install CPU-only PyTorch to save memory
+      pip install torch==2.7.1+cpu --index-url https://download.pytorch.org/whl/cpu
+
+      # Install remaining dependencies
+      pip install -r requirements.txt
+    startCommand: gunicorn caption_api:app --bind 0.0.0.0:$PORT --workers 1 --threads 1
+    plan: starter
+    envVars:
+      - key: PORT
+        value: "5000"

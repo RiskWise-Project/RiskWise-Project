@@ -18,6 +18,10 @@ dist-ssr
 
 python/venv/
 
+# Firebase credentials
+backend/riskwise-bffe8-firebase-adminsdk-fbsvc-d988bd5c0e.json
+# Env file
+backend/server/.env.development
 
 .vscode/*
 !.vscode/extensions.json

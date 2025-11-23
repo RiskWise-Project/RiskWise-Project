@@ -11,15 +11,21 @@ app = Flask(__name__)
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 torch.set_num_threads(1)
 
-# Model and processor
-MODEL_NAME = "Salesforce/blip-image-captioning-base"
+# Model variables
+MODEL_NAME = "Salesforce/blip-image-captioning-mini"
 device = torch.device("cpu")
+model = None
+processor = None
 
-print("Loading BLIP-mini model...")
-processor = BlipProcessor.from_pretrained(MODEL_NAME)
-model = BlipForConditionalGeneration.from_pretrained(MODEL_NAME).to(device)
-gc.collect()
-print("Model loaded successfully on CPU")
+def load_model():
+    """Lazy load the model to save memory at startup"""
+    global model, processor
+    if model is None:
+        print("Loading BLIP-mini model...")
+        processor = BlipProcessor.from_pretrained(MODEL_NAME)
+        model = BlipForConditionalGeneration.from_pretrained(MODEL_NAME).to(device)
+        gc.collect()
+        print("Model loaded successfully on CPU")
 
 # Health check endpoint
 @app.route("/", methods=["GET"])
@@ -30,6 +36,8 @@ def health_check():
 @app.route("/caption", methods=["POST"])
 def caption():
     try:
+        load_model()
+
         if "file" not in request.files:
             return jsonify({"error": "No file uploaded"}), 400
 
@@ -58,7 +66,6 @@ def caption():
         gc.collect()
         return jsonify({"error": f"Processing failed: {str(e)}"}), 500
 
-
 if __name__ == "__main__":
-    port = int( 5000)
-    app.run(host="0.0.0.0", port=port, debug=False, threaded=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False, threaded=False)
