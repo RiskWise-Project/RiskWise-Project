@@ -17,10 +17,10 @@ export default function ProtectedRoute({ children, allowedRoles }) {
 
           const { success, user: dbUser } = await FetchUser(tokenID);
 
-          if (success) {
+          if (success && dbUser) {
             setUser({
               ...firebaseUser,
-              role: dbUser.role,
+              role: dbUser?.role || "user", // fallback
               ...dbUser,
             });
           } else {
