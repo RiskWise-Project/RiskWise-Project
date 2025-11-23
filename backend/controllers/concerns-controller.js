@@ -1,4 +1,4 @@
-const { db } = require("../helper/firebase");
+const { db, admin } = require("../helper/firebase");
 
 const submitConcern = async (req, res) => {
   const { email, message } = req.body;
@@ -11,20 +11,16 @@ const submitConcern = async (req, res) => {
     const docRef = await db.collection("concerns").add({
       email,
       message,
-      createdAt: new Date().toISOString(),
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
-
+    console.log("Firestore write success:", docRef.id);
     res
       .status(201)
       .json({ id: docRef.id, message: "Concern submitted successfully" });
-
-    console.log(docRef);
   } catch (error) {
-    console.error("Error saving concern:", error);
-    res.status(500).json({ error: "Failed to submit concern" });
+    console.error("❌ Firestore write failed:", error);
+    res.status(500).json({ error: error.message, stack: error.stack });
   }
 };
 
-module.exports = {
-  submitConcern,
-};
+module.exports = { submitConcern };

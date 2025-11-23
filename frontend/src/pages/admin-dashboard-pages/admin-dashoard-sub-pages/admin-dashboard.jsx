@@ -1,4 +1,5 @@
 import { Bell, Sun, Moon } from "lucide-react";
+import { useState } from "react";
 import NotificationModal from "../../../components/notification-components/notification-modal/notification-modal";
 import { useNotifications } from "../../../context/notification-context";
 import { useTheme } from "../../../context/theme-context";

@@ -5,6 +5,10 @@ import { userNavData } from "../../../data/dashboard-data/user-nav";
 import { riskwise_symbol } from "../../../assets/logos/logo";
 import riskwise_combination from "../../../assets/logos/riskwise-logo-2x.webp";
 
+import { LogOut } from "lucide-react";
+import { auth } from "../../../utils/firebase"; // Make sure this is your Firebase auth instance
+import { signOut } from "firebase/auth";
+
 function UserNavigation() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,6 +16,15 @@ function UserNavigation() {
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   return (
@@ -72,6 +85,16 @@ function UserNavigation() {
             </div>
           );
         })}
+
+        <div
+          onClick={handleLogout}
+          className="absolute md:flex hidden flex-col bottom-10 items-center justify-center gap-1 rounded-xl w-full h-fit md:w-fit p-2.5 cursor-pointer text-[var(--color-highlight)] hover:text-[var(--color-accent)] transition-all duration-300 ease-in-out"
+        >
+          <LogOut strokeWidth={2} className="md:w-7 md:h-7 w-7 h-7" />
+          <span className="md:text-sm text-xs whitespace-nowrap md:hidden">
+            Logout
+          </span>
+        </div>
       </div>
 
       {expanded && (

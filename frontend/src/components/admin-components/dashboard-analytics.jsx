@@ -5,7 +5,7 @@ function DashboardAnalytics() {
 
   const totalReports = reports.length;
   const highRiskIssues = reports.filter((r) => r.score >= 8).length;
-  const resolvedIssues = reports.filter((r) => r.status === "resolved").length;
+  const resolvedIssues = reports.filter((r) => r.status === "solved").length;
   const pendingReviews = reports.filter((r) => r.status === "pending").length;
   return (
     <div className="dashboard-analytics-container mt-5 w-full md:h-fit h-[30%] grid grid-cols-2 lg:grid-cols-4 gap-4">

@@ -1,4 +1,5 @@
 const { db, admin } = require("../helper/firebase");
+const { pingCaptionAPI } = require("../helper/pingCaptionAPI");
 
 const saveUser = async (req, res) => {
   try {
@@ -83,6 +84,7 @@ const fetchUser = async (req, res) => {
     }
 
     console.log("User document fetched:", userDoc.data());
+    pingCaptionAPI().then(() => console.log("Caption API ping completed"));
     return res.status(200).json({ user: userDoc.data() });
   } catch (error) {
     console.error("Unexpected error in fetchUser:", error);

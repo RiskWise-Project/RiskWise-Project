@@ -47,10 +47,12 @@ function ChartSelector({ reports, users, chartType, setChartType }) {
     }, {})
   ).map(([month, count]) => ({ month, count }));
 
-  const severityDistributionData = ["High", "Medium", "Low"].map((level) => ({
-    name: level,
-    value: reports.filter((r) => r.severity === level).length,
-  }));
+  const severityDistributionData = ["High", "Medium", "Low", "Critical"].map(
+    (level) => ({
+      name: level,
+      value: reports.filter((r) => r.severity === level).length,
+    })
+  );
 
   const categories = [...new Set(reports.map((r) => r.category))];
   const categoryDistributionData = categories.map((cat) => ({
@@ -59,7 +61,7 @@ function ChartSelector({ reports, users, chartType, setChartType }) {
   }));
 
   const resolvedReportsData = reports.filter(
-    (r) => r.status?.toLowerCase() === "resolved" && r.resolvedAt
+    (r) => r.status?.toLowerCase() === "solved" && r.resolvedAt
   );
   const timeToResolutionData = resolvedReportsData.map((r) => ({
     id: r.id,

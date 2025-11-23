@@ -1,5 +1,4 @@
 flask==2.3.3
-torch==2.7.1+cpu  # Force CPU version, much smaller than GPU build
 transformers==4.53.3
 Pillow==10.4.0
 requests==2.31.0

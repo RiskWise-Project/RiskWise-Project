@@ -1,67 +1,119 @@
-import { Bell, LayoutGrid, List } from "lucide-react";
+import { Bell, LayoutGrid, List, SlidersHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchUserReports } from "../../../services/image-services";
 import { getAuth } from "firebase/auth";
 import { riskwise_symbol } from "../../../assets/logos/logo";
 import RiskCardGrid from "../../../components/dashboard-components/report-list-components/risk-card-grid";
 import RiskCardList from "../../../components/dashboard-components/report-list-components/risk-card-list";
+import { useUserNotifications } from "../../../context/user-notification-context";
+import UserNotificationModal from "../../../components/notification-components/notification-modal/user-notification-modal";
+import SortModal from "../../../components/admin-components/user-management-components/sort-modal";
 import dayjs from "dayjs";
 
 function ReportListPage() {
   const [reports, setReports] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [viewMode, setViewMode] = useState("list");
+  const [sortModalOpen, setSortModalOpen] = useState(false);
+  const [filters, setFilters] = useState({
+    month: "",
+    severity: "",
+    category: "",
+    status: "",
+    date: "",
+  });
+
+  const { unreadCount, modalOpen, setModalOpen } = useUserNotifications();
 
   const toggleViewMode = () => {
-    setViewMode((prevMode) => (prevMode === "grid" ? "list" : "grid"));
+    setViewMode((prev) => (prev === "grid" ? "list" : "grid"));
   };
 
   useEffect(() => {
-    const fetchReports = async () => {
+    const auth = getAuth();
+
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        setReports([]);
+        return;
+      }
+
       setIsLoading(true);
       try {
-        const auth = getAuth();
-        const user = auth.currentUser;
+        const tokenID = await user.getIdToken();
+        const userReports = await fetchUserReports(user.uid, tokenID);
 
-        if (user) {
-          const tokenID = await user.getIdToken();
-          const userReports = await fetchUserReports(user.uid, tokenID);
+        // 🚨 Always convert createdAt safely
+        const reportsWithDates = userReports.map((report) => ({
+          ...report,
+          createdAt: new Date(report.createdAt),
+        }));
 
-          const sorted = [...userReports].sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setReports(sorted);
-        } else {
-          console.warn("No authenticated user found.");
-        }
+        const sorted = reportsWithDates.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        setReports(sorted);
       } catch (error) {
         console.error("Error fetching reports:", error);
       } finally {
         setIsLoading(false);
       }
-    };
+    });
 
-    fetchReports();
+    return () => unsubscribe();
   }, []);
 
-  const groupedReports = reports.reduce((groups, report) => {
-    const month = dayjs(report.createdAt).format("MMMM YYYY");
-    if (!groups[month]) groups[month] = [];
-    groups[month].push(report);
+  // 🧠 Apply filters safely
+  const filteredReports = reports.filter((report) => {
+    if (filters.month && report.createdAt.getMonth() !== Number(filters.month))
+      return false;
+    if (filters.severity && report.severity !== filters.severity) return false;
+    if (filters.category && report.category !== filters.category) return false;
+    if (filters.status && (report.status ?? "") !== filters.status)
+      return false;
+
+    return true;
+  });
+
+  // 📌 Sorting
+  const sortedReports = [...filteredReports].sort((a, b) => {
+    if (filters.date === "dateAsc")
+      return new Date(a.createdAt) - new Date(b.createdAt);
+    if (filters.date === "dateDesc")
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    return 0;
+  });
+
+  // 📌 Group by month text
+  const groupedReports = sortedReports.reduce((groups, report) => {
+    const monthKey = dayjs(report.createdAt).format("MMMM YYYY");
+    if (!groups[monthKey]) groups[monthKey] = [];
+    groups[monthKey].push(report);
     return groups;
   }, {});
 
   return (
     <div className="flex flex-col w-full h-full bg-[var(--color-white)]">
+      {/* Header */}
       <div className="header-container-dashboard flex flex-row items-center justify-between p-4 w-full">
         <h1 className="text-2xl text-[var(--color-highlight)] tracking-wider font-black md:text-3xl">
           Report
         </h1>
+
         <div className="buttons flex flex-row items-center gap-4">
           <button
+            onClick={() => setSortModalOpen(true)}
+            className="p-2 rounded-lg text-[var(--color-highlight)] cursor-pointer"
+          >
+            <SlidersHorizontal
+              className="md:w-6 md:h-6 w-5 h-5"
+              strokeWidth={2.5}
+            />
+          </button>
+          <button
             onClick={toggleViewMode}
-            className={`p-2 rounded-lg md:block hidden text-[var(--color-highlight)] cursor-pointer
-            `}
+            className="p-2 rounded-lg md:block hidden text-[var(--color-highlight)] cursor-pointer"
           >
             {viewMode === "grid" ? (
               <LayoutGrid className="md:w-7 md:h-7 w-6 h-6" strokeWidth={2.5} />
@@ -70,13 +122,24 @@ function ReportListPage() {
             )}
           </button>
 
-          <Bell
-            className="md:w-7 md:h-7 w-7 h-7 text-[var(--color-highlight)] font-black cursor-pointer"
-            strokeWidth={2.5}
-          />
+          <div
+            className="relative cursor-pointer"
+            onClick={() => setModalOpen(true)}
+          >
+            <Bell
+              className="md:w-7 md:h-7 w-7 h-7 text-[var(--color-highlight)] font-black"
+              strokeWidth={2.5}
+            />
+            {unreadCount > 0 && (
+              <span className="absolute -top-1 -right-1 text-[10px] text-white bg-red-500 rounded-full w-4 h-4 flex items-center justify-center">
+                {unreadCount}
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
+      {/* Reports */}
       <div className="report-form md:p-4 w-full">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-screen bg-white">
@@ -92,7 +155,7 @@ function ReportListPage() {
               Loading RiskWise...
             </p>
           </div>
-        ) : reports.length === 0 ? (
+        ) : sortedReports.length === 0 ? (
           <div>No reports found.</div>
         ) : (
           Object.keys(groupedReports).map((month) => (
@@ -104,7 +167,7 @@ function ReportListPage() {
               <div
                 className={
                   viewMode === "grid"
-                    ? "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 transition-all ease-in-out duration-200"
+                    ? "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
                     : "flex flex-col gap-5"
                 }
               >
@@ -120,6 +183,14 @@ function ReportListPage() {
           ))
         )}
       </div>
+
+      <SortModal
+        isOpen={sortModalOpen}
+        onClose={() => setSortModalOpen(false)}
+        sortOptions={filters}
+        setSortOptions={setFilters}
+      />
+      <UserNotificationModal />
     </div>
   );
 }

@@ -5,7 +5,7 @@ function KpiCards({ reports, users }) {
   const totalReports = reports.length;
   const highRiskReports = reports.filter((r) => r.severity === "High").length;
   const resolvedReports = reports.filter(
-    (r) => r.status?.toLowerCase() === "resolved"
+    (r) => r.status?.toLowerCase() === "solved"
   ).length;
 
   const kpis = [

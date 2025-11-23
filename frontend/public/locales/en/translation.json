@@ -215,6 +215,7 @@
     "fullname": "Full Name:",
     "terms_condition": "I agree to the terms and conditions",
     "signup_button_loading": "Creating account...",
+    "signup_button": "Sign up",
     "google_button": "Sign up with Google",
     "dont_have_account": "Already have an account?",
     "sign_up": "Sign in"

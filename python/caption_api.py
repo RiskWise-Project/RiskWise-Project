@@ -12,7 +12,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 torch.set_num_threads(1)
 
 # Model variables
-MODEL_NAME = "Salesforce/blip-image-captioning-mini"
+MODEL_NAME = "Salesforce/blip-image-captioning-base"
 device = torch.device("cpu")
 model = None
 processor = None

@@ -1,7 +1,11 @@
 const axios = require("axios");
 const { db } = require("../helper/firebase");
 const { v4: uuidv4 } = require("uuid");
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({
+  path: path.join(__dirname, "../server/.env.development"),
+});
+const { Timestamp } = require("firebase-admin/firestore");
 
 // Summarize Report Controller (Base64 version)
 const summarizeReport = async (req, res) => {
@@ -95,7 +99,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       summary: structured.summary,
       status: "pending",
       read: false,
-      createdAt: new Date().toISOString(),
+      createdAt: Timestamp.now(),
     };
     // === STEP 4: Save in Firebase ===
     const docRef = await db.collection("reports").add(reportData);
