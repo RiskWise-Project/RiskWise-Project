@@ -11,18 +11,12 @@ os.environ["CUDA_VISIBLE_DEVICES"] = ""
 torch.set_num_threads(1)
 device = torch.device("cpu")
 
-MODEL_NAME = "Salesforce/blip-mini"
-model = None
-processor = None
-
-def load_model():
-    global model, processor
-    if model is None or processor is None:
-        print("Loading BLIP-mini model on CPU...")
-        processor = BlipProcessor.from_pretrained(MODEL_NAME, use_fast=False)
-        model = BlipForConditionalGeneration.from_pretrained(MODEL_NAME).to(device)
-        gc.collect()
-        print("BLIP-mini model loaded successfully.")
+MODEL_NAME = "mookymook/blip-image-captioning-wikiart-mini-10epoch"
+print(f"Loading BLIP-mini model from {MODEL_NAME} on CPU...")
+processor = BlipProcessor.from_pretrained(MODEL_NAME)
+model = BlipForConditionalGeneration.from_pretrained(MODEL_NAME).to(device)
+gc.collect()
+print("BLIP-mini model loaded successfully.")
 
 @app.route("/", methods=["GET"])
 def health_check():
@@ -31,8 +25,6 @@ def health_check():
 @app.route("/caption", methods=["POST"])
 def caption():
     try:
-        load_model()
-
         if "file" not in request.files:
             return jsonify({"error": "No file uploaded"}), 400
 

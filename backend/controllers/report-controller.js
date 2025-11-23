@@ -99,7 +99,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       summary: structured.summary,
       status: "pending",
       read: false,
-      createdAt: Timestamp.now(),
+      createdAt: date.toISOString(),
     };
     // === STEP 4: Save in Firebase ===
     const docRef = await db.collection("reports").add(reportData);
