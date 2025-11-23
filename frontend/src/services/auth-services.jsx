@@ -1,9 +1,6 @@
 import axios from "axios";
 
-const baseURL =
-  import.meta.env.MODE === "development"
-    ? import.meta.env.VITE_API_URL_DEVELOPMENT
-    : import.meta.env.VITE_API_URL;
+const baseURL = import.meta.env.VITE_API_URL;
 
 export const SignUpSend = async (formData, tokenID) => {
   try {

@@ -20,7 +20,7 @@ export default function ProtectedRoute({ children, allowedRoles }) {
           if (success && dbUser) {
             setUser({
               ...firebaseUser,
-              role: dbUser?.role || "user", // fallback
+              role: dbUser?.role || "user",
               ...dbUser,
             });
           } else {
