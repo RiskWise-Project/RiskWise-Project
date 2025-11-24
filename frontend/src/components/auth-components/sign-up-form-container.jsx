@@ -1,272 +1,231 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { toast } from "react-hot-toast";
+import { auth } from "../../utils/firebase";
 import {
-  createUserWithEmailAndPassword,
-  sendEmailVerification,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../../utils/firebase";
-import { toast } from "react-hot-toast";
-
 import googleIcon from "../../assets/logos/search.png";
-import { SignUpSend } from "../../services/auth-services";
+import { useTranslation } from "react-i18next";
+import { SignUpSend, FetchUser } from "../../services/auth-services";
 
-function SignUpForm() {
-  const navigate = useNavigate();
+export default function LoginFormContainer() {
   const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    fullname: "",
-    studentNumber: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    termsAccepted: false,
-  });
+  const navigate = useNavigate();
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState({ login: false, reset: false });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+  const startLoading = (key) =>
+    setLoading((prev) => ({ ...prev, [key]: true }));
+  const stopLoading = (key) =>
+    setLoading((prev) => ({ ...prev, [key]: false }));
+
+  const redirectToDashboard = async (firebaseUser) => {
+    const token = await firebaseUser.getIdToken();
+    const { success, user: dbUser } = await FetchUser(token);
+
+    if (success && dbUser.role === "admin") {
+      navigate("/admin/dashboard");
+    } else {
+      navigate("/dashboard/profile");
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
-
-    const { email, password, confirmPassword, termsAccepted } = formData;
-
-    if (!termsAccepted) {
-      setError("You must agree to the terms and conditions.");
-      setLoading(false);
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      setLoading(false);
-      return;
-    }
-
+    startLoading("login");
     try {
-      const userCred = await createUserWithEmailAndPassword(
+      const { user: firebaseUser } = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      const idToken = await userCred.user.getIdToken();
-      await sendEmailVerification(userCred.user);
-      await SignUpSend(
-        {
-          email: userCred.user.email,
-          fullname: formData.fullname,
-          studentNumber: formData.studentNumber,
-        },
-        idToken
-      );
+      if (!firebaseUser.emailVerified) {
+        setError("Please verify your email before logging in.");
+        return;
+      }
 
-      toast.success("Verification email sent! Please check your inbox.");
-      navigate("/sign-in");
+      toast.success("Login successful!");
+      await redirectToDashboard(firebaseUser);
     } catch (err) {
-      setError(err.message);
+      setError(parseFirebaseError(err));
     } finally {
-      setLoading(false);
+      stopLoading("login");
     }
   };
 
-  const handleGoogleSignup = async () => {
-    setError("");
-    setLoading(true);
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
+  const completeGoogleLogin = async (firebaseUser) => {
+    const token = await firebaseUser.getIdToken(true);
 
-      const user = result.user;
-      const idToken = await user.getIdToken();
-
+    const { success } = await FetchUser(token);
+    if (!success) {
       await SignUpSend(
         {
-          email: user.email,
-          fullname: user.displayName || "No Name",
+          email: firebaseUser.email,
+          fullname: firebaseUser.displayName || "No Name",
           studentNumber: "N/A",
         },
-        idToken
+        token
       );
-
-      toast.success("Google sign-up successful!");
-      navigate("/dashboard/profile");
-    } catch (err) {
-      console.error("Google signup error:", err.message);
-      setError(err.message);
-      toast.error("Google signup failed.");
-    } finally {
-      setLoading(false);
     }
+
+    await redirectToDashboard(firebaseUser);
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    startLoading("login");
+    try {
+      const { user: firebaseUser } = await signInWithPopup(auth, provider);
+      await completeGoogleLogin(firebaseUser);
+    } catch (err) {
+      console.error(err);
+      setError(parseFirebaseError(err));
+    } finally {
+      stopLoading("login");
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      toast.error("Please enter your email address first.");
+      return;
+    }
+
+    startLoading("reset");
+    try {
+      await sendPasswordResetEmail(auth, email);
+      toast.success("Password reset email sent. Check your inbox.");
+    } catch (err) {
+      toast.error(parseFirebaseError(err));
+    } finally {
+      stopLoading("reset");
+    }
+  };
+
+  const parseFirebaseError = (err) => {
+    if (!err?.code) return err.message || "Unexpected error.";
+    const map = {
+      "auth/invalid-email": "Invalid email address.",
+      "auth/user-disabled": "This account has been disabled.",
+      "auth/user-not-found": "No user found with this email.",
+      "auth/wrong-password": "Incorrect password.",
+      "auth/popup-closed-by-user":
+        "Popup closed before completing sign in.",
+    };
+    return map[err.code] || err.message;
   };
 
   return (
-    <div className="flex flex-col items-center md:px-[5%] h-screen w-full  bg-[var(--color-white)]">
-      <div className="form-container w-full flex flex-col items-center">
-        <div className="form-header flex flex-col w-[90%] lg:w-[70%] mb-8">
-          <h1 className=" font-black text-2xl tracking-wider whitespace-nowrap">
-            {t("SignupComponent.signup_header")}
+    <div className="flex flex-col items-center text-[var(--color-dark)] bg-[var(--color-white)] md:pt-[10%] pt-[20%] md:px-[15%] h-screen w-full">
+      <div className="form-container w-full">
+        <div className="form-header flex flex-col items-center mb-8">
+          <h1 className="text-center font-black text-4xl tracking-wider">
+            {t("LoginComponent.header")}
           </h1>
-          <p className="subtext-signup text-sm">
-            {t("SignupComponent.signup_subtext")}
+          <p className="subtext-login text-center">
+            {t("LoginComponent.subtext")}
           </p>
         </div>
+      </div>
 
-        <form
-          className="flex flex-col gap-4 w-[90%] lg:w-[70%]"
-          onSubmit={handleSubmit}
-        >
-          <div className="input-container flex flex-col gap-2">
-            <label htmlFor="fullname" className="">
-              {t("SignupComponent.fullname")}
-            </label>
-            <input
-              type="text"
-              name="fullname"
-              id="fullname"
-              value={formData.fullname}
-              onChange={handleChange}
-              required
-              placeholder="John Doe"
-              className="px-3 py-2 border border-gray-300 rounded appearance-none"
-            />
-          </div>
+      <form onSubmit={handleLogin} className="w-full space-y-4">
+        <div className="form-group flex flex-col gap-2">
+          <label htmlFor="email">Email Address:</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="example@email.com"
+            className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+          />
+        </div>
 
-          <div className="input-container flex flex-col gap-2">
-            <label htmlFor="studentNumber" className="">
-              Student Number:
-            </label>
-            <input
-              type="number"
-              name="studentNumber"
-              id="studentNumber"
-              placeholder="2020123456"
-              max={9999999999}
-              min={0}
-              value={formData.studentNumber}
-              onChange={handleChange}
-              required
-              onInput={(e) => {
-                if (e.target.value.length > 10) {
-                  e.target.value = e.target.value.slice(0, 10);
-                }
-              }}
-              className="no-spinner px-3 py-2 border border-gray-300 rounded appearance-none"
-            />
-          </div>
+        <div className="form-group flex flex-col gap-2">
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={t("LoginComponent.password_placeholder")}
+            className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+          />
+        </div>
 
-          <div className="input-container flex flex-col gap-2">
-            <label htmlFor="email" className="">
-              Email:
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="example@email.com"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="no-spinner px-3 py-2 border border-gray-300 rounded appearance-none"
-            />
-          </div>
+        <div className="flex items-center gap-2">
+          <input
+            id="show-password"
+            type="checkbox"
+            checked={showPassword}
+            onChange={() => setShowPassword((p) => !p)}
+            className="scale-125"
+          />
+          <label htmlFor="show-password">
+            {t("LoginComponent.show_password_label")}
+          </label>
+        </div>
 
-          <div className="input-container flex flex-col gap-2">
-            <label htmlFor="password" className="">
-              Password:
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="********"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="no-spinner px-3 py-2 border border-gray-300 rounded appearance-none"
-            />
-          </div>
-
-          <div className="input-container flex flex-col mb-4 gap-2">
-            <label htmlFor="confirmPassword" className="">
-              Confirm Password:
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              placeholder="********"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-              className="no-spinner px-3 py-2 border border-gray-300 rounded appearance-none"
-            />
-          </div>
-
-          <div className="input-container flex flex-row items-center mb-4 gap-2">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="termsAccepted"
-                checked={formData.termsAccepted}
-                onChange={handleChange}
-                required
-                className="cursor-pointer scale-125 transform"
-              />
-              {t("SignupComponent.terms_condition")}
-            </label>
-          </div>
-
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-
+        <div className="flex justify-end">
           <button
-            type="submit"
-            disabled={loading}
-            className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 ${
-              loading ? "cursor-wait" : "cursor-pointer"
+            type="button"
+            onClick={handleForgotPassword}
+            disabled={loading.reset}
+            className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
+              loading.reset ? "opacity-60 cursor-wait" : ""
             }`}
           >
-            {loading
-              ? t("SignupComponent.signup_button_loading")
-              : t("SignupComponent.signup_button")}
+            {loading.reset
+              ? t("LoginComponent.sending_email")
+              : t("LoginComponent.forgot_password_label")}
           </button>
+        </div>
 
-          <button
-            onClick={handleGoogleSignup}
-            disabled={loading}
-            className="w-full border border-gray-300 focus:outline-none py-2 px-4 rounded-md hover:opacity-80 transition-all motion-safe:duration-200 cursor-pointer flex items-center justify-center gap-2"
-          >
-            <img src={googleIcon} alt="Google" className="h-5 w-5" />
-            {t("SignupComponent.google_button")}
-          </button>
+        {error && <p className="text-red-500 text-sm">{error}</p>}
 
-          <div className="no-account-container">
-            <p className="text-center">
-              {t("SignupComponent.dont_have_account")}{" "}
-              <a
-                href="/sign-in"
-                className="text-[var(--color-highlight)] underline hover:opacity-80"
-              >
-                {t("SignupComponent.sign_up")}
-              </a>
-            </p>
-          </div>
-        </form>
-      </div>
+        <button
+          type="submit"
+          disabled={loading.login}
+          className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 ${
+            loading.login ? "cursor-wait" : "cursor-pointer"
+          }`}
+        >
+          {loading.login
+            ? t("LoginComponent.sign_in_button_loading")
+            : t("LoginComponent.sign_in_button")}
+        </button>
+      </form>
+
+      <button
+        onClick={handleGoogleSignIn}
+        disabled={loading.login}
+        className="w-full mt-6 border border-gray-300 py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 flex items-center justify-center gap-2"
+      >
+        <img src={googleIcon} alt="Google" className="h-5 w-5" />
+        {t("LoginComponent.google_button")}
+      </button>
+
+      <p className="text-center mt-6">
+        {t("LoginComponent.dont_have_account")}{" "}
+        <a
+          href="/sign-up"
+          className="text-[var(--color-highlight)] underline hover:opacity-80"
+        >
+          {t("LoginComponent.sign_up")}
+        </a>
+      </p>
     </div>
   );
 }
-
-export default SignUpForm;
