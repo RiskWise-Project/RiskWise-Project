@@ -6,8 +6,6 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
@@ -29,72 +27,14 @@ export default function LoginFormContainer() {
   const stopLoading = (key) =>
     setLoading((prev) => ({ ...prev, [key]: false }));
 
-  const parseFirebaseError = (err) => {
-    if (!err?.code) return err.message || "Unexpected error.";
-    const map = {
-      "auth/invalid-email": "Invalid email address.",
-      "auth/user-disabled": "This account has been disabled.",
-      "auth/user-not-found": "No user found with this email.",
-      "auth/wrong-password": "Incorrect password.",
-      "auth/popup-closed-by-user": "Popup closed before completing sign in.",
-    };
-    return map[err.code] || err.message;
-  };
-
   const redirectToDashboard = async (firebaseUser) => {
     const token = await firebaseUser.getIdToken();
     const { success, user: dbUser } = await FetchUser(token);
 
     if (success && dbUser.role === "admin") {
-      window.location.href = "/admin/dashboard";
+      navigate("/admin/dashboard");
     } else {
-      window.location.href = "/dashboard/profile";
-    }
-  };
-
-  const completeGoogleLogin = async (firebaseUser) => {
-    const token = await firebaseUser.getIdToken(true);
-    const { success } = await FetchUser(token);
-
-    if (!success) {
-      await SignUpSend(
-        {
-          email: firebaseUser.email,
-          fullname: firebaseUser.displayName || "No Name",
-          studentNumber: "N/A",
-        },
-        token
-      );
-    }
-
-    await redirectToDashboard(firebaseUser);
-  };
-
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then(async (result) => {
-        if (result?.user) {
-          await completeGoogleLogin(result.user);
-        }
-      })
-      .catch((err) => setError(err.message));
-  }, []);
-
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    const isPWA =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      window.navigator.standalone === true;
-
-    try {
-      if (isPWA) {
-        await signInWithRedirect(auth, provider);
-      } else {
-        const { user: firebaseUser } = await signInWithPopup(auth, provider);
-        await completeGoogleLogin(firebaseUser);
-      }
-    } catch (err) {
-      setError(parseFirebaseError(err));
+      navigate("/dashboard/profile");
     }
   };
 
@@ -102,7 +42,6 @@ export default function LoginFormContainer() {
     e.preventDefault();
     setError("");
     startLoading("login");
-
     try {
       const { user: firebaseUser } = await signInWithEmailAndPassword(
         auth,
@@ -124,6 +63,36 @@ export default function LoginFormContainer() {
     }
   };
 
+  async function completeGoogleLogin(firebaseUser) {
+    const token = await firebaseUser.getIdToken(true);
+    const { success } = await FetchUser(token);
+
+    if (!success) {
+      await SignUpSend(
+        {
+          email: firebaseUser.email,
+          fullname: firebaseUser.displayName || "No Name",
+          studentNumber: "N/A",
+        },
+        token
+      );
+    }
+
+    await redirectToDashboard(firebaseUser);
+  }
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const { user: firebaseUser } = await signInWithPopup(auth, provider);
+      await completeGoogleLogin(firebaseUser);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+      toast.error("Google sign-in failed.");
+    }
+  };
+
   const handleForgotPassword = async () => {
     if (!email) {
       toast.error("Please enter your email address first.");
@@ -139,6 +108,18 @@ export default function LoginFormContainer() {
     } finally {
       stopLoading("reset");
     }
+  };
+
+  const parseFirebaseError = (err) => {
+    if (!err?.code) return err.message || "Unexpected error.";
+    const map = {
+      "auth/invalid-email": "Invalid email address.",
+      "auth/user-disabled": "This account has been disabled.",
+      "auth/user-not-found": "No user found with this email.",
+      "auth/wrong-password": "Incorrect password.",
+      "auth/popup-closed-by-user": "Popup closed before completing sign in.",
+    };
+    return map[err.code] || err.message;
   };
 
   return (
