@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+signInWithRedirect,
   sendPasswordResetEmail,
 } from "firebase/auth";
 import googleIcon from "../../assets/logos/search.png";
@@ -65,24 +66,52 @@ export default function LoginFormContainer() {
   };
 
   const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    const { user: firebaseUser } = await signInWithPopup(auth, provider);
-    const token = await firebaseUser.getIdToken(true);
+  const provider = new GoogleAuthProvider();
 
-    const { success } = await FetchUser(token);
-    if (!success) {
-      await SignUpSend(
-        {
-          email: firebaseUser.email,
-          fullname: firebaseUser.displayName || "No Name",
-          studentNumber: "N/A",
-        },
-        token
-      );
+  // Detect PWA standalone mode
+  const isPWA =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  try {
+    if (isPWA) {
+      // In PWA: popup is blocked → use redirect
+      await signInWithRedirect(auth, provider);
+    } else {
+      // In browser: popup works
+      const { user: firebaseUser } = await signInWithPopup(auth, provider);
+      await completeGoogleLogin(firebaseUser);
     }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-    await redirectToDashboard(firebaseUser);
-  };
+// Handle the result AFTER redirect
+getRedirectResult(auth).then(async (result) => {
+  if (result?.user) {
+    await completeGoogleLogin(result.user);
+  }
+});
+
+// Reuse your existing logic
+async function completeGoogleLogin(firebaseUser) {
+  const token = await firebaseUser.getIdToken(true);
+
+  const { success } = await FetchUser(token);
+  if (!success) {
+    await SignUpSend(
+      {
+        email: firebaseUser.email,
+        fullname: firebaseUser.displayName || "No Name",
+        studentNumber: "N/A",
+      },
+      token
+    );
+  }
+
+  await redirectToDashboard(firebaseUser);
+}
 
   const handleForgotPassword = async () => {
     if (!email) {
