@@ -24,16 +24,16 @@ export default function LoginFormContainer() {
   const [loading, setLoading] = useState({ login: false, reset: false });
   const [error, setError] = useState("");
 
-  const startLoading = (key) => setLoading((prev) => ({ ...prev, [key]: true }));
-  const stopLoading = (key) => setLoading((prev) => ({ ...prev, [key]: false }));
+  const startLoading = (key) =>
+    setLoading((prev) => ({ ...prev, [key]: true }));
 
-  // -------------------------------
-  // ⚡ COMPLETE GOOGLE LOGIN LOGIC
-  // -------------------------------
+  const stopLoading = (key) =>
+    setLoading((prev) => ({ ...prev, [key]: false }));
+
   const completeGoogleLogin = async (firebaseUser) => {
     const token = await firebaseUser.getIdToken(true);
-
     const { success } = await FetchUser(token);
+
     if (!success) {
       await SignUpSend(
         {
@@ -48,9 +48,6 @@ export default function LoginFormContainer() {
     await redirectToDashboard(firebaseUser);
   };
 
-  // -------------------------------
-  // ⚡ HANDLE REDIRECT RESULT (PWA)
-  // -------------------------------
   useEffect(() => {
     getRedirectResult(auth).then(async (result) => {
       if (result?.user) {
@@ -59,9 +56,6 @@ export default function LoginFormContainer() {
     });
   }, []);
 
-  // -------------------------------
-  // ⚡ GOOGLE SIGN-IN HANDLER
-  // -------------------------------
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
 
@@ -82,9 +76,6 @@ export default function LoginFormContainer() {
     }
   };
 
-  // -------------------------------
-  // NORMAL LOGIN
-  // -------------------------------
   const redirectToDashboard = async (firebaseUser) => {
     const token = await firebaseUser.getIdToken();
     const { success, user: dbUser } = await FetchUser(token);
@@ -152,6 +143,106 @@ export default function LoginFormContainer() {
   };
 
   return (
-    <!-- your JSX stays the same -->
+    <div className="flex flex-col items-center text-[var(--color-dark)] bg-[var(--color-white)] md:pt-[10%] pt-[20%] md:px-[15%] h-screen w-full">
+      <div className="form-container w-full">
+        <div className="form-header flex flex-col items-center mb-8">
+          <h1 className="text-center font-black text-4xl tracking-wider">
+            {t("LoginComponent.header")}
+          </h1>
+          <p className="subtext-login text-center">
+            {t("LoginComponent.subtext")}
+          </p>
+        </div>
+      </div>
+
+      <form onSubmit={handleLogin} className="w-full space-y-4">
+        <div className="form-group flex flex-col gap-2">
+          <label htmlFor="email">Email Address:</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="example@email.com"
+            className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+          />
+        </div>
+
+        <div className="form-group flex flex-col gap-2">
+          <label htmlFor="password">Password:</label>
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={t("LoginComponent.password_placeholder")}
+            className="px-3 py-2 border border-gray-300 rounded-sm focus:outline-none"
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          <input
+            id="show-password"
+            type="checkbox"
+            checked={showPassword}
+            onChange={() => setShowPassword((p) => !p)}
+            className="scale-125"
+          />
+          <label htmlFor="show-password">
+            {t("LoginComponent.show_password_label")}
+          </label>
+        </div>
+
+        <div className="flex justify-end">
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            disabled={loading.reset}
+            className={`text-[var(--color-highlight)] underline hover:opacity-80 transition-all duration-200 ${
+              loading.reset ? "opacity-60 cursor-wait" : ""
+            }`}
+          >
+            {loading.reset
+              ? t("LoginComponent.sending_email")
+              : t("LoginComponent.forgot_password_label")}
+          </button>
+        </div>
+
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+
+        <button
+          type="submit"
+          disabled={loading.login}
+          className={`w-full bg-[var(--color-highlight)] text-white py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 ${
+            loading.login ? "cursor-wait" : "cursor-pointer"
+          }`}
+        >
+          {loading.login
+            ? t("LoginComponent.sign_in_button_loading")
+            : t("LoginComponent.sign_in_button")}
+        </button>
+      </form>
+
+      <button
+        onClick={handleGoogleSignIn}
+        disabled={loading.login}
+        className="w-full mt-6 border border-gray-300 py-2 px-4 rounded-md hover:opacity-80 transition-all duration-200 flex items-center justify-center gap-2"
+      >
+        <img src={googleIcon} alt="Google" className="h-5 w-5" />
+        {t("LoginComponent.google_button")}
+      </button>
+
+      <p className="text-center mt-6">
+        {t("LoginComponent.dont_have_account")}{" "}
+        <a
+          href="/sign-up"
+          className="text-[var(--color-highlight)] underline hover:opacity-80"
+        >
+          {t("LoginComponent.sign_up")}
+        </a>
+      </p>
+    </div>
   );
 }
