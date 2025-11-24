@@ -112,19 +112,16 @@ console.error(err);
 
 
 useEffect(() => {
-  const handleRedirectResult = async () => {
-    try {
-      const result = await getRedirectResult(auth);
+  getRedirectResult(auth)
+    .then(async (result) => {
       if (result?.user) {
         await completeGoogleLogin(result.user);
+        window.location.href = "/dashboard/profile"; // force reload and redirect
       }
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  handleRedirectResult();
+    })
+    .catch((err) => setError(err.message));
 }, []);
+
 
 const handleForgotPassword = async () => {
 if (!email) {
