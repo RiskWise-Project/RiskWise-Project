@@ -68,6 +68,26 @@ if (!firebaseUser.emailVerified) {
 
 };
 
+
+// Reuse your existing logic
+async function completeGoogleLogin(firebaseUser) {
+const token = await firebaseUser.getIdToken(true);
+
+const { success } = await FetchUser(token);
+if (!success) {
+await SignUpSend(
+{
+email: firebaseUser.email,
+fullname: firebaseUser.displayName || "No Name",
+studentNumber: "N/A",
+},
+token
+);
+}
+await redirectToDashboard(firebaseUser);
+}
+
+
 const handleGoogleSignIn = async () => {
 const provider = new GoogleAuthProvider();
 
@@ -96,25 +116,6 @@ if (result?.user) {
 await completeGoogleLogin(result.user);
 }
 });
-
-// Reuse your existing logic
-async function completeGoogleLogin(firebaseUser) {
-const token = await firebaseUser.getIdToken(true);
-
-const { success } = await FetchUser(token);
-if (!success) {
-await SignUpSend(
-{
-email: firebaseUser.email,
-fullname: firebaseUser.displayName || "No Name",
-studentNumber: "N/A",
-},
-token
-);
-}
-
-await redirectToDashboard(firebaseUser);
-}
 
 const handleForgotPassword = async () => {
 if (!email) {
