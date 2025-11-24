@@ -111,20 +111,20 @@ console.error(err);
 };
 
 
-const [checkingRedirect, setCheckingRedirect] = useState(true);
-
 useEffect(() => {
-  getRedirectResult(auth)
-    .then(async (result) => {
+  const handleRedirectResult = async () => {
+    try {
+      const result = await getRedirectResult(auth);
       if (result?.user) {
         await completeGoogleLogin(result.user);
       }
-    })
-    .catch((err) => setError(err.message))
-    .finally(() => setCheckingRedirect(false));
-}, []);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
-if (checkingRedirect) return <div>Loading...</div>;
+  handleRedirectResult();
+}, []);
 
 const handleForgotPassword = async () => {
 if (!email) {
