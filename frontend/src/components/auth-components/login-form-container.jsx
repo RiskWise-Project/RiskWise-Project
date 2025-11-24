@@ -87,16 +87,6 @@ token
 await redirectToDashboard(firebaseUser);
 }
 
-useEffect(() => {
-  getRedirectResult(auth)
-    .then(async (result) => {
-      if (result?.user) {
-        await completeGoogleLogin(result.user);
-      }
-    })
-    .catch((err) => setError(err.message));
-}, []);
-
 
 const handleGoogleSignIn = async () => {
 const provider = new GoogleAuthProvider();
@@ -121,6 +111,15 @@ console.error(err);
 };
 
 
+useEffect(() => {
+  getRedirectResult(auth)
+    .then(async (result) => {
+      if (result?.user) {
+        await completeGoogleLogin(result.user);
+      }
+    })
+    .catch((err) => setError(err.message));
+}, []);
 
 const handleForgotPassword = async () => {
 if (!email) {
