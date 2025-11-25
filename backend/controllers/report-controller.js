@@ -5,9 +5,9 @@ const path = require("path");
 require("dotenv").config({
   path: path.join(__dirname, "../server/.env.development"),
 });
-const { Timestamp } = require("firebase-admin/firestore");
+const sharp = require("sharp");
 
-// Summarize Report Controller (Base64 version)
+// Summarize Report Controller (super compressed for phone photos)
 const summarizeReport = async (req, res) => {
   try {
     const { fileNametoPass, description, userId, summary, address } = req.body;
@@ -18,6 +18,25 @@ const summarizeReport = async (req, res) => {
           "Image (Base64), description, userId, summary, and address are required",
       });
     }
+
+    // === STEP 1: Aggressive compression for phone photos ===
+    const base64Data = fileNametoPass.replace(/^data:image\/\w+;base64,/, "");
+    const buffer = Buffer.from(base64Data, "base64");
+
+    // Aggressive compression settings
+    const compressedBuffer = await sharp(buffer)
+      .jpeg({
+        quality: 25,            // very low quality for large images
+        chromaSubsampling: "4:2:0",
+      })
+      .resize({
+        width: 600,             // resize to max 600px width
+        withoutEnlargement: true,
+      })
+      .toBuffer();
+
+    const compressedBase64 =
+      "data:image/jpeg;base64," + compressedBuffer.toString("base64");
 
     // === STEP 2: Build AI analysis prompt ===
     const prompt = `
@@ -75,7 +94,9 @@ Based on the following incident data, assign category, likelihood, impact, calcu
     } catch (e) {
       structured = {
         category: "Unknown",
-        score: 0,
+        likelihood: 1,
+        impact: 1,
+        score: 1,
         severity: "Medium",
         summary: "Parsing failed, fallback values used.",
       };
@@ -87,7 +108,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
     const reportData = {
       uniqueId,
       userId,
-      fileBase64: fileNametoPass,
+      fileBase64: compressedBase64, // store aggressively compressed version
       caption: summary,
       address,
       description,
@@ -101,6 +122,7 @@ Based on the following incident data, assign category, likelihood, impact, calcu
       read: false,
       createdAt: new Date().toISOString(),
     };
+
     // === STEP 4: Save in Firebase ===
     const docRef = await db.collection("reports").add(reportData);
 
@@ -110,11 +132,13 @@ Based on the following incident data, assign category, likelihood, impact, calcu
     console.error("Summarization error:", {
       message: error.message,
       response: error.response?.data,
+      stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
     });
     res.status(500).json({ error: "Failed to analyze and store report" });
   }
 };
 
+// --- Get Reports by User ---
 const getReportsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -147,6 +171,7 @@ const getReportsByUser = async (req, res) => {
   }
 };
 
+// --- Mark Report as Read ---
 const markReportRead = async (req, res) => {
   try {
     const { reportId } = req.params;
