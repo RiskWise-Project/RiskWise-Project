@@ -31,6 +31,20 @@ export default function LoginFormContainer() {
     const token = await firebaseUser.getIdToken();
     const { success, user: dbUser } = await FetchUser(token);
 
+    if (dbUser.status === "pending") {
+      setError(
+        "Your account is under verification. Please wait for admin approval."
+      );
+      return;
+    }
+
+    if (dbUser.status === "rejected") {
+      setError(
+        "Your verification was rejected. Please reupload your COR/School ID in your profile."
+      );
+      return;
+    }
+
     if (success && dbUser.role === "admin") {
       navigate("/admin/dashboard");
     } else {

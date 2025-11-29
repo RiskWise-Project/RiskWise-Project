@@ -105,6 +105,40 @@ export const SavePicture = async (data, tokenID) => {
   }
 };
 
+export const uploadRequirement = async (file, tokenID) => {
+  try {
+    const formData = new FormData();
+    formData.append("requirement", file);
+
+    const response = await axios.post(
+      `${baseURL}/upload-verification-document`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${tokenID}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    return {
+      success: true,
+      message: response.data.message || "Upload successful",
+    };
+  } catch (error) {
+    console.error(
+      "UploadRequirement error:",
+      error.response?.data || error.message
+    );
+
+    return {
+      success: false,
+      message:
+        error.response?.data?.message || error.message || "Upload failed",
+    };
+  }
+};
+
 export const pingServer = async () => {
   try {
     const response = await axios.get(`${baseURL}/ping`);

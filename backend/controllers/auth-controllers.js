@@ -198,6 +198,47 @@ const uploadProfilePicture = async (req, res) => {
   }
 };
 
+const uploadVerificationDocument = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized: No token provided" });
+    }
+
+    const idToken = authHeader.split(" ")[1];
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const uid = decodedToken.uid;
+
+    const { documentBase64 } = req.body;
+
+    if (!documentBase64) {
+      return res
+        .status(400)
+        .json({ message: "Missing documentBase64 in request body" });
+    }
+
+    const userRef = db.collection("users").doc(uid);
+    await userRef.set(
+      {
+        verificationDocument: documentBase64,
+        verificationStatus: "pending", // default status
+        updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    console.log(`Verification document uploaded for UID: ${uid}`);
+    return res
+      .status(200)
+      .json({ message: "Verification document uploaded successfully" });
+  } catch (error) {
+    console.error("Error uploading verification document:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const promoteToAdmin = async (req, res) => {
   const { uid } = req.body;
 
@@ -215,4 +256,5 @@ module.exports = {
   updateUser,
   uploadProfilePicture,
   promoteToAdmin,
+  uploadVerificationDocument,
 };

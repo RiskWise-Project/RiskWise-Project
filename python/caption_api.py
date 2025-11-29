@@ -15,6 +15,18 @@ MODEL_NAME = "Salesforce/blip-image-captioning-base"
 model = None
 processor = None
 
+def warmup_model():
+    load_model()
+    dummy_image = Image.new('RGB', (224, 224), color='white')
+    inputs = processor(images=dummy_image, return_tensors="pt").to(device)
+    with torch.no_grad():
+        model.generate(**inputs, max_length=16, num_beams=1)
+    del inputs
+    torch.cuda.empty_cache() if device.type == "cuda" else None
+    print("Model warmed up!")
+
+warmup_model()
+
 def load_model():
     global model, processor
     if model is None or processor is None:
