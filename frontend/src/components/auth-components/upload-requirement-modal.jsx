@@ -38,15 +38,28 @@ export default function UploadRequirementModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg w-[90%] max-w-md">
+    <div className="fixed inset-0 bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white/100 backdrop-blur-md p-6 rounded-lg shadow-lg md:w-[90%] md:h-fit h-full flex flex-col justify-center max-w-md border border-white/20">
         <h2 className="text-xl font-bold mb-4">Upload Requirement</h2>
         <p className="text-sm mb-4">
           Please upload your Certificate of Registration (COR) or School ID to
           complete your account setup.
         </p>
 
-        <input type="file" accept="image/*,.pdf" onChange={handleFileChange} />
+        <div className="flex items-center gap-2 border-2 rounded-lg border-[var(--color-dark)] bg-white/20 backdrop-blur-sm px-3 py-2">
+          <input
+            id="RiskAttachment"
+            type="file"
+            name="file"
+            accept="image/*"
+            capture
+            className="file:bg-[var(--color-highlight)] file:text-white file:px-4 file:py-2 file:rounded-lg file:border-0
+               file:hover:opacity-80 file:cursor-pointer
+               text-[var(--color-dark)] text-sm md:text-base
+               file:transition file:duration-200"
+            onChange={handleFileChange}
+          />
+        </div>
 
         <div className="flex justify-end gap-2 mt-4">
           <button

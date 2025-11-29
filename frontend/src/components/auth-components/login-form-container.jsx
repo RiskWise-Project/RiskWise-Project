@@ -31,25 +31,31 @@ export default function LoginFormContainer() {
     const token = await firebaseUser.getIdToken();
     const { success, user: dbUser } = await FetchUser(token);
 
-    if (dbUser.status === "pending") {
-      setError(
-        "Your account is under verification. Please wait for admin approval."
-      );
-      return;
+    if (dbUser.verificationStatus === "pending") {
+      const msg =
+        "Your account is under verification. Please wait for admin approval.";
+      setError(msg);
+      toast.error(msg);
+      return false; // indicate redirect didn't happen
     }
 
-    if (dbUser.status === "rejected") {
-      setError(
-        "Your verification was rejected. Please reupload your COR/School ID in your profile."
-      );
-      return;
+    if (dbUser.verificationStatus === "rejected") {
+      const msg =
+        "Your verification was rejected. Please reupload your COR/School ID in your profile.";
+      setError(msg);
+      toast.error(msg);
+      return false;
     }
 
     if (success && dbUser.role === "admin") {
+      toast.success("Login successful!");
       navigate("/admin/dashboard");
     } else {
+      toast.success("Login successful!");
       navigate("/dashboard/profile");
     }
+
+    return true; // redirect happened
   };
 
   const handleLogin = async (e) => {
@@ -64,11 +70,12 @@ export default function LoginFormContainer() {
       );
 
       if (!firebaseUser.emailVerified) {
-        setError("Please verify your email before logging in.");
+        const msg = "Please verify your email before logging in.";
+        setError(msg);
+        toast.error(msg);
         return;
       }
 
-      toast.success("Login successful!");
       await redirectToDashboard(firebaseUser);
     } catch (err) {
       setError(parseFirebaseError(err));

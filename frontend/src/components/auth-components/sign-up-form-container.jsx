@@ -126,7 +126,7 @@ function SignUpForm() {
   const handleUploaded = () => {
     setShowUploadModal(false);
     setFirebaseTempUser(null);
-    navigate("/dashboard/profile"); // redirect after successful upload
+    navigate("/sign-in"); // redirect after successful upload
   };
 
   return (

@@ -107,16 +107,23 @@ export const SavePicture = async (data, tokenID) => {
 
 export const uploadRequirement = async (file, tokenID) => {
   try {
-    const formData = new FormData();
-    formData.append("requirement", file);
+    const toBase64 = (file) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result.split(",")[1]); // get base64 part only
+        reader.onerror = (error) => reject(error);
+      });
+
+    const documentBase64 = await toBase64(file);
 
     const response = await axios.post(
       `${baseURL}/upload-verification-document`,
-      formData,
+      { documentBase64 },
       {
         headers: {
           Authorization: `Bearer ${tokenID}`,
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       }
     );
