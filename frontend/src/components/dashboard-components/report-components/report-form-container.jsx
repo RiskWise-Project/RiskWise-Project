@@ -66,6 +66,11 @@ function ReportFormContainer({
 
       const result = await summarizeReportService(payload);
 
+      if (result.error) {
+        toast.error(result.error + (result.reason ? `: ${result.reason}` : ""));
+        return; // stop submission
+      }
+
       setAnalysis(result.summary || "");
       setFileName("");
       setFileNametoPass("");
@@ -74,7 +79,11 @@ function ReportFormContainer({
       setLocation(dhvsuCoords); // reset to default
       toast.success("Report submitted successfully!");
     } catch (error) {
-      toast.error(error, "Failed to submit report. Please try again.");
+      const msg =
+        typeof error === "string"
+          ? error
+          : error?.message || "Failed to submit report. Please try again.";
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

@@ -82,6 +82,50 @@ export const FetchUser = async (tokenID) => {
   }
 };
 
+export const approveUserAPI = async (userId) => {
+  try {
+    const response = await axios.patch(`${baseURL}/admin/approve/${userId}`);
+    return {
+      success: true,
+      message: response.data.message || "Approved successfully",
+    };
+  } catch (error) {
+    console.error(
+      "approveUserAPI error:",
+      error.response?.data || error.message
+    );
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to approve user",
+    };
+  }
+};
+
+export const rejectUserAPI = async (userId) => {
+  try {
+    const response = await axios.patch(`${baseURL}/admin/reject/${userId}`);
+    return {
+      success: true,
+      message: response.data.message || "Rejected successfully",
+    };
+  } catch (error) {
+    console.error(
+      "rejectUserAPI error:",
+      error.response?.data || error.message
+    );
+    return {
+      success: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to reject user",
+    };
+  }
+};
+
 export const SavePicture = async (data, tokenID) => {
   try {
     const response = await axios.post(`${baseURL}/save-picture`, data, {

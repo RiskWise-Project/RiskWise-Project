@@ -239,6 +239,56 @@ const uploadVerificationDocument = async (req, res) => {
   }
 };
 
+const approveUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await userRef.update({
+      verificationStatus: "approved",
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log(`User ${userId} approved`);
+    return res.json({ message: "User approved successfully" });
+  } catch (error) {
+    console.error("Error approving user:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const rejectUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { reason } = req.body; // optional rejection reason
+
+    const userRef = db.collection("users").doc(userId);
+    const userDoc = await userRef.get();
+
+    if (!userDoc.exists) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    await userRef.update({
+      verificationStatus: "rejected",
+      rejectionReason: reason || "No reason provided",
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log(`User ${userId} rejected`);
+    return res.json({ message: "User rejected successfully" });
+  } catch (error) {
+    console.error("Error rejecting user:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 const promoteToAdmin = async (req, res) => {
   const { uid } = req.body;
 
@@ -257,4 +307,6 @@ module.exports = {
   uploadProfilePicture,
   promoteToAdmin,
   uploadVerificationDocument,
+  approveUser,
+  rejectUser,
 };

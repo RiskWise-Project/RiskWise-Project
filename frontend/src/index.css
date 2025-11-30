@@ -26,6 +26,11 @@
   font-family: var(--text-font);
 }
 
+button {
+  cursor: pointer;
+  font-family: var(--text-font);
+}
+
 body {
   margin: 0;
   padding: 0;

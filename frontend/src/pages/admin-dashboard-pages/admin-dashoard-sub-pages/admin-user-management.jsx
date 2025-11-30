@@ -13,6 +13,7 @@ import NotificationModal from "../../../components/notification-components/notif
 import { useNotifications } from "../../../context/notification-context";
 import { useTheme } from "../../../context/theme-context";
 import AddUserModal from "../../../components/admin-components/user-management-components/add-user-modal";
+import ApproveModal from "../../../components/admin-components/user-management-components/approve-user-modal";
 import UserRow from "../../../components/admin-components/user-management-components/user-row";
 import { Plus } from "lucide-react";
 
@@ -22,6 +23,7 @@ export default function UserManagement() {
   const { darkMode, setDarkMode } = useTheme();
   const [editingUser, setEditingUser] = useState(null);
   const [modalOpen, setModalOpenState] = useState(false);
+  const [approveModalOpen, setApproveModalOpenState] = useState(false);
   const [search, setSearch] = useState("");
   const [newUser, setNewUser] = useState({
     fullname: "",
@@ -86,10 +88,10 @@ export default function UserManagement() {
   const filteredUsers = users.filter(
     (u) =>
       !u.archived &&
-      (u.fullname.toLowerCase().includes(search.toLowerCase()) ||
-        u.email.toLowerCase().includes(search.toLowerCase()))
+      u.verificationStatus === "approved" &&
+      (u.fullname?.toLowerCase().includes(search.toLowerCase()) ||
+        u.email?.toLowerCase().includes(search.toLowerCase()))
   );
-
   return (
     <div className="dashboard-container flex flex-col w-full h-full bg-[var(--color-white)]">
       {/* Header */}
@@ -134,14 +136,23 @@ export default function UserManagement() {
           placeholder="Search users..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="md:w-[85%] w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
+          className="md:w-[60%] w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-highlight)]"
         />
-        <button
-          className="flex items-center gap-2 px-4 py-2 bg-[var(--color-accent)] text-[var(--color-white)] rounded-lg hover:bg-orange-600 transition"
-          onClick={() => setModalOpenState(true)}
-        >
-          <Plus className="w-5 h-5" /> Add New User
-        </button>
+
+        <div className="flex flex-row">
+          <button
+            onClick={() => setApproveModalOpenState(true)}
+            className="px-4 py-2 bg-blue-600 text-[var(--color-white)] rounded-lg hover:bg-[var(--color-highlight)] transition mr-5"
+          >
+            Approve Users
+          </button>
+          <button
+            className="flex items-center gap-2 px-4 py-2 bg-[var(--color-accent)] text-[var(--color-white)] rounded-lg hover:bg-orange-600 transition"
+            onClick={() => setModalOpenState(true)}
+          >
+            <Plus className="w-5 h-5" /> Add User
+          </button>
+        </div>
       </div>
 
       {/* Users Table */}
@@ -191,6 +202,11 @@ export default function UserManagement() {
         setNewUser={setNewUser}
         handleAddUser={handleAddUser}
       />
+      <ApproveModal
+        isOpen={approveModalOpen}
+        onClose={() => setApproveModalOpenState(false)}
+      />
+      {/* Notification Modal */}
       <NotificationModal />
     </div>
   );
